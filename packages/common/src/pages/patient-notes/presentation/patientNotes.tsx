@@ -46,7 +46,7 @@ const PatientNotesScreen = (props: IPatientNotesProps) => {
 
 	return (
 		<div
-			className='flex flex-col p-0 m-0 gap-4 w-full h-full'
+			className='flex flex-col gap-4 w-full h-full'
 		>
 			<div className='flex gap-4 justify-content items-center text-lg font-bold'>
 				Notes		

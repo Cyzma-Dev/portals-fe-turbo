@@ -14,38 +14,6 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icons.userRound width="16" height="16" />,
   },
   {
-    title: 'Projects',
-    path: '/projects',
-    icon: <Icons.folder width="16" height="16" />,
-    submenu: true,
-    subMenuItems: [
-      { title: 'All', path: '/projects' },
-      { title: 'Web Design', path: '/projects/web-design' },
-      { title: 'Graphic Design', path: '/projects/graphic-design' },
-
-    ],
-  },
-  {
-    title: 'Messages',
-    path: '/messages',
-    icon: <Icons.messageSquareOff width="16" height="16" />,
-  },
-  {
-    title: 'Settings',
-    path: '/settings',
-    icon: <Icons.settings width="16" height="16" />,
-    submenu: true,
-    subMenuItems: [
-      { title: 'Account', path: '/settings/account' },
-      { title: 'Privacy', path: '/settings/privacy' },
-    ],
-  },
-  {
-    title: 'Help',
-    path: '/help',
-    icon: <Icons.helpCircle width="16" height="16" />,
-  },
-  {
     title: 'Notes',
     path: '/patient-notes',
     icon: <Icons.notebookPenIcon width="16" height="16" />,
@@ -53,6 +21,23 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
   {
     title: 'Messages',
     path: '/patient-messages',
-    icon: <Icons.notebookPenIcon width="16" height="16" />,
+    icon: <Icons.messageSquare width="16" height="16" />,
   },
+  {
+    title: 'Settings',
+    path: '/settings',
+    icon: <Icons.settings width="16" height="16" />,
+  },
+  // {
+  //   title: 'Projects',
+  //   path: '/projects',
+  //   icon: <Icons.folder width="16" height="16" />,
+  //   submenu: true,
+  //   subMenuItems: [
+  //     { title: 'All', path: '/projects' },
+  //     { title: 'Web Design', path: '/projects/web-design' },
+  //     { title: 'Graphic Design', path: '/projects/graphic-design' },
+
+  //   ],
+  // },
 ];

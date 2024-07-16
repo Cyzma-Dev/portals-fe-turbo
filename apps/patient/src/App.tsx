@@ -41,15 +41,14 @@ function App() {
                     element={<LoginContainer />}
                   />
                 </Route>
-                <Route path='/' element={
-                  <ProtectRoute>
-                    <SideNav
+                <Route path='/' 
+                  element={
+                    <ProtectRoute>
+                      <SideNav
 
-                    />
-                  </ProtectRoute>
-
-                }
-
+                      />
+                    </ProtectRoute>
+                  }
                 >
                   <Route
                     path='/patient-notes'
