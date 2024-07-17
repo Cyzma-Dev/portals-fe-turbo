@@ -1,0 +1,91 @@
+import { AuthHook, logoutService, PatientContext} from '@repo/common/common-library';
+import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger, Icons } from '@repo/ui/shadcn'
+import React, { useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
+import { useTheme } from './useTheme';
+function HeaderBar() {
+    const { patient_data } = useContext(PatientContext)
+    const { logout: authLogout } = AuthHook();
+    const navigate = useNavigate();
+    const { setTheme, theme } = useTheme();
+    const logout = async () => {
+        try {
+            await logoutService.logout();
+            toast.success('Logout Successfully')
+
+        } catch (error: any) {
+            error?.data?.details && toast.error(error?.data?.details)
+        } finally {
+            authLogout && authLogout();
+            navigate('/login');
+            localStorage.clear();
+        }
+    };
+
+    return (
+        <div className='flex justify-between dark:bg-blue border-b border-muted-background h-12 px-4 items-center'>
+            <div className='flex gap-8 items-center'>
+                <img src="../../public/png/alera.png" alt="Loading"
+                    className='object-cover h-6 '
+                />
+                <h3 className='text-md font-bold'>
+                    Patient Portal
+                </h3>
+            </div>
+
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <div className='flex justify-center items-center gap-2 p-2 px-3 rounded-md cursor-pointer hover:bg-secondary/60'>
+                        <Button variant="secondary" size="icon" className="rounded-full "
+                            style={{ width: "30px", height: "30px" }}
+                        >
+                                <Icons.user className="h-4 w-4" />
+                        </Button>
+                        <span className='text-sm'>
+                            {patient_data.first_name+" "+patient_data.last_name}
+                        </span>
+                    </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                    <DropdownMenuItem className='gap-2' onClick={()=>{alert()}} >
+                        <Icons.keyRound 
+                            className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all light:-rotate-90 light:scale-0"
+                            onClick={() => setTheme('dark')}
+                            />
+                        Change Password
+                    </DropdownMenuItem>
+                    {
+                        theme == 'light'
+                        ?
+                            <DropdownMenuItem className='gap-2' onClick={() => setTheme('dark')}>
+                                <Icons.moon 
+                                className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+                                onClick={() => setTheme('dark')}
+                                />
+                                    Dark Mode
+                            </DropdownMenuItem>
+                        :
+                            <DropdownMenuItem className='gap-2' onClick={() => setTheme('light')}>
+                                <Icons.sun
+                                className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all light:-rotate-90 light:scale-0 "
+                                onClick={() => setTheme('light')}
+                                />
+                                    Light Mode 
+                            </DropdownMenuItem>
+                    }
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem className='gap-2' onClick={() => {logout()}}>
+                        <Icons.logout
+                            className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all light:-rotate-90 light:scale-0 "
+                            onClick={() => {logout()}}
+                        />
+                        Logout
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
+        </div>
+    )
+}
+
+export default HeaderBar

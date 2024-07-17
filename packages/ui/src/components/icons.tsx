@@ -57,6 +57,7 @@ import {
   NotebookPenIcon,
   FilterIcon,
   Pencil,
+  KeyRound
 } from 'lucide-react';
 
 export const Icons = {
@@ -116,6 +117,7 @@ export const Icons = {
   notebookPenIcon: NotebookPenIcon,
   filter: FilterIcon,
   pencil: Pencil,
+  keyRound:KeyRound,
   checkSVG: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
