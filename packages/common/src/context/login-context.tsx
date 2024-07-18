@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { ILocalUser } from '../models';
 import { UserService } from '../utility/service/userService';
+import { ILocalUser } from '../common-props';
 interface IProps {
 	isAuthenticated: boolean | null;
 	user: ILocalUser | null;

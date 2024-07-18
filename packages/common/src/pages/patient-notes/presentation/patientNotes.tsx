@@ -48,8 +48,8 @@ const PatientNotesScreen = (props: IPatientNotesProps) => {
 		<div
 			className='flex flex-col gap-4 w-full h-full'
 		>
-			<div className='flex gap-4 justify-content items-center text-md font-bold'>
-				Notes		
+			<div className='flex gap-4 justify-content items-center text-lg font-bold'>
+				Notes
 				<div className='flex gap-1'>
 					<Button variant="secondary" size="sm" className="flex gap-1" onClick={props.openSheet}>
 						Add

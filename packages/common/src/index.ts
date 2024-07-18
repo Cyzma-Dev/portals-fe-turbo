@@ -1,5 +1,5 @@
 export * from './common-hooks';
 export * from './context';
-export * from './models';
+export * from './common-props';
 export * from './pages';
 export * from './utility';

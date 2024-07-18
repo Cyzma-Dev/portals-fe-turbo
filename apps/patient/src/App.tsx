@@ -44,9 +44,7 @@ function App() {
                 <Route path='/' 
                   element={
                     <ProtectRoute>
-                      <SideNav
-
-                      />
+                      <SideNav/>
                     </ProtectRoute>
                   }
                 >

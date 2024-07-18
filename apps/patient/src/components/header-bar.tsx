@@ -25,9 +25,9 @@ function HeaderBar() {
 
     return (
         <div className='flex justify-between dark:bg-blue border-b border-muted-background h-12 px-4 items-center'>
-            <div className='flex gap-8 items-center'>
-                <img src="../../public/png/alera.png" alt="Loading"
-                    className='object-cover h-6 '
+            <div className='flex gap-4 items-center min-w-[8rem]'>
+                <img src="png/alera.png" alt="Loading"
+                    className='object-cover h-6 hidden sm:block'
                 />
                 <h3 className='text-md font-bold'>
                     Patient Portal
@@ -40,7 +40,7 @@ function HeaderBar() {
                         <Button variant="secondary" size="icon" className="rounded-full "
                             style={{ width: "30px", height: "30px" }}
                         >
-                                <Icons.user className="h-4 w-4" />
+                            <Icons.user className="h-4 w-4" />
                         </Button>
                         <span className='text-sm'>
                             {patient_data.first_name+" "+patient_data.last_name}

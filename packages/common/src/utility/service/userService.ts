@@ -1,5 +1,5 @@
 import { BrowserUtility } from '../browser';
-import { ILocalUser } from '../../models';
+import { ILocalUser } from '../../common-props';
 import { StorageConstant } from '../constants';
 
 export class UserService {

@@ -1,4 +1,4 @@
-import { IPagedResponse } from '../../models';
+import { IPagedResponse } from '../../common-props';
 import { APIConstant } from '../constants/api';
 import { IOptions } from '../types';
 import { BaseService } from './base';
