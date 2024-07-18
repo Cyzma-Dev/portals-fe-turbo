@@ -32,7 +32,7 @@ const LoginScreen = (props: ILoginProps) => {
 			<div className="mx-auto flex w-full flex-col justify-center space-y-3 sm:w-[350px]">
 				<div className="flex flex-col text-center">
 					<p className="text-md font-bold text-foreground">
-						Sign in to Pharmacy Portal
+						Sign in to Physician Portal
 					</p>
 				</div>
 				<Form {...form}>
