@@ -16,3 +16,4 @@ export * from "./scroll-area";
 export * from "./textarea";
 export * from "./combobox";
 export * from "./sonner";
+export * from "./skeleton";
