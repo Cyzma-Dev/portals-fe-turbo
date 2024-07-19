@@ -4,3 +4,4 @@ export * from "./data-table";
 export * from "./filter-fields";
 export * from "./messageSearch";
 export * from "./quite-here";
+export * from "./fileDrug";

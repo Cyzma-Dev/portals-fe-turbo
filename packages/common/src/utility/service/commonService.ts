@@ -15,4 +15,19 @@ export class CommonService {
 		return response;
 	};
 
+	static getDocumentTypeOptions = async (): Promise<
+		IPagedResponse<IOptions[]>
+	> => {
+		const response =
+			(await BaseService.get<IPagedResponse<IOptions[]>>(
+				APIConstant.document_type_options,
+				true
+			)) || [];
+		return response;
+	};
+
+
 }
+
+
+
