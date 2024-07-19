@@ -1,4 +1,4 @@
-const QuiteHere = () => {
+export const QuiteHere = () => {
   return (
     <div className='w-full h-full flex flex-col gap-6 items-center justify-center'>
         <img src="svg/quite.svg" alt="Loading" className='h-64 w-64'/>
@@ -6,5 +6,3 @@ const QuiteHere = () => {
     </div>
   )
 }
-
-export default QuiteHere

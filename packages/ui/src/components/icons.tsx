@@ -63,6 +63,8 @@ import {
   KeyRound,
   CloudUpload,
   ArchiveRestore,
+  PanelLeftOpen,
+  PanelLeftClose,
 } from 'lucide-react';
 
 export const Icons = {
@@ -128,6 +130,8 @@ export const Icons = {
   keyRound: KeyRound,
   cloudUpload: CloudUpload,
   archiveRestore: ArchiveRestore,
+  panelLeftOpen: PanelLeftOpen,
+  panelLeftClose: PanelLeftClose,
   checkSVG: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

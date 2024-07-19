@@ -1,10 +1,17 @@
 import { AuthHook, logoutService, PhysicianContext} from '@repo/common/common-library';
-import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger, Icons } from '@repo/ui/shadcn'
+import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger, Icons, SideNavToggleBtn } from '@repo/ui/shadcn'
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { useTheme } from './useTheme';
-function HeaderBar() {
+import clsx from 'clsx';
+
+interface IHeaderBar {
+    collapsed: boolean
+    toggleCollapse: () => void
+}
+
+function HeaderBar(props: IHeaderBar) {
     const { physician_data } = useContext(PhysicianContext)
     const { logout: authLogout } = AuthHook();
     const navigate = useNavigate();
@@ -24,16 +31,25 @@ function HeaderBar() {
     };
 
     return (
-        <div className='flex justify-between border-b border-muted-background h-14 px-4 items-center'>
-            <div className='flex gap-4 items-center min-w-[8rem]'>
-                <img src="png/alera-logo.png" alt="Loading"
-                    className='object-cover h-6 hidden sm:block'
-                />
-                <h3 className='text-md font-bold '>
-                    Aleracare
-                </h3>
-            </div>
-
+        <div className={clsx('flex justify-end border-b border-muted-background h-16 px-4 items-center',
+            {'justify-between': props.collapsed}
+        )}>
+            {/* <div
+                onClick={props.toggleCollapse}
+                className={clsx('hover:bg-blueBackground hover:text-blue p-1 w-fit h-fit rounded-md cursor-pointer',
+                    {'hidden' : !props.collapsed}
+                )}
+            >
+                <Icons.panelLeftOpen className='h-5 w-5' />
+            </div> */}
+            <SideNavToggleBtn
+                toggleCollapse={props.toggleCollapse}
+                collapsed={props.collapsed}
+                children={<Icons.panelLeftOpen className='h-5 w-5' />}
+                className={clsx('hover:bg-blueBackground hover:text-blue p-1 w-fit h-fit rounded-md cursor-pointer',
+                    {'hidden' : !props.collapsed}
+                )}
+            />
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <div className='flex justify-center items-center gap-2 p-2 px-3 rounded-md cursor-pointer hover:bg-secondary/60'>

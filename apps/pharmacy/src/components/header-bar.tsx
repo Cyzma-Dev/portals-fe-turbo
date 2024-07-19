@@ -24,7 +24,7 @@ function HeaderBar() {
     };
 
     return (
-        <div className='flex justify-between dark:bg-blue border-b border-muted-background h-12 px-4 items-center'>
+        <div className='flex justify-between dark:bg-blue border-b border-muted-background h-16 px-4 items-center'>
             <div className='flex gap-4 items-center min-w-[8rem]'>
                 <img src="png/alera.png" alt="Loading"
                     className='object-cover h-6 hidden sm:block'
