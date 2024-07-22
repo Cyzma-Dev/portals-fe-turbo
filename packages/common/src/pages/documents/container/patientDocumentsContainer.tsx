@@ -1,10 +1,11 @@
 import { useCallback, useState } from "react";
 import { GetPatientId } from "../../../../../../packages/common/src/helper-methods";
-import { ICreateDecomentst, IPatientDocument, IPreviewDocuments } from "../presentation";
+import { ICreateDecomentst, IPatientDocument, IPreviewDocuments, IUploadDocument } from "../presentation";
 import { toast } from "sonner";
 import { IQueryString, MessageConstant, PatientDocumentsHook, PatientDocumentsService } from "@repo/common/common-library";
 import CustomFilterStateManage from "../../../../../../packages/common/src/helper-methods/custom-filter";
 import PatientDocumentScreen from "../presentation/patientDocuments";
+import { QuiteHere } from "@repo/ui/shadcn";
 
 export const PatientDocumentsContainer = () => {
 
@@ -21,7 +22,7 @@ export const PatientDocumentsContainer = () => {
 	const [isBtnDisable, setIsBtnDisable] = useState<boolean>(false)
 	const [sheetOpen, setSheetOpen] = useState<boolean>(false);
 	const [currentNotes, setCurrentNotes] = useState<IPatientDocument>()
-	const [viewerFile, setViewerFile] = useState<any | null>(null);
+	const [viewerFile, setViewerFile] = useState<IUploadDocument | null>(null);
 	const [previewSheetOpen, setPreviewSheetOpen] = useState<boolean>(false);
 
 	const closeSheet = () => {
@@ -40,7 +41,6 @@ export const PatientDocumentsContainer = () => {
 	}
 
 	const handleSubmit = async (formData: ICreateDecomentst) => {
-		console.log(formData, 'formDataformDataformDataformData')
 		setIsBtnDisable(true)
 		try {
 			setIsLoading(true)
@@ -59,7 +59,7 @@ export const PatientDocumentsContainer = () => {
 				const fileData = new FormData();
 				const contentType = 'multipart/form-data';
 				for (const key in formData) {
-					fileData.append(key, formData[key]);
+					fileData.append(key, formData[key as keyof ICreateDecomentst] as string | Blob);
 				}
 				const response = await PatientDocumentsService.uploadPatientDocument(
 					fileData,
@@ -153,6 +153,7 @@ export const PatientDocumentsContainer = () => {
 			const result = await PatientDocumentsService.getPatientDocument(item.id);
 			setPreviewSheetOpen(true)
 			setViewerFile(result.results);
+			console.log(result.results, 'result')
 		} catch (error: any) {
 			if (error?.status) {
 				error?.data?.error && toast.error(error?.data?.error);
@@ -165,7 +166,7 @@ export const PatientDocumentsContainer = () => {
 
 
 	return (
-		<>
+		patientDocumentsData ?
 			<PatientDocumentScreen
 				patientDocumentsData={patientDocumentsData ? patientDocumentsData : []}
 				handleGridChange={handleGridChange}
@@ -188,6 +189,7 @@ export const PatientDocumentsContainer = () => {
 				previewSheetOpen={previewSheetOpen}
 				setPreviewSheetOpen={setPreviewSheetOpen}
 			/>
-		</>
+			:
+			<QuiteHere />
 	);
 };

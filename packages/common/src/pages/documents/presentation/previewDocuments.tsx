@@ -1,9 +1,7 @@
 import React, { useState } from "react"
 
 import { IPreviewDocumentsProps } from "./type";
-import { Button, Dialog, DialogBox, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, Icons, Input, Label, Sheet, SheetContent } from "@repo/ui/shadcn";
-
-
+import { Button, DialogBox, Icons, Input, Sheet, SheetContent } from "@repo/ui/shadcn";
 
 
 
@@ -13,7 +11,7 @@ interface IDocumentsNotesProps extends IPreviewDocumentsProps {
 export const PreviewDocuments = (props: IDocumentsNotesProps) => {
 
     const [fullScreenPreview, setFullScreenPreview] = useState<boolean>(false);
-    console.log(fullScreenPreview)
+
     return (
         <>
 
@@ -27,7 +25,6 @@ export const PreviewDocuments = (props: IDocumentsNotesProps) => {
                             ?
                             <>
                                 <embed
-                                    // className={commonStyles.pdfViewer}
                                     src={`data:application/pdf;base64,${props.viewerFile?.document.substring(
                                         props.viewerFile?.document.indexOf("'") + 1,
                                         props.viewerFile?.document.lastIndexOf("'")
@@ -126,7 +123,7 @@ export const PreviewDocuments = (props: IDocumentsNotesProps) => {
             <DialogBox
                 FullScreenPreview={fullScreenPreview}
                 setFullScreenPreview={setFullScreenPreview}
-                title="testing"
+                title="Preview"
             >
                 {props.viewerFile?.document_type === 'PDF'
                     ?

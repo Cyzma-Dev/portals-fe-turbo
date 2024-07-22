@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, DataTable, DataTableColumnHeader, Icons, QuiteHere } from "@repo/ui/shadcn";
+import { Button, DataTable, DataTableColumnHeader, Icons } from "@repo/ui/shadcn";
 import FilterFields from '../../../../../ui/src/components/filter-fields';
 import { useState } from 'react';
 import { CustomColumnDef } from "../../../utility";
@@ -74,59 +74,58 @@ const PatientDocumentScreen = (props: IDocumentsNotesProps) => {
 	]
 
 	return (
-		props.patientDocumentsData ?
-			<div
-				className='flex flex-col gap-4 w-full h-full'
-			>
-				<div className='flex gap-4 justify-content items-center text-md font-bold'>
-					Documents
-					<div className='flex gap-1'>
-						<Button variant="secondary" size="sm" className="flex gap-1" onClick={props.openSheet}>
-							Add
-						</Button>
 
-						<Button variant="ghost" size="sm" className="flex gap-1" onClick={() => setFilterOpen(!filterOpen)}>
-							<Icons.listFilter className="h-4 w-4" />
-						</Button>
-					</div>
+		<div
+			className='flex flex-col gap-4 w-full h-full'
+		>
+			<div className='flex gap-4 justify-content items-center text-md font-bold'>
+				Documents
+				<div className='flex gap-1'>
+					<Button variant="secondary" size="sm" className="flex gap-1" onClick={props.openSheet}>
+						Add
+					</Button>
+
+					<Button variant="ghost" size="sm" className="flex gap-1" onClick={() => setFilterOpen(!filterOpen)}>
+						<Icons.listFilter className="h-4 w-4" />
+					</Button>
 				</div>
-
-				{filterOpen
-					&&
-					<FilterFields
-						filterOpen={filterOpen}
-						handleFilterChange={props.handleFilterChange}
-						listColumns={documentColumns}
-						options={[]}
-					/>
-				}
-				<AddDocumentsNotes
-					sheetOpen={props.sheetOpen}
-					setSheetOpen={props.setSheetOpen}
-					isEdit={props.isEdit}
-					setIsEdit={props.setIsEdit}
-					openSheet={props.openSheet}
-					currentNotes={props.currentNotes}
-					setCurrentNotes={props.setCurrentNotes}
-					handleSubmit={props.handleSubmit}
-					isLoading={props.isLoading}
-					isBtnDisable={props.isBtnDisable}
-				/>
-				<PreviewDocuments
-					previewSheetOpen={props.previewSheetOpen}
-					setPreviewSheetOpen={props.setPreviewSheetOpen}
-					viewerFile={props.viewerFile}
-				/>
-
-				<DataTable
-					data={props.patientDocumentsData}
-					columns={extendColumns}
-					toolbar={false}
-					handleGridChange={props.handleGridChange}
-				/>
 			</div>
-			:
-			<QuiteHere />
+
+			{filterOpen
+				&&
+				<FilterFields
+					filterOpen={filterOpen}
+					handleFilterChange={props.handleFilterChange}
+					listColumns={documentColumns}
+					options={[]}
+				/>
+			}
+			<AddDocumentsNotes
+				sheetOpen={props.sheetOpen}
+				setSheetOpen={props.setSheetOpen}
+				isEdit={props.isEdit}
+				setIsEdit={props.setIsEdit}
+				openSheet={props.openSheet}
+				currentNotes={props.currentNotes}
+				setCurrentNotes={props.setCurrentNotes}
+				handleSubmit={props.handleSubmit}
+				isLoading={props.isLoading}
+				isBtnDisable={props.isBtnDisable}
+			/>
+			<PreviewDocuments
+				previewSheetOpen={props.previewSheetOpen}
+				setPreviewSheetOpen={props.setPreviewSheetOpen}
+				viewerFile={props.viewerFile}
+			/>
+
+			<DataTable
+				data={props.patientDocumentsData}
+				columns={extendColumns}
+				toolbar={false}
+				handleGridChange={props.handleGridChange}
+			/>
+		</div>
+
 	)
 };
 

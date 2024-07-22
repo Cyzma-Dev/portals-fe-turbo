@@ -57,9 +57,9 @@ export interface IDocumentsCommonProps {
 }
 
 export interface ICreateDecomentst {
-  document: File
+  document: Document
   document_name: string
-  note: string
+  note?: string
   subject: number
 
 }
@@ -70,13 +70,7 @@ export interface IPreviewDocumentsProps {
   viewerFile: any
 }
 
-export interface ICreateDecomentst {
-  document: File
-  document_name: string
-  note: string
-  subject: number
 
-}
 
 export interface IPreviewDocuments {
   document: File

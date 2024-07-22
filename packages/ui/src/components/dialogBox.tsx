@@ -1,5 +1,5 @@
-import React, { Children } from 'react';
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
+import React from 'react';
+import { Dialog, DialogContent, DialogTitle } from '@radix-ui/react-dialog';
 import { Button, DialogFooter, DialogHeader, } from '../shadcn/ui';
 
 interface DialogProps {

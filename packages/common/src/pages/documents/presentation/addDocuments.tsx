@@ -28,7 +28,9 @@ export const AddDocumentsNotes = (props: IDocumentsNotesProps) => {
             ...formData,
             document: binaryData
         }
+        console.log(data, 'data');
         props.handleSubmit(data)
+
     }
 
     const form = useForm<z.infer<typeof addDocumentsSchema>>({
