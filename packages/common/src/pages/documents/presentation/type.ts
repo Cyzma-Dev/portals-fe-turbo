@@ -63,3 +63,26 @@ export interface ICreateDecomentst {
   subject: number
 
 }
+
+export interface IPreviewDocumentsProps {
+  previewSheetOpen: boolean
+  setPreviewSheetOpen: React.Dispatch<React.SetStateAction<boolean>>
+  viewerFile: any
+}
+
+export interface ICreateDecomentst {
+  document: File
+  document_name: string
+  note: string
+  subject: number
+
+}
+
+export interface IPreviewDocuments {
+  document: File
+  document_name: string
+  note: string
+  subject: number
+  id: number
+
+}

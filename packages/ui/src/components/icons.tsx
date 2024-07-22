@@ -65,6 +65,8 @@ import {
   ArchiveRestore,
   PanelLeftOpen,
   PanelLeftClose,
+  ArrowDownToLine,
+  ScanEye,
 } from 'lucide-react';
 
 export const Icons = {
@@ -132,6 +134,8 @@ export const Icons = {
   archiveRestore: ArchiveRestore,
   panelLeftOpen: PanelLeftOpen,
   panelLeftClose: PanelLeftClose,
+  downloadArrow: ArrowDownToLine,
+  scanEye: ScanEye,
   checkSVG: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

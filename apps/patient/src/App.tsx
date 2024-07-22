@@ -41,10 +41,10 @@ function App() {
                     element={<LoginContainer />}
                   />
                 </Route>
-                <Route path='/' 
+                <Route path='/'
                   element={
                     <ProtectRoute>
-                      <SideNav/>
+                      <SideNav />
                     </ProtectRoute>
                   }
                 >
@@ -61,7 +61,7 @@ function App() {
 
                     }
                   />
-                   <Route
+                  <Route
                     path='/documents'
                     element={
                       <ProtectRoute>
