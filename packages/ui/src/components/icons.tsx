@@ -63,6 +63,7 @@ import {
   KeyRound,
   PanelLeftOpen,
   PanelLeftClose,
+  AlarmClock,
 } from 'lucide-react';
 
 export const Icons = {
@@ -128,6 +129,7 @@ export const Icons = {
   keyRound: KeyRound,
   panelLeftOpen: PanelLeftOpen,
   panelLeftClose :PanelLeftClose,
+  alarmClock: AlarmClock,
   checkSVG: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

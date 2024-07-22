@@ -1,33 +1,107 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
-import { Icons } from '@repo/ui/shadcn';
+import { Icons, SideNavToggleBtn } from '@repo/ui/shadcn';
 import { SIDENAV_ITEMS } from '../utility/constant/side-nav-items';
 import { SideNavItem } from '../utility';
 import HeaderBar from './header-bar';
+import clsx from 'clsx';
 
 const SideNav = () => {
+  const [isSmallScreen, setIsSmallScreen] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
+  const sideNavRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    // Define the media query
+    const mediaQuery = window.matchMedia('(min-width: 640px)'); // Tailwind's 'sm' breakpoint is 640px
+
+    // Define the handler function
+    const handleMediaQueryChange = (e: MediaQueryListEvent) => {
+        setIsSmallScreen(!e.matches);
+        setCollapsed(true)
+    };
+
+    // Attach the event listener
+    mediaQuery.addEventListener('change', handleMediaQueryChange);
+
+    // Check the initial screen size
+    setIsSmallScreen(!mediaQuery.matches);
+    setCollapsed(!mediaQuery.matches);
+
+    // Cleanup function to remove the event listener
+    return () => {
+        mediaQuery.removeEventListener('change', handleMediaQueryChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isSmallScreen && sideNavRef.current && !sideNavRef.current.contains(event.target as Node)) {
+        setCollapsed(true);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSmallScreen]);
+
+
+  const toggleCollapse = () => {
+    setCollapsed(!collapsed);
+  };
 
   return (
     <>
-      <HeaderBar />
-      <div className='flex h-screen w-full'>
+      <div className='flex h-screen w-full relative'>
         <div
+          ref={sideNavRef}
           style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}
-          className="md:w-60  min-w-fit max-w-fit bg-white flex-1 border-r border-muted-background hidden md:flex h-screen overflow-y-auto"
+          className={clsx('md:w-60 min-w-fit max-w-fit bg-white flex-1 border-r border-muted-background absolute sm:static h-screen overflow-y-auto', {
+            'md:flex' : !collapsed,
+            'hidden' : collapsed
+          })}
         >
-          <div className="flex bg-background flex-col space-y-6 w-full pt-3">
-            
-            <div className="flex flex-col space-y-1 md:px-3">
+          <div className="flex bg-background flex-col gap-4 w-[14rem] h-full">
+            <div className='flex gap-4 items-center min-w-[8rem] h-16 p-3 border-b border-muted-background hidden sm:flex'>
+              <img src="png/alera-logo.png" alt="Loading" className='object-cover h-6' />
+              <div className='w-full flex justify-between items-center text-xl font-bold '>
+                Aleracare
+                <SideNavToggleBtn
+                  toggleCollapse={toggleCollapse}
+                  collapsed={collapsed}
+                  children={<Icons.panelLeftClose className='h-5 w-5' />}
+                  className='hover:bg-blueBackground hover:text-blue p-1 w-fit h-fit rounded-md cursor-pointer'
+                />
+              </div>
+            </div>
+            <div className="flex flex-col space-y-1 px-4">
+              <div className='h-16 flex items-center sm:hidden'>
+                <SideNavToggleBtn
+                  toggleCollapse={toggleCollapse}
+                  collapsed={collapsed}
+                  children={<Icons.panelLeftClose className='h-5 w-5' />}
+                  className={clsx('hover:bg-blueBackground hover:text-blue p-1 w-fit h-fit rounded-md cursor-pointer',
+                    {'hidden' : collapsed}
+                  )}
+                />
+              </div>
               {SIDENAV_ITEMS.map((item: SideNavItem, idx: number) => {
                 return <MenuItem key={idx} item={item} />;
               })}
             </div>
           </div>
         </div>
-        <div
-          className='overflow-y-auto flex-1 p-4 m-0'
-        >
-          <Outlet />
+        <div className='w-full'>
+          <HeaderBar 
+            collapsed={collapsed}
+            toggleCollapse={toggleCollapse}
+          />
+          <div className='overflow-y-auto flex-1 h-full p-4 m-0'>
+            <Outlet />
+          </div>
         </div>
       </div>
     </>
@@ -48,8 +122,7 @@ const MenuItem = ({ item }: { item: SideNavItem; }) => {
         <div className='min-w-[10rem]'>
           <button
             onClick={toggleSubMenu}
-            className={`flex flex-row items-center p-2 rounded-md hover:bg-blueBackground w-full justify-between hover:bg-blueBackground ${pathname.pathname.includes(item.path) ? 'bg-zinc-100' : ''
-              }`}
+            className={`flex flex-row items-center p-2 rounded-md hover:bg-blueBackground w-full justify-between hover:bg-blueBackground ${pathname.pathname.includes(item.path) ? 'bg-zinc-100' : '' }`}
           >
             <div className="flex flex-row space-x-3 items-center">
               {item.icon}

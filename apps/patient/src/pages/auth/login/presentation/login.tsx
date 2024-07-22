@@ -8,15 +8,13 @@ import { InputTypeLoginUser } from './types';
 interface ILoginProps {
 	loginHandler: (data: InputTypeLoginUser) => void;
 	isBtnDisable: boolean
+	isLoading: boolean
 }
 
 const LoginScreen = (props: ILoginProps) => {
-	const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
 	const onLoginSubmit = (formData: InputTypeLoginUser) => {
-		setIsLoading(true)
 		props.loginHandler(formData);
-		setIsLoading(false)
 	};
 
 	const form = useForm<z.infer<typeof userLoginSchema>>({
@@ -41,7 +39,7 @@ const LoginScreen = (props: ILoginProps) => {
 							<FormField
 								control={form.control}
 								name="username"
-								disabled={isLoading}
+								disabled={props.isLoading}
 								render={({ field }) => (
 									<FormItem>
 									<FormControl>
@@ -54,7 +52,7 @@ const LoginScreen = (props: ILoginProps) => {
 							<FormField
 								control={form.control}
 								name="password"
-								disabled={isLoading}
+								disabled={props.isLoading}
 								render={({ field }) => (
 									<FormItem>
 									<FormControl>
@@ -65,8 +63,8 @@ const LoginScreen = (props: ILoginProps) => {
 								)}
 							/>
 						</div>
-						<Button className="md:right-8 md:top-8 w-full" type="submit" disabled={isLoading}>
-						{isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" /> }
+						<Button className="md:right-8 md:top-8 w-full" type="submit" disabled={props.isLoading}>
+						{props.isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" /> }
 						Sign In
 						</Button>
 					</form>

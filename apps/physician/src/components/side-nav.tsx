@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import { Icons, SideNavToggleBtn } from '@repo/ui/shadcn';
 import { SIDENAV_ITEMS } from '../utility/constant/side-nav-items';
@@ -7,8 +7,47 @@ import HeaderBar from './header-bar';
 import clsx from 'clsx';
 
 const SideNav = () => {
-
+  const [isSmallScreen, setIsSmallScreen] = useState(true);
   const [collapsed, setCollapsed] = useState(false);
+  const sideNavRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    // Define the media query
+    const mediaQuery = window.matchMedia('(min-width: 640px)'); // Tailwind's 'sm' breakpoint is 640px
+
+    // Define the handler function
+    const handleMediaQueryChange = (e: MediaQueryListEvent) => {
+        setIsSmallScreen(!e.matches);
+        setCollapsed(true)
+    };
+
+    // Attach the event listener
+    mediaQuery.addEventListener('change', handleMediaQueryChange);
+
+    // Check the initial screen size
+    setIsSmallScreen(!mediaQuery.matches);
+    setCollapsed(!mediaQuery.matches);
+
+    // Cleanup function to remove the event listener
+    return () => {
+        mediaQuery.removeEventListener('change', handleMediaQueryChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isSmallScreen && sideNavRef.current && !sideNavRef.current.contains(event.target as Node)) {
+        setCollapsed(true);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSmallScreen]);
+
 
   const toggleCollapse = () => {
     setCollapsed(!collapsed);
@@ -18,6 +57,7 @@ const SideNav = () => {
     <>
       <div className='flex h-screen w-full relative'>
         <div
+          ref={sideNavRef}
           style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}
           className={clsx('md:w-60 min-w-fit max-w-fit bg-white flex-1 border-r border-muted-background absolute sm:static h-screen overflow-y-auto', {
             'md:flex' : !collapsed,

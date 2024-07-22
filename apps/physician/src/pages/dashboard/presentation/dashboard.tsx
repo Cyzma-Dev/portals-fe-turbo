@@ -1,5 +1,5 @@
-import { useContext, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, Icons } from "@repo/ui/shadcn";
+import { useContext } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/shadcn";
 import { IDashboardCount } from './types';
 import { NotificationContext } from '@repo/common/common-library';
 
@@ -11,8 +11,6 @@ interface IDashboardProps{
 const DashboardScreen = (props: IDashboardProps) => {
 	const { messageNotifications } = useContext(NotificationContext);
 
-    useEffect(() => {
-    }, []);
     return (
 
             <div className="flex-col align-start space-y-4 h-full">
@@ -20,7 +18,6 @@ const DashboardScreen = (props: IDashboardProps) => {
                     <h2 className="inline-block text-xl justify-self-start font-bold tracking-tight">Dashboard</h2>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                    {props.dashboardCount?.patient_enrollments &&
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-md font-medium">
@@ -42,14 +39,12 @@ const DashboardScreen = (props: IDashboardProps) => {
                             </svg>
                             </CardHeader>
                             <CardContent>
-                            <div className="text-2xl font-bold">+{props.dashboardCount?.patient_enrollments}</div>
+                            <div className="text-2xl font-bold">{props.dashboardCount?.patient_enrollments}</div>
                             <p className="text-xs text-muted-foreground">
                                 total enrolled patients
                             </p>
                             </CardContent>
                         </Card>
-                    }
-                    {props.dashboardCount?.physician_inbounds &&
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-md font-medium">
@@ -72,14 +67,12 @@ const DashboardScreen = (props: IDashboardProps) => {
                             </svg>
                             </CardHeader>
                             <CardContent>
-                            <div className="text-2xl font-bold flex items-center"><Icons.arrowDownUp className='h-4 w-4'/>{props.dashboardCount?.physician_inbounds}</div>
+                            <div className="text-2xl font-bold flex items-center">{props.dashboardCount?.physician_inbounds}</div>
                             <p className="text-xs text-muted-foreground">
                                 need to process this renewals
                             </p>
                             </CardContent>
                         </Card>
-                    }
-                    {messageNotifications?.total_notifications &&
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                             <CardTitle className="text-md font-medium">Unread Messages</CardTitle>
@@ -93,7 +86,7 @@ const DashboardScreen = (props: IDashboardProps) => {
                                 strokeWidth="2" 
                                 strokeLinecap="round" 
                                 strokeLinejoin="round" 
-                                className="lucide lucide-message-square-dashed text-orange"
+                                className="lucide lucide-message-square-dashed text-purple"
                             >
                                 <path d="M3 6V5c0-1.1.9-2 2-2h2"/>
                                 <path d="M11 3h3"/>
@@ -106,13 +99,12 @@ const DashboardScreen = (props: IDashboardProps) => {
                             </svg>
                             </CardHeader>
                             <CardContent>
-                            <div className="text-2xl font-bold">{messageNotifications?.total_notifications}</div>
+                            <div className="text-2xl font-bold">{messageNotifications?.total_notifications ? messageNotifications?.total_notifications : 0}</div>
                             <p className="text-xs text-muted-foreground">
                                 total unread messages
                             </p>
                             </CardContent>
                         </Card>
-                    }
                 </div>
             </div>
 

@@ -10,6 +10,9 @@ export function DocumentSkeleton() {
                 <Skeleton className="h-[125px] w-full rounded-xl" />
                 <Skeleton className="h-[125px] w-full rounded-xl" />
                 <Skeleton className="h-[125px] w-full rounded-xl" />
+                <Skeleton className="h-[125px] w-full rounded-xl" />
+                <Skeleton className="h-[125px] w-full rounded-xl" />
+                <Skeleton className="h-[125px] w-full rounded-xl" />
             </div>
         </div>
     )

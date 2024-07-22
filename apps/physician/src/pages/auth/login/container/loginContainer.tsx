@@ -13,9 +13,11 @@ export const LoginContainer = () => {
 	const query = useQuery();
 	const auth = AuthHook();
 	const [isBtnDisable, setIsBtnDisable] = useState(false);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const { login } = LoginHook();
 
 	const loginHandler = async (formData: InputTypeLoginUser) => {
+		setIsLoading(true);
 		setIsBtnDisable(true);
 		try {
 			const result = await login(formData);
@@ -52,6 +54,7 @@ export const LoginContainer = () => {
 				} else {
 					navigate('/dashboard', { replace: true });
 				}
+				setIsLoading(false);
 			}
 		} catch (error: any) {
 			if (error?.data?.state && error?.data?.state === 'error') {
@@ -59,6 +62,7 @@ export const LoginContainer = () => {
 				// error?.data?.message && customToaster.error(error?.data?.message);
 			}
 		} finally {
+			setIsLoading(false);
 			setIsBtnDisable(false);
 		}
 	};
@@ -67,6 +71,7 @@ export const LoginContainer = () => {
 		<LoginScreen
 			loginHandler={loginHandler}
 			isBtnDisable={isBtnDisable}
+			isLoading={isLoading}
 		/>
 	);
 };
