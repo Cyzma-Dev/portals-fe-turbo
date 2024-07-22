@@ -1,2 +1,4 @@
 export * from "./patientNotesHook"
 export * from "./subjectTypeOptionsHook"
+export * from "./patientDocumentsHook"
+export * from "./documentTypeOptionsHook"

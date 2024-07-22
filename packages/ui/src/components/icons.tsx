@@ -61,9 +61,13 @@ import {
   FilterIcon,
   Pencil,
   KeyRound,
+  CloudUpload,
+  ArchiveRestore,
   PanelLeftOpen,
   PanelLeftClose,
   AlarmClock,
+  ArrowDownToLine,
+  ScanEye,
 } from 'lucide-react';
 
 export const Icons = {
@@ -75,8 +79,8 @@ export const Icons = {
   ChevronUp: ChevronUp,
   chevronDown: ChevronDown,
   chevronUpDown: ChevronsUpDown,
-  chevronsDown:ChevronsDown,
-  chevronsUp:ChevronsUp,
+  chevronsDown: ChevronsDown,
+  chevronsUp: ChevronsUp,
   trash: Trash,
   post: FileText,
   page: File,
@@ -127,9 +131,13 @@ export const Icons = {
   filter: FilterIcon,
   pencil: Pencil,
   keyRound: KeyRound,
+  cloudUpload: CloudUpload,
+  archiveRestore: ArchiveRestore,
   panelLeftOpen: PanelLeftOpen,
   panelLeftClose :PanelLeftClose,
   alarmClock: AlarmClock,
+  downloadArrow: ArrowDownToLine,
+  scanEye: ScanEye,
   checkSVG: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

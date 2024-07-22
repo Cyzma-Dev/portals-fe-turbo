@@ -19,6 +19,11 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icons.notebookPenIcon width="16" height="16" />,
   },
   {
+    title: 'Documents',
+    path: '/documents',
+    icon: <Icons.post width="16" height="16" />,
+  },
+  {
     title: 'Messages',
     path: '/patient-messages',
     icon: <Icons.messageSquare width="16" height="16" />,
