@@ -55,7 +55,7 @@ const SideNav = () => {
 
   return (
     <>
-      <div className='flex h-screen w-full relative z-50'>
+      <div className='flex h-screen w-full relative'>
         <div
           ref={sideNavRef}
           style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}
@@ -99,7 +99,7 @@ const SideNav = () => {
             collapsed={collapsed}
             toggleCollapse={toggleCollapse}
           />
-          <div className='overflow-y-auto flex-1 h-full p-4 m-0 z-40'>
+          <div className='overflow-y-auto flex-1 h-full p-4 m-0'>
             <Outlet />
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { IDocumentsCommonProps } from "./type";
 import { DocumentTypeOptionsHook } from "../../../common-hooks";
-import { Button, Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Icons, Input, Popover, PopoverContent, PopoverTrigger, ReactDropzone, ScrollArea, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@repo/ui/shadcn";
+import { Button, Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Icons, Input, Popover, PopoverContent, PopoverTrigger, FileUpload, ScrollArea, Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle } from "@repo/ui/shadcn";
 import { cn } from "@repo/ui/utils";
 import { z } from "zod";
 import { addDocumentsSchema } from "./schema";
@@ -97,7 +97,7 @@ export const AddDocumentsNotes = (props: IDocumentsNotesProps) => {
                                             ?
                                             null
                                             :
-                                            <ReactDropzone
+                                            <FileUpload
                                                 name='patient_document'
                                                 control={form.control}
                                                 onChange={handleFileChange}

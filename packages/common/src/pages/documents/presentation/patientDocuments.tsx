@@ -14,7 +14,6 @@ interface IDocumentsNotesProps extends IDocumentsCommonProps {
 	handleFilterChange: (field: string, operator: string, event: any) => void;
 	handleEdit: (row: IPatientDocument) => void;
 	handleDocumentNoteDelete: (rec_id: number) => void;
-
 	handlePreviewDocuments: (item: any) => void;
 	viewerFile: any
 	previewSheetOpen: boolean

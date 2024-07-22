@@ -48,6 +48,9 @@ importers:
       axios:
         specifier: ^1.7.2
         version: 1.7.2
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       lz-string:
         specifier: ^1.5.0
         version: 1.5.0

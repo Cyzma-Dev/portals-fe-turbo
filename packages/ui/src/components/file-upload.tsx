@@ -4,6 +4,7 @@ import { Controller } from 'react-hook-form'
 import Dropzone from 'react-dropzone'
 import { Icons } from './icons'
 import { Alert, AlertDescription } from '../shadcn/ui/alert'
+import clsx from 'clsx'
 
 
 
@@ -14,7 +15,7 @@ interface FileUploadProps {
     onChange?: (file: File, rawData: any) => void
 }
 
-export const ReactDropzone = ({ name, control, onChange, disabled = false }: FileUploadProps) => {
+export const FileUpload = ({ name, control, onChange, disabled = false }: FileUploadProps) => {
     const [file, setFile] = useState<any>(null)
     const [fileSelect, setFileSelect] = useState<any>(null)
     const handleValidFileType = (file: File) => {
@@ -69,31 +70,38 @@ export const ReactDropzone = ({ name, control, onChange, disabled = false }: Fil
                                 <div {...getRootProps()}>
                                     <input {...getInputProps()} />
                                     <div
-                                        style={{
-                                            cursor: disabled ? 'not-allowed' : 'pointer',
-                                            width: '100%',
-                                            height: 'max-content',
-                                            borderRadius: '4px',
-                                            border: '1px dashed ',
-                                            justifyContent: 'center',
-                                            textAlign: 'center',
-                                            marginBottom: '1rem',
-                                            padding: '20px 0px 10px 0px',
-                                            // color: 'rgba(0,0,0,0.7)'
-                                        }}
+                                        className={clsx('flex justify-center p-4 w-full h-28 border border-secondary rounded-sm cursor-pointer', {
+
+                                        })}
+                                        // style={{
+                                        //     cursor: disabled ? 'not-allowed' : 'pointer',
+                                        //     width: '100%',
+                                        //     height: 'max-content',
+                                        //     borderRadius: '4px',
+                                        //     border: '1px dashed ',
+                                        //     justifyContent: 'center',
+                                        //     textAlign: 'center',
+                                        //     marginBottom: '1rem',
+                                        //     padding: '20px 0px 10px 0px',
+                                        //     // color: 'rgba(0,0,0,0.7)'
+                                        // }}
                                     >
 
                                         {fileSelect
                                             ?
-                                            (<>
-                                                <Icons.cloudUpload style={{ fontSize: '3em' }} />
-                                                <p>{fileSelect?.name}</p>
-                                            </>)
+                                            (
+                                                <div className='flex flex-col justify-center gap-2 items-center'>
+                                                    <Icons.cloudUpload className='h-6 w-6' />
+                                                    <p>{fileSelect?.name}</p>
+                                                </div>
+                                            )
                                             :
-                                            (<>
-                                                <Icons.archiveRestore style={{ fontSize: '3em' }} />
-                                                <p>Please drag and drop file or click here</p>
-                                            </>)
+                                            (
+                                                <div className='flex flex-col justify-center gap-2 items-center'>
+                                                    <Icons.archiveRestore className='h-5 w-5' />
+                                                    <span className='text-sm'>Please drag and drop file or click here</span>
+                                                </div>
+                                            )
                                         }
                                     </div>
                                 </div>

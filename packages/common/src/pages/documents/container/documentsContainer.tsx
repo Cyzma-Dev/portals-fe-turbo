@@ -4,7 +4,7 @@ import { ICreateDecomentst, IPatientDocument } from "../presentation";
 import { toast } from "sonner";
 import { IQueryString, MessageConstant, PatientDocumentsHook, PatientDocumentsService } from "@repo/common/common-library";
 import CustomFilterStateManage from "../../../../../../packages/common/src/helper-methods/custom-filter";
-import PatientDocumentScreen from "../presentation/patientDocumentRecord";
+import PatientDocumentScreen from "../presentation/patientDocuments";
 
 export const PatientDocumentsContainer = () => {
 
@@ -38,7 +38,6 @@ export const PatientDocumentsContainer = () => {
 	}
 
 	const handleSubmit = async (formData: ICreateDecomentst) => {
-		console.log(formData, 'formDataformDataformDataformData')
 		setIsBtnDisable(true)
 		try {
 			setIsLoading(true)

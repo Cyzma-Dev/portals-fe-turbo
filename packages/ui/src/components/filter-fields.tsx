@@ -10,7 +10,7 @@ interface FilterProps {
 const FilterFields = (props: FilterProps) => {
 	const toFilter = props.listColumns.filter((item) => item.toFilter);
 	return (
-        <div>
+        <div className='grid md:grid-cols-5 gap-3'>
             {toFilter.map((value, index) => {
                 return (
                     <div key={index}>
