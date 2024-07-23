@@ -29,8 +29,8 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icons.messageSquare width="16" height="16" />,
   },
   {
-    title: 'Settings',
-    path: '/settings',
+    title: 'In-Bound',
+    path: '/inBound',
     icon: <Icons.settings width="16" height="16" />,
   },
   // {

@@ -7,7 +7,7 @@ import { documentColumns } from "./documentscolumns";
 import { IDocumentsCommonProps, IPatientDocument } from "./type";
 import { AddDocumentsNotes } from "./addDocuments";
 import { PreviewDocuments } from "./previewDocuments";
-import IconWrapper from "../../../../../ui/src/components/IconWrapper";
+import IconWrapper from "../../../../../ui/src/components/Icon-wrapper";
 interface IDocumentsNotesProps extends IDocumentsCommonProps {
 	patientDocumentsData: IPatientDocument[];
 	handleGridChange: (event: any) => void;

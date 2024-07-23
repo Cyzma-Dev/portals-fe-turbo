@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { IQueryString, MessageConstant, PatientDocumentsHook, PatientDocumentsService } from "@repo/common/common-library";
 import CustomFilterStateManage from "../../../../../../packages/common/src/helper-methods/custom-filter";
 import PatientDocumentScreen from "../presentation/patientDocuments";
-import { QuiteHere } from "@repo/ui/shadcn";
+import { DocumentSkeleton, QuiteHere } from "@repo/ui/shadcn";
 
 export const PatientDocumentsContainer = () => {
 
@@ -14,7 +14,8 @@ export const PatientDocumentsContainer = () => {
 		patientDocumentsData,
 		fetchPatientDocuments,
 		setQueryString,
-		queryString
+		queryString,
+		isLoading: isPatientDocumentsLoading,
 	} = PatientDocumentsHook(patient_id)
 
 	const [isEdit, setIsEdit] = useState<boolean>(false)
@@ -166,7 +167,11 @@ export const PatientDocumentsContainer = () => {
 
 
 	return (
-		patientDocumentsData ?
+		isPatientDocumentsLoading ?
+			<DocumentSkeleton
+				title='Documents'
+			/>
+			:
 			<PatientDocumentScreen
 				patientDocumentsData={patientDocumentsData ? patientDocumentsData : []}
 				handleGridChange={handleGridChange}
@@ -189,7 +194,6 @@ export const PatientDocumentsContainer = () => {
 				previewSheetOpen={previewSheetOpen}
 				setPreviewSheetOpen={setPreviewSheetOpen}
 			/>
-			:
-			<QuiteHere />
+
 	);
 };

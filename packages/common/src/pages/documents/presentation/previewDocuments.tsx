@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 
 import { IPreviewDocumentsProps } from "./type";
-import { Button, DialogBox, Icons, Input, Sheet, SheetContent } from "@repo/ui/shadcn";
+import { Button, Popup, Icons, Input, Sheet, SheetContent } from "@repo/ui/shadcn";
 
 
 
@@ -10,7 +10,7 @@ interface IDocumentsNotesProps extends IPreviewDocumentsProps {
 }
 export const PreviewDocuments = (props: IDocumentsNotesProps) => {
 
-    const [fullScreenPreview, setFullScreenPreview] = useState<boolean>(false);
+    const [fullScreenDialog, setFullScreenDialog] = useState(false);
 
     return (
         <>
@@ -56,7 +56,7 @@ export const PreviewDocuments = (props: IDocumentsNotesProps) => {
                                         </a>
                                     </div>
                                     <div style={{ cursor: 'zoom-in' }}>
-                                        <Button onClick={() => setFullScreenPreview(true)}>
+                                        <Button onClick={() => setFullScreenDialog(true)}>
                                             <Icons.scanEye />
                                             Preview
                                         </Button>
@@ -99,7 +99,7 @@ export const PreviewDocuments = (props: IDocumentsNotesProps) => {
                                         </a>
                                     </div>
                                     <div style={{ cursor: 'zoom-in' }}>
-                                        <Button onClick={() => setFullScreenPreview(true)}>
+                                        <Button onClick={() => setFullScreenDialog(true)}>
                                             <Icons.scanEye />
                                             Preview
                                         </Button>
@@ -120,9 +120,9 @@ export const PreviewDocuments = (props: IDocumentsNotesProps) => {
             </Sheet>
 
 
-            <DialogBox
-                FullScreenPreview={fullScreenPreview}
-                setFullScreenPreview={setFullScreenPreview}
+            <Popup
+                fullScreenDialog={fullScreenDialog}
+                setFullScreenDialog={setFullScreenDialog}
                 title="Preview"
             >
                 {props.viewerFile?.document_type === 'PDF'
@@ -146,7 +146,7 @@ export const PreviewDocuments = (props: IDocumentsNotesProps) => {
                         )}`}
                     />
                 }
-            </DialogBox>
+            </Popup>
         </>
     )
 }

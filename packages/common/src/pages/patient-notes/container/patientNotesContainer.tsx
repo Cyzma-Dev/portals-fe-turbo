@@ -6,6 +6,7 @@ import { useCallback, useState } from 'react';
 import CustomFilterStateManage from '../../../helper-methods/custom-filter';
 import { ICreatePatientNotes, IPatientNotes } from '../presentation/types';
 import { toast } from 'sonner';
+import { DocumentSkeleton } from '@repo/ui/shadcn';
 
 export const PatientNotesContainer = () => {
 	const patient_id: number = GetPatientId();
@@ -13,10 +14,11 @@ export const PatientNotesContainer = () => {
 		patientNotesData,
 		fetchPatientNotes,
 		setQueryString,
-		queryString
+		queryString,
+		isLoading: isLoadingNotes,
 	} = PatientNotesHook(patient_id)
 	const [isEdit, setIsEdit] = useState<boolean>(false)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [isBtnDisable, setIsBtnDisable] = useState<boolean>(false)
 	const [sheetOpen, setSheetOpen] = useState<boolean>(false);
 	const [currentNotes, setCurrentNotes] = useState<IPatientNotes>()
@@ -139,24 +141,28 @@ export const PatientNotesContainer = () => {
 	)
 
 	return (
-		<PatientNotesScreen
-			patientNotesData={patientNotesData ? patientNotesData : []}
-			handleGridChange={handleGridChange}
-			handleFilterChange={handleFilterChange}
-			handlePatientNoteDelete={handlePatientNoteDelete}
-			isEdit={isEdit}
-			setIsEdit={setIsEdit}
-			isLoading={isLoading}
-			setIsLoading={setIsLoading}
-			isBtnDisable={isBtnDisable}
-			setIsBtnDisable={setIsBtnDisable}
-			sheetOpen={sheetOpen}
-			setSheetOpen={setSheetOpen}
-			openSheet={openSheet}
-			handleSubmit={handleSubmit}
-			handleEdit={handleEdit}
-			currentNotes={currentNotes}
-			setCurrentNotes={setCurrentNotes}
-		/>
+		isLoadingNotes
+			?
+			<DocumentSkeleton title='Notes' />
+			:
+			<PatientNotesScreen
+				patientNotesData={patientNotesData ? patientNotesData : []}
+				handleGridChange={handleGridChange}
+				handleFilterChange={handleFilterChange}
+				handlePatientNoteDelete={handlePatientNoteDelete}
+				isEdit={isEdit}
+				setIsEdit={setIsEdit}
+				isLoading={isLoading}
+				setIsLoading={setIsLoading}
+				isBtnDisable={isBtnDisable}
+				setIsBtnDisable={setIsBtnDisable}
+				sheetOpen={sheetOpen}
+				setSheetOpen={setSheetOpen}
+				openSheet={openSheet}
+				handleSubmit={handleSubmit}
+				handleEdit={handleEdit}
+				currentNotes={currentNotes}
+				setCurrentNotes={setCurrentNotes}
+			/>
 	);
 };
