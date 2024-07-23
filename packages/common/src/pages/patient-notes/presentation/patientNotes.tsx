@@ -45,9 +45,7 @@ const PatientNotesScreen = (props: IPatientNotesProps) => {
 	]
 
 	return (
-		<div
-			className='flex flex-col gap-4 w-full h-full'
-		>
+		<div className='flex flex-col gap-4 w-full h-full'>
 			<div className='flex gap-4 justify-content items-center text-xl font-bold'>
 				Notes
 				<div className='flex gap-1'>
@@ -87,13 +85,13 @@ const PatientNotesScreen = (props: IPatientNotesProps) => {
 				currentNotes={props.currentNotes}
 				setCurrentNotes={props.setCurrentNotes}
 			/>
-
-			<DataTable
-				data={props.patientNotesData}
-				columns={extendColumns}
-				toolbar={false}
-				handleGridChange={props.handleGridChange}
-			/>
+			
+				<DataTable
+					data={props.patientNotesData}
+					columns={extendColumns}
+					toolbar={false}
+					handleGridChange={props.handleGridChange}
+				/>
 		</div>
 	);
 };

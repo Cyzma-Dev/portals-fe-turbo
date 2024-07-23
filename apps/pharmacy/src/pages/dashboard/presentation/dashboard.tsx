@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/shadcn";
 import { IDashboardCount } from "./types";
 import { NotificationContext } from "@repo/common/common-library";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface IDashboardScreenProps{
     isLoading: boolean
@@ -10,6 +11,7 @@ interface IDashboardScreenProps{
 
 const DashboardScreen = (props: IDashboardScreenProps) => {
 	const { messageNotifications } = useContext(NotificationContext);
+    const navigate = useNavigate();
 
     return (
         <div className="flex-col align-start space-y-4 h-full">
@@ -17,7 +19,10 @@ const DashboardScreen = (props: IDashboardScreenProps) => {
                 <h2 className="inline-block text-xl justify-self-start font-bold tracking-tight">Dashboard</h2>
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                <Card>
+                <Card
+                    className="hover:bg-secondary cursor-pointer"
+                    onClick={() => navigate('/patients')}
+                >
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
                         Patient Enrollments
@@ -44,7 +49,11 @@ const DashboardScreen = (props: IDashboardScreenProps) => {
                     </p>
                     </CardContent>
                 </Card>
-                <Card>
+                <Card
+                    className="hover:bg-secondary cursor-pointer"
+                    onClick={() => navigate('/patients')}
+                    
+                >
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
                         Physician Request Responses
@@ -72,7 +81,11 @@ const DashboardScreen = (props: IDashboardScreenProps) => {
                     </p>
                     </CardContent>
                 </Card>
-                <Card>
+                <Card
+                    className="hover:bg-secondary cursor-pointer"
+                    onClick={() => navigate('/patients')}
+                    
+                >
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
                         Refill Requests
@@ -100,7 +113,11 @@ const DashboardScreen = (props: IDashboardScreenProps) => {
                     </p>
                     </CardContent>
                 </Card>
-                <Card>
+                <Card
+                    className="hover:bg-secondary cursor-pointer"
+                    onClick={() => navigate('/patients')}
+                    
+                >
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
                         Expiring Rx
@@ -132,7 +149,11 @@ const DashboardScreen = (props: IDashboardScreenProps) => {
                     </p>
                     </CardContent>
                 </Card>
-                <Card>
+                <Card
+                    className="hover:bg-secondary cursor-pointer"
+                    onClick={() => navigate('/patients')}
+                    
+                >
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
                         Expired Rx
@@ -164,7 +185,11 @@ const DashboardScreen = (props: IDashboardScreenProps) => {
                     </p>
                     </CardContent>
                 </Card>
-                <Card>
+                <Card
+                    className="hover:bg-secondary cursor-pointer"
+                    onClick={() => navigate('/patients')}
+                    
+                >
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
                         Unread Messages

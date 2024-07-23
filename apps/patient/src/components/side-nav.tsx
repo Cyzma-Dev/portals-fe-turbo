@@ -94,7 +94,7 @@ const SideNav = () => {
             </div>
           </div>
         </div>
-        <div className='w-full'>
+        <div className='flex flex-col w-full h-full overflow-auto'>
           <HeaderBar 
             collapsed={collapsed}
             toggleCollapse={toggleCollapse}

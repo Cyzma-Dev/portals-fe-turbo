@@ -9,23 +9,28 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icons.home width="16" height="16" />,
   },
   {
-    title: 'Account Info',
-    path: '/account-info',
+    title: 'Patients',
+    path: '/patients',
     icon: <Icons.userRound width="16" height="16" />,
   },
   {
-    title: 'Notes',
-    path: '/patient-notes',
+    title: 'Messages',
+    path: '/messages',
     icon: <Icons.notebookPenIcon width="16" height="16" />,
   },
   {
-    title: 'Messages',
-    path: '/patient-messages',
+    title: 'Inbound',
+    path: '/inbound',
     icon: <Icons.messageSquare width="16" height="16" />,
   },
   {
-    title: 'Settings',
-    path: '/settings',
+    title: 'Outbound',
+    path: '/outbound',
+    icon: <Icons.settings width="16" height="16" />,
+  },
+  {
+    title: 'RX Archive',
+    path: '/rx-archive',
     icon: <Icons.settings width="16" height="16" />,
   },
   // {

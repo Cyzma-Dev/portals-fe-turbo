@@ -5,6 +5,7 @@ import { AuthHook, ILocalUser, PharmacyContext, UserService } from '@repo/common
 import { useQuery } from '../../../../hooks';
 import LoginScreen from '../presentation/login';
 import { InputTypeLoginUser } from '../presentation/types';
+import { toast } from 'sonner';
 export const LoginContainer = () => {
 
 	const { setPharmacy } = useContext(PharmacyContext);
@@ -58,8 +59,8 @@ export const LoginContainer = () => {
 			}
 		} catch (error: any) {
 			if (error?.data?.state && error?.data?.state === 'error') {
-				// error?.data?.error && customToaster.error(error?.data?.error);
-				// error?.data?.message && customToaster.error(error?.data?.message);
+				error?.data?.error && toast.error(error?.data?.error);
+				error?.data?.message && toast.error(error?.data?.message);
 			}
 		} finally {
 			setIsLoading(false)

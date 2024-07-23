@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@repo/ui/shadcn";
 import { IDashboardCount } from './types';
 import { NotificationContext } from '@repo/common/common-library';
+import { useNavigate } from 'react-router-dom';
 
 interface IDashboardProps{
     dashboardCount: IDashboardCount
@@ -10,6 +11,7 @@ interface IDashboardProps{
 
 const DashboardScreen = (props: IDashboardProps) => {
 	const { messageNotifications } = useContext(NotificationContext);
+    const navigate = useNavigate();
 
     return (
 
@@ -18,9 +20,12 @@ const DashboardScreen = (props: IDashboardProps) => {
                     <h2 className="inline-block text-xl justify-self-start font-bold tracking-tight">Dashboard</h2>
                 </div>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                        <Card>
+                        <Card
+                            className="hover:bg-secondary cursor-pointer"
+                            onClick={() => navigate('/patients')}
+                        >
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-md font-medium">
+                            <CardTitle className="text-sm font-medium">
                                 Patient Enrollments
                             </CardTitle>
                             <svg
@@ -45,9 +50,12 @@ const DashboardScreen = (props: IDashboardProps) => {
                             </p>
                             </CardContent>
                         </Card>
-                        <Card>
+                        <Card
+                            className="hover:bg-secondary cursor-pointer"
+                            onClick={() => navigate('/patients')}
+                        >
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-md font-medium">
+                            <CardTitle className="text-sm font-medium">
                                 Rx Renewals
                             </CardTitle>
                             <svg 
@@ -73,9 +81,12 @@ const DashboardScreen = (props: IDashboardProps) => {
                             </p>
                             </CardContent>
                         </Card>
-                        <Card>
+                        <Card
+                            className="hover:bg-secondary cursor-pointer"
+                            onClick={() => navigate('/patients')}
+                        >
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-md font-medium">Unread Messages</CardTitle>
+                            <CardTitle className="text-sm font-medium">Unread Messages</CardTitle>
                             <svg 
                                 xmlns="http://www.w3.org/2000/svg" 
                                 width="22" 

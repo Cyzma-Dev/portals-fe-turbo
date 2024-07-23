@@ -5,6 +5,7 @@ import { AuthHook, ILocalUser,PatientContext, UserService } from '@repo/common/c
 import { useQuery } from '../../../../hooks';
 import LoginScreen from '../presentation/login';
 import { InputTypeLoginUser } from '../presentation/types';
+import { toast } from 'sonner';
 export const LoginContainer = () => {
 
 	const { setPatient } = useContext(PatientContext);
@@ -35,8 +36,6 @@ export const LoginContainer = () => {
 				JSON.stringify(patient_data)
 			);
 
-
-
 			setPatient?.(patient_data);
 			if (result?.state && result?.state === 'success') {
 				const user: ILocalUser = {
@@ -60,12 +59,12 @@ export const LoginContainer = () => {
 			}
 		} catch (error: any) {
 			if (error?.data?.state && error?.data?.state === 'error') {
-				// error?.data?.error && customToaster.error(error?.data?.error);
-				// error?.data?.message && customToaster.error(error?.data?.message);
+				error?.data?.error && toast.error(error?.data?.error);
+				error?.data?.message && toast.error(error?.data?.message);
 			}
 		} finally {
 			setIsBtnDisable(false);
-			setIsBtnDisable(false);
+			setIsLoading(false)
 		}
 	};
 
