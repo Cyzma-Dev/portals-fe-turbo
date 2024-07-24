@@ -28,7 +28,6 @@ export const AddDocumentsNotes = (props: IDocumentsNotesProps) => {
             ...formData,
             document: binaryData
         }
-        console.log(data, 'data');
         props.handleSubmit(data)
 
     }

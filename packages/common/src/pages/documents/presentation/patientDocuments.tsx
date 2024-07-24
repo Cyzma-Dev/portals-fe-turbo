@@ -18,10 +18,11 @@ interface IDocumentsNotesProps extends IDocumentsCommonProps {
 	viewerFile: any
 	previewSheetOpen: boolean
 	setPreviewSheetOpen: React.Dispatch<React.SetStateAction<boolean>>
+	filterOpen: boolean
+	setFilterOpen: (data: boolean) => void
 }
 
 const PatientDocumentScreen = (props: IDocumentsNotesProps) => {
-	const [filterOpen, setFilterOpen] = useState<boolean>(false);
 	const [recId, setRecId] = useState<number | null>(null);
 
 	const extendColumns: CustomColumnDef<any>[] = [
@@ -84,16 +85,16 @@ const PatientDocumentScreen = (props: IDocumentsNotesProps) => {
 						Add
 					</Button>
 
-					<Button variant="ghost" size="sm" className="flex gap-1" onClick={() => setFilterOpen(!filterOpen)}>
+					<Button variant="ghost" size="sm" className="flex gap-1" onClick={() => props.setFilterOpen(!props.filterOpen)}>
 						<Icons.listFilter className="h-4 w-4" />
 					</Button>
 				</div>
 			</div>
 
-			{filterOpen
+			{props.filterOpen
 				&&
 				<FilterFields
-					filterOpen={filterOpen}
+					filterOpen={props.filterOpen}
 					handleFilterChange={props.handleFilterChange}
 					listColumns={documentColumns}
 					options={[]}

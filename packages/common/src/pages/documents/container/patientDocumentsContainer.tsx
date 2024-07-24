@@ -25,6 +25,7 @@ export const PatientDocumentsContainer = () => {
 	const [currentNotes, setCurrentNotes] = useState<IPatientDocument>()
 	const [viewerFile, setViewerFile] = useState<IUploadDocument | null>(null);
 	const [previewSheetOpen, setPreviewSheetOpen] = useState<boolean>(false);
+	const [filterOpen, setFilterOpen] = useState<boolean>(false);
 
 	const closeSheet = () => {
 		setSheetOpen(false)
@@ -154,7 +155,6 @@ export const PatientDocumentsContainer = () => {
 			const result = await PatientDocumentsService.getPatientDocument(item.id);
 			setPreviewSheetOpen(true)
 			setViewerFile(result.results);
-			console.log(result.results, 'result')
 		} catch (error: any) {
 			if (error?.status) {
 				error?.data?.error && toast.error(error?.data?.error);
@@ -167,7 +167,8 @@ export const PatientDocumentsContainer = () => {
 
 
 	return (
-		isPatientDocumentsLoading ?
+		!filterOpen && isPatientDocumentsLoading
+			?
 			<DocumentSkeleton
 				title='Documents'
 			/>
@@ -188,7 +189,8 @@ export const PatientDocumentsContainer = () => {
 				handleEdit={handleEdit}
 				currentNotes={currentNotes}
 				setCurrentNotes={setCurrentNotes}
-
+				filterOpen={filterOpen}
+				setFilterOpen={setFilterOpen}
 				handlePreviewDocuments={handlePreviewDocuments}
 				viewerFile={viewerFile}
 				previewSheetOpen={previewSheetOpen}

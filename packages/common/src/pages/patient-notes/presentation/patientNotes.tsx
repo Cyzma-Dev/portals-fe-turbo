@@ -11,13 +11,11 @@ interface IPatientNotesProps extends INotesCommonProps {
 	handleFilterChange: (field: string, operator: string, event: any) => void;
 	handleEdit: (row: IPatientNotes) => void;
 	handlePatientNoteDelete: (rec_id: number) => void;
-
 	filterOpen: boolean;
 	setFilterOpen: (data: boolean) => void
 }
 
 const PatientNotesScreen = (props: IPatientNotesProps) => {
-	// const [filterOpen, setFilterOpen] = useState<boolean>(false);
 
 	const extendColumns: CustomColumnDef<any>[] = [
 		{

@@ -166,7 +166,6 @@ export const PatientNotesContainer = () => {
 				handleEdit={handleEdit}
 				currentNotes={currentNotes}
 				setCurrentNotes={setCurrentNotes}
-
 				filterOpen={filterOpen}
 				setFilterOpen={setFilterOpen}
 			/>

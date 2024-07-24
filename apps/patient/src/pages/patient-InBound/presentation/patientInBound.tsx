@@ -15,10 +15,11 @@ interface IPatientInBoundProps {
 	inBoundListData: IInBoundList[];
 	handleGridChange: (event: any) => void;
 	handleFilterChange: (field: string, operator: string, event: any) => void;
+	filterOpen: boolean
+	setFilterOpen: (data: boolean) => void
 }
 
 const PatientInBoundScreen = (props: IPatientInBoundProps) => {
-	const [filterOpen, setFilterOpen] = useState<boolean>(false);
 	const [clickedActionRowData, setClickedActionRowData] = useState<any>(null);
 	const [fullScreenDialog, setFullScreenDialog] = useState<boolean>(false);
 	const [pdfOpenLoading, setPdfOpenLoading] = useState<boolean>(false);
@@ -96,16 +97,16 @@ const PatientInBoundScreen = (props: IPatientInBoundProps) => {
 
 				<div className='flex gap-1'>
 
-					<Button variant="ghost" size="sm" className="flex gap-1" onClick={() => setFilterOpen(!filterOpen)}>
+					<Button variant="ghost" size="sm" className="flex gap-1" onClick={() => props.setFilterOpen(!props.filterOpen)}>
 						<Icons.listFilter className="h-4 w-4" />
 					</Button>
 				</div>
 			</div>
 
-			{filterOpen
+			{props.filterOpen
 				&&
 				<FilterFields
-					filterOpen={filterOpen}
+					filterOpen={props.filterOpen}
 					handleFilterChange={props.handleFilterChange}
 					listColumns={PatientInBoundColumns}
 					options={[]}

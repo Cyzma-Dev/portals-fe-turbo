@@ -1,6 +1,6 @@
 import { IQueryString } from '@repo/common/common-library';
 import { GetPatientId } from '../../../../../../packages/common/src/helper-methods';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { PatientInBoundHook } from '../../../hooks';
 import CustomFilterStateManage from '../../../../../../packages/common/src/helper-methods/custom-filter';
 import PatientInBoundScreen from '../presentation/patientInBound';
@@ -14,6 +14,9 @@ export const PatientInBoundContainer = () => {
 		queryString,
 		loading
 	} = PatientInBoundHook(patient_id)
+
+	const [filterOpen, setFilterOpen] = useState<boolean>(false);
+
 
 	const handleFilterChange = (field: string, operator: string, event: any) => {
 		const filteredData = CustomFilterStateManage(
@@ -56,7 +59,7 @@ export const PatientInBoundContainer = () => {
 	)
 
 	return (
-		loading
+		!filterOpen && loading
 			?
 			<DocumentSkeleton
 				title='In Bound'
@@ -66,6 +69,8 @@ export const PatientInBoundContainer = () => {
 				inBoundListData={inBoundListData ? inBoundListData : []}
 				handleGridChange={handleGridChange}
 				handleFilterChange={handleFilterChange}
+				filterOpen={filterOpen}
+				setFilterOpen={setFilterOpen}
 			/>
 	);
 };
