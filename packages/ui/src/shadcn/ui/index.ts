@@ -17,3 +17,4 @@ export * from "./textarea";
 export * from "./combobox";
 export * from "./sonner";
 export * from "./skeleton";
+export * from "./tooltip";

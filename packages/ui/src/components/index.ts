@@ -9,3 +9,5 @@ export * from "./side-nav-toggle-btn";
 export * from "./Icon-wrapper";
 export * from "./popup";
 export * from "./skeletons";
+export * from "./commonTooltip";
+export * from "./notes-tooltip-viewer";

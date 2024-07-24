@@ -1,47 +1,56 @@
-import {Button, DataTable, DataTableColumnHeader, Icons} from "@repo/ui/shadcn";
+import { Button, DataTable, DataTableColumnHeader, Icons } from "@repo/ui/shadcn";
 import { notesColumns } from './notesColumns';
 import FilterFields from '../../../../../ui/src/components/filter-fields';
-import { useState } from 'react';
 import { AddPatientNotes } from './addPatientNotes';
 import { INotesCommonProps, IPatientNotes } from './types';
 import { CustomColumnDef } from "../../../utility";
-interface IPatientNotesProps extends INotesCommonProps{
+import IconWrapper from "../../../../../ui/src/components/Icon-wrapper";
+interface IPatientNotesProps extends INotesCommonProps {
 	patientNotesData: IPatientNotes[];
-	handleGridChange: (event:any) => void;
+	handleGridChange: (event: any) => void;
 	handleFilterChange: (field: string, operator: string, event: any) => void;
 	handleEdit: (row: IPatientNotes) => void;
 	handlePatientNoteDelete: (rec_id: number) => void;
+
+	filterOpen: boolean;
+	setFilterOpen: (data: boolean) => void
 }
 
 const PatientNotesScreen = (props: IPatientNotesProps) => {
-	const [filterOpen, setFilterOpen] = useState<boolean>(false);
+	// const [filterOpen, setFilterOpen] = useState<boolean>(false);
 
 	const extendColumns: CustomColumnDef<any>[] = [
-		...notesColumns,
 		{
 			id: "actions",
 			header: ({ column }) => (
-			  <DataTableColumnHeader column={column} title="Actions" />
+				<DataTableColumnHeader column={column} title="Actions" />
 			),
 			cell: ({ row }) => {
-			  return(
-				<div className="w-fit flex gap-4">
-				  	<Icons.pencil 
-				  		className="cursor-pointer h-4 w-4 hover:text-red/90 hover:fill-redBackground hover:bg-red/10"
-						onClick={() => {
-							props.handleEdit(row.original)
-						}}
-					/>
-				  	<Icons.trash
-						className="cursor-pointer h-4 w-4"
-						onClick={() => {
-							props.handlePatientNoteDelete(row.original.id)
-						}}
-					/>
-				</div>
-			  )
+				return (
+					<div className="w-fit flex gap-4">
+						<IconWrapper
+							className="cursor-pointer hover:text-blue hover:fill-blueBackground hover:bg-blueBackground"
+							onClick={() => {
+								props.handleEdit(row.original)
+							}}
+							disable={!row.original.is_editable}
+						>
+							<Icons.pencil className="h-4 w-4" />
+						</IconWrapper>
+						<IconWrapper
+							className="cursor-pointer hover:text-red hover:fill-redBackground hover:bg-redBackground"
+							onClick={() => {
+								props.handlePatientNoteDelete(row.original.id)
+							}}
+							disable={!row.original.is_editable}
+						>
+							<Icons.trash className="h-4 w-4" />
+						</IconWrapper>
+					</div>
+				)
 			},
 		},
+		...notesColumns,
 	]
 
 	return (
@@ -53,22 +62,22 @@ const PatientNotesScreen = (props: IPatientNotesProps) => {
 						Add
 					</Button>
 
-					<Button variant="ghost" size="sm" className="flex gap-1" onClick={() => setFilterOpen(!filterOpen)}>
+					<Button variant="ghost" size="sm" className="flex gap-1" onClick={() => props.setFilterOpen(!props.filterOpen)}>
 						<Icons.listFilter className="h-4 w-4" />
 					</Button>
-				</div>				
+				</div>
 			</div>
-			
-			{filterOpen
+
+			{props.filterOpen
 				?
-					<FilterFields
-						filterOpen={filterOpen}
-						handleFilterChange={props.handleFilterChange}
-						listColumns={notesColumns}
-						options={[]}
-					/>
+				<FilterFields
+					filterOpen={props.filterOpen}
+					handleFilterChange={props.handleFilterChange}
+					listColumns={notesColumns}
+					options={[]}
+				/>
 				:
-					''
+				''
 			}
 
 			<AddPatientNotes
@@ -85,13 +94,13 @@ const PatientNotesScreen = (props: IPatientNotesProps) => {
 				currentNotes={props.currentNotes}
 				setCurrentNotes={props.setCurrentNotes}
 			/>
-			
-				<DataTable
-					data={props.patientNotesData}
-					columns={extendColumns}
-					toolbar={false}
-					handleGridChange={props.handleGridChange}
-				/>
+
+			<DataTable
+				data={props.patientNotesData}
+				columns={extendColumns}
+				toolbar={false}
+				handleGridChange={props.handleGridChange}
+			/>
 		</div>
 	);
 };

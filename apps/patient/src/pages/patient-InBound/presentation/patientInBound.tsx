@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, DataTable, DataTableColumnHeader, Icons } from "@repo/ui/shadcn";
+import { Button, DataTable, DataTableColumnHeader, Icons, NotesTooltipViewer } from "@repo/ui/shadcn";
 import { useState } from 'react';
 import { CustomColumnDef, NewTabPdfViewer } from "@repo/common/common-library";
 import { PatientInBoundColumns } from "./PatientInBoundColumns";
@@ -8,6 +8,9 @@ import IconWrapper from "../../../../../../packages/ui/src/components/Icon-wrapp
 import { toast } from "sonner";
 import DownloadPdf from "./downloadPdf";
 import { IInBoundList } from "./types";
+
+
+
 interface IPatientInBoundProps {
 	inBoundListData: IInBoundList[];
 	handleGridChange: (event: any) => void;
@@ -15,7 +18,6 @@ interface IPatientInBoundProps {
 }
 
 const PatientInBoundScreen = (props: IPatientInBoundProps) => {
-
 	const [filterOpen, setFilterOpen] = useState<boolean>(false);
 	const [clickedActionRowData, setClickedActionRowData] = useState<any>(null);
 	const [fullScreenDialog, setFullScreenDialog] = useState<boolean>(false);
@@ -27,7 +29,12 @@ const PatientInBoundScreen = (props: IPatientInBoundProps) => {
 			header: ({ column }) => (
 				<DataTableColumnHeader column={column} title="Request Status" />
 			),
-			cell: ({ row }) => <div className="w-fit">{row.getValue("action")}</div>,
+			cell: ({ row }) =>
+				<NotesTooltipViewer
+					header={`Reason for ${row.getValue("action")}`}
+					Content={row.original.note}
+					statusValue={row.getValue("action")}
+				/>,
 			enableSorting: true,
 			enableHiding: false,
 		},
@@ -47,7 +54,7 @@ const PatientInBoundScreen = (props: IPatientInBoundProps) => {
 								</IconWrapper>
 								:
 								<IconWrapper
-									className="cursor-pointer hover:text-blue hover:fill-blueBackground hover:bg-blueBackground"
+									className="cursor-pointer hover:text-blue hover:underline"
 									onClick={async () => {
 										setPdfOpenLoading(true)
 										setClickedActionRowData(row.original)
@@ -69,7 +76,7 @@ const PatientInBoundScreen = (props: IPatientInBoundProps) => {
 								setClickedActionRowData(row.original)
 							}}
 						>
-							<Icons.arrowDown className="h-5 w-5 border border-gray-300 border-dashed rounded-full" />
+							<Icons.circleArrowDown className="h-5 w-5" />
 						</IconWrapper>
 
 					</div>
@@ -86,7 +93,9 @@ const PatientInBoundScreen = (props: IPatientInBoundProps) => {
 		>
 			<div className='flex gap-4 justify-content items-center text-xl font-bold'>
 				In Bound
+
 				<div className='flex gap-1'>
+
 					<Button variant="ghost" size="sm" className="flex gap-1" onClick={() => setFilterOpen(!filterOpen)}>
 						<Icons.listFilter className="h-4 w-4" />
 					</Button>
@@ -113,6 +122,8 @@ const PatientInBoundScreen = (props: IPatientInBoundProps) => {
 				setFullScreenDialog={setFullScreenDialog}
 				clickedActionRowData={clickedActionRowData}
 			/>
+
+
 		</div>
 	);
 };

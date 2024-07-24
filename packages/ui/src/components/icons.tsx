@@ -68,6 +68,10 @@ import {
   AlarmClock,
   ArrowDownToLine,
   ScanEye,
+  CircleCheckBig,
+  CircleArrowDown,
+  Timer,
+  SendHorizontal,
 } from 'lucide-react';
 
 export const Icons = {
@@ -134,10 +138,15 @@ export const Icons = {
   cloudUpload: CloudUpload,
   archiveRestore: ArchiveRestore,
   panelLeftOpen: PanelLeftOpen,
-  panelLeftClose :PanelLeftClose,
+  panelLeftClose: PanelLeftClose,
   alarmClock: AlarmClock,
   downloadArrow: ArrowDownToLine,
   scanEye: ScanEye,
+  circleCheckBig: CircleCheckBig,
+  circleArrowDown: CircleArrowDown,
+  timer: Timer,
+  sendHorizontal: SendHorizontal,
+
   checkSVG: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

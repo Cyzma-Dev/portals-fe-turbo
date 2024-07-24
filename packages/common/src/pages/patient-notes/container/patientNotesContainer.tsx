@@ -23,6 +23,9 @@ export const PatientNotesContainer = () => {
 	const [sheetOpen, setSheetOpen] = useState<boolean>(false);
 	const [currentNotes, setCurrentNotes] = useState<IPatientNotes>()
 
+	const [filterOpen, setFilterOpen] = useState<boolean>(false);
+
+
 	const closeSheet = () => {
 		setSheetOpen(false)
 		setCurrentNotes(undefined)
@@ -141,7 +144,7 @@ export const PatientNotesContainer = () => {
 	)
 
 	return (
-		isLoadingNotes
+		!filterOpen && isLoadingNotes
 			?
 			<DocumentSkeleton title='Notes' />
 			:
@@ -163,6 +166,9 @@ export const PatientNotesContainer = () => {
 				handleEdit={handleEdit}
 				currentNotes={currentNotes}
 				setCurrentNotes={setCurrentNotes}
+
+				filterOpen={filterOpen}
+				setFilterOpen={setFilterOpen}
 			/>
 	);
 };

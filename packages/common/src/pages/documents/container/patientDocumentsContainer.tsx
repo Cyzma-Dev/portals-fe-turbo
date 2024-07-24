@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { IQueryString, MessageConstant, PatientDocumentsHook, PatientDocumentsService } from "@repo/common/common-library";
 import CustomFilterStateManage from "../../../../../../packages/common/src/helper-methods/custom-filter";
 import PatientDocumentScreen from "../presentation/patientDocuments";
-import { DocumentSkeleton, QuiteHere } from "@repo/ui/shadcn";
+import { DocumentSkeleton } from "@repo/ui/shadcn";
 
 export const PatientDocumentsContainer = () => {
 
