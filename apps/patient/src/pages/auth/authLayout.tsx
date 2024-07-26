@@ -17,13 +17,15 @@ function AuthLayout() {
                     <span className='text-sm'>Your health is our priority</span>
                 </div>
             </div>
-            <div className='flex flex-col items-center bg-muted h-full justify-center'>
-                <img
-                    className='w-48'
-                    src="png/alera.png"
-                    alt='logo'
-                />
-                <Outlet />
+            <div className='flex bg-muted h-full overflow-y-auto'>
+                <div className='flex flex-col items-center space-y-4 m-auto p-4 w-full'>
+                    <img
+                        className='w-48'
+                        src="png/alera.png"
+                        alt='logo'
+                    />
+                    <Outlet />
+                </div>
             </div>
         </div>
     );

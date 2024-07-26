@@ -72,6 +72,8 @@ import {
   CircleArrowDown,
   Timer,
   SendHorizontal,
+  Eye,
+  EyeOff,
 } from 'lucide-react';
 
 export const Icons = {
@@ -146,7 +148,8 @@ export const Icons = {
   circleArrowDown: CircleArrowDown,
   timer: Timer,
   sendHorizontal: SendHorizontal,
-
+  eye: Eye,
+  eyeOff: EyeOff,
   checkSVG: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

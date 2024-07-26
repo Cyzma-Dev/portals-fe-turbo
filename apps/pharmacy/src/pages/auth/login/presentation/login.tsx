@@ -43,7 +43,7 @@ const LoginScreen = (props: ILoginProps) => {
 								render={({ field }) => (
 									<FormItem>
 									<FormControl>
-										<Input placeholder="username" {...field} />
+										<Input placeholder="Username" {...field} />
 									</FormControl>
 									<FormMessage />
 									</FormItem>
@@ -56,7 +56,7 @@ const LoginScreen = (props: ILoginProps) => {
 								render={({ field }) => (
 									<FormItem>
 									<FormControl>
-										<Input type="password" placeholder="password" {...field} />
+										<Input type="password" placeholder="Password" {...field} />
 									</FormControl>
 									<FormMessage />
 									</FormItem>

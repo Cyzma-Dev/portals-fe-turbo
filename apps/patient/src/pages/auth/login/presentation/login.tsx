@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { userLoginSchema } from './schema';
 import { InputTypeLoginUser } from './types';
+import { useNavigate } from 'react-router-dom';
 interface ILoginProps {
 	loginHandler: (data: InputTypeLoginUser) => void;
 	isBtnDisable: boolean
@@ -12,6 +13,7 @@ interface ILoginProps {
 }
 
 const LoginScreen = (props: ILoginProps) => {
+	const navigate = useNavigate();
 
 	const onLoginSubmit = (formData: InputTypeLoginUser) => {
 		props.loginHandler(formData);
@@ -26,8 +28,8 @@ const LoginScreen = (props: ILoginProps) => {
 	})
 	
 	return (
-		<div className="p-8">
-			<div className="mx-auto flex w-full flex-col justify-center space-y-3 sm:w-[350px]">
+		<div className="">
+			<div className="mx-auto flex w-full flex-col justify-center space-y-2 sm:w-[350px]">
 				<div className="flex flex-col text-center">
 					<p className="text-md font-bold text-foreground">
 						Sign in to Patient Portal
@@ -43,7 +45,7 @@ const LoginScreen = (props: ILoginProps) => {
 								render={({ field }) => (
 									<FormItem>
 									<FormControl>
-										<Input placeholder="username" {...field} />
+										<Input placeholder="Username" {...field} />
 									</FormControl>
 									<FormMessage />
 									</FormItem>
@@ -56,7 +58,7 @@ const LoginScreen = (props: ILoginProps) => {
 								render={({ field }) => (
 									<FormItem>
 									<FormControl>
-										<Input type="password" placeholder="password" {...field} />
+										<Input type="password" placeholder="Password" {...field} />
 									</FormControl>
 									<FormMessage />
 									</FormItem>
@@ -69,11 +71,12 @@ const LoginScreen = (props: ILoginProps) => {
 						</Button>
 					</form>
 				</Form>
-				<p className="px-8 text-center text-sm text-muted-foreground">
-					<span
-						className="cursor-pointer hover:text-brand hover:underline underline-offset-2"
-					>
-						Don&apos;t have an account? Sign Up
+				<p className="flex flex-col px-8 text-center text-sm text-muted-foreground">
+					<span className="cursor-pointer hover:text-brand" >
+						New here? &nbsp;<span className='text-primary hover:underline' onClick={() => navigate('/patient-signup')}>Click here to Sign Up</span>
+					</span>
+					<span className="cursor-pointer hover:text-brand text-primary hover:underline" onClick={() => navigate('/forgot-password')}>
+						Forgot Password ?
 					</span>
 				</p>
 			</div>

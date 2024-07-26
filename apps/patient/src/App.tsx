@@ -7,11 +7,11 @@ import {
 import SideNav from './components/side-nav';
 import { ThemeProvider } from './components/theme-provider';
 import { AuthProvider, PatientDocumentsContainer, NotificationProvider, PatientNotesContainer, PatientProvider, ProtectRoute } from '@repo/common/common-library';
-import { LoginContainer, PatientInBoundContainer, PermissionGate } from './pages';
+import { AccountCreated, LoginContainer, PatientInBoundContainer, PermissionGate } from './pages';
 import AuthLayout from './pages/auth/authLayout';
 import { RoleConstant } from './utility';
-import { PatientMessagesContainer } from './pages/patient-messages/container';
 import { Toaster } from 'sonner';
+import { AuthSteps } from './pages/auth/stepper/stepper-container';
 
 function App() {
 
@@ -40,6 +40,10 @@ function App() {
                     <Route
                       path='/login'
                       element={<LoginContainer />}
+                    />
+                    <Route
+                      path='/patient-signup'
+                      element={<AuthSteps />}
                     />
                   </Route>
                   <Route path='/'
@@ -72,20 +76,6 @@ function App() {
                             <PatientDocumentsContainer />
                           </PermissionGate>
                         </ProtectRoute>
-
-                      }
-                    />
-                    <Route
-                      path='/patient-messages'
-                      element={
-                        <ProtectRoute>
-                          <PermissionGate
-                            requiredPermission={[RoleConstant.patient.view]}
-                          >
-                            <PatientMessagesContainer />
-                          </PermissionGate>
-                        </ProtectRoute>
-
                       }
                     />
                     <Route
@@ -120,6 +110,10 @@ function App() {
                       />
                     </Route>
                   </Route>
+                  <Route
+                      path='/account-created'
+                      element={<AccountCreated />}
+                  />
                 </Routes>
               </Router>
             </NotificationProvider>
