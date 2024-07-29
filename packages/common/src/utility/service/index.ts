@@ -4,3 +4,7 @@ export * from './userService';
 export * from './logoutService';
 export * from './patientDocumentService';
 export * from './pdfViewerInBoundOutBoundService';
+export * from './patientAllergiesService';
+export * from './patientComorbidConditionsService';
+export * from './patientHighRiskConditionsService';
+

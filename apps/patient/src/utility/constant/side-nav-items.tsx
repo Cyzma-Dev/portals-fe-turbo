@@ -33,6 +33,11 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     path: '/inBound',
     icon: <Icons.settings width="16" height="16" />,
   },
+  {
+    title: 'Allergies',
+    path: '/allergies',
+    icon: <Icons.settings width="16" height="16" />,
+  },
   // {
   //   title: 'Projects',
   //   path: '/projects',

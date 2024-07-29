@@ -11,3 +11,5 @@ export * from "./popup";
 export * from "./skeletons";
 export * from "./commonTooltip";
 export * from "./notes-tooltip-viewer";
+export * from "./Icon-wrapper";
+export * from "./multipleSelectorAutocomplete";
