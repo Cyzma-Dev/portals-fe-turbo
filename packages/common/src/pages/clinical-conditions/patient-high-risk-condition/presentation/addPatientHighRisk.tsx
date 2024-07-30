@@ -1,33 +1,33 @@
 import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Icons, Input, ScrollArea, Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "@repo/ui/shadcn"
-import { addPatientAllergiesSchema } from "./schema"
+import { addPatientHighRiskSchema } from "./schema"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { useEffect } from "react"
-import { IAllergiesCommonProps } from "./types"
-import { PatientAllergiesOptionsHook } from "../../../../common-hooks"
-import MultipleSelectorAutocomplete, { OptionProps } from "../../../../../../ui/src/components/multipleSelectorAutocomplete"
+import { IHighRiskCommonProps } from "./types"
+import { PatientHighRiskOptionsHook } from "../../../../common-hooks"
+import MultipleSelectorAutocomplete from "../../../../../../ui/src/components/multipleSelectorAutocomplete"
 
 
-interface IAddPatientAllergies extends IAllergiesCommonProps {
+interface IAddPatientHighRisk extends IHighRiskCommonProps {
 }
-export const AddPatientAllergies = (props: IAddPatientAllergies) => {
+export const AddPatientHighRisk = (props: IAddPatientHighRisk) => {
 
-    const { patientAllergiesOptionsData, fetchData } = PatientAllergiesOptionsHook();
+    const { patientHighRiskOptionsData, fetchData } = PatientHighRiskOptionsHook();
 
 
     useEffect(() => {
-        // This effect will triggered to fetch Allergies subject options
+        // This effect will triggered to fetch High Risk Condition subject options
         props.sheetOpen && fetchData();
     }, [props.sheetOpen]);
 
-    const onSubmit = async (formData: z.infer<typeof addPatientAllergiesSchema>) => {
+    const onSubmit = async (formData: z.infer<typeof addPatientHighRiskSchema>) => {
         console.log(formData, 'aleracare..localhost:5173')
         props.handleSubmit(formData)
     }
 
-    const form = useForm<z.infer<typeof addPatientAllergiesSchema>>({
-        resolver: zodResolver(addPatientAllergiesSchema),
+    const form = useForm<z.infer<typeof addPatientHighRiskSchema>>({
+        resolver: zodResolver(addPatientHighRiskSchema),
         defaultValues: {
             subject_id: 0,
             note_text: '',
@@ -35,18 +35,18 @@ export const AddPatientAllergies = (props: IAddPatientAllergies) => {
     })
 
     useEffect(() => {
-        if (props.currentAllergies && props.isEdit && props.sheetOpen) {
-            form.reset(props.currentAllergies)
+        if (props.currentHighRiskCondition && props.isEdit && props.sheetOpen) {
+            form.reset(props.currentHighRiskCondition)
         }
         if (!props.sheetOpen) {
             props.setIsEdit(false)
-            props.setCurrentAllergies(undefined)
+            props.setCurrentHighRiskCondition(undefined)
             form.reset({
                 subject_id: 0,
                 note_text: '',
             });
         }
-    }, [props.currentAllergies, props.sheetOpen])
+    }, [props.currentHighRiskCondition, props.sheetOpen])
     const OPTIONS: any[] = [
         { label: 'nextjs', value: 'nextjs', id: 45 },
         { label: 'React', value: 'react', id: 78 },
@@ -73,11 +73,11 @@ export const AddPatientAllergies = (props: IAddPatientAllergies) => {
                         <form onSubmit={form.handleSubmit(onSubmit)}>
                             <ScrollArea>
                                 <SheetHeader>
-                                    <SheetTitle>{props.isEdit ? 'Edit Allergies' : 'Add Allergy'}</SheetTitle>
+                                    <SheetTitle>{props.isEdit ? 'Edit High Risk Condition' : 'Add High Risk Condition'}</SheetTitle>
                                     <SheetDescription>
                                         {props.isEdit
-                                            ? 'Edit the Allergies details'
-                                            : 'Create new Allergies by filling the following details'
+                                            ? 'Edit the High Risk Condition details'
+                                            : 'Create new High Risk Condition by filling the following details'
                                         }
                                     </SheetDescription>
                                 </SheetHeader>
@@ -86,10 +86,10 @@ export const AddPatientAllergies = (props: IAddPatientAllergies) => {
                                         <FormField
                                             control={form.control}
                                             name="subject_id"
-                                            render={({ field }) => (
+                                            render={() => (
                                                 <FormItem>
                                                     <div className="space-y-0.5">
-                                                        <FormLabel className="text-base">Allergies</FormLabel>
+                                                        <FormLabel className="text-base">High Risk Condition</FormLabel>
                                                     </div>
                                                     <FormControl>
                                                         <MultipleSelectorAutocomplete

@@ -1,1 +1,1 @@
-export * from './patientAllergies'
+export * from './clinicalConditionsContainer'

@@ -34,8 +34,8 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icons.settings width="16" height="16" />,
   },
   {
-    title: 'Allergies',
-    path: '/allergies',
+    title: 'Clinical Conditions',
+    path: '/clinical-conditions',
     icon: <Icons.settings width="16" height="16" />,
   },
   // {

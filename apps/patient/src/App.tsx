@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import SideNav from './components/side-nav';
 import { ThemeProvider } from './components/theme-provider';
-import { AuthProvider, PatientDocumentsContainer, NotificationProvider, PatientNotesContainer, PatientProvider, ProtectRoute, PatientAllergiesContainer } from '@repo/common/common-library';
+import { AuthProvider, PatientDocumentsContainer, NotificationProvider, PatientNotesContainer, PatientProvider, ProtectRoute, PatientClinicalConditionsContainer } from '@repo/common/common-library';
 import { LoginContainer, PatientInBoundContainer, PermissionGate } from './pages';
 import AuthLayout from './pages/auth/authLayout';
 import { RoleConstant } from './utility';
@@ -102,13 +102,13 @@ function App() {
                       }
                     />
                     <Route
-                      path='/allergies'
+                      path='/clinical-conditions'
                       element={
                         <ProtectRoute>
                           <PermissionGate
                             requiredPermission={[RoleConstant.patient.view]}
                           >
-                            <PatientAllergiesContainer />
+                            <PatientClinicalConditionsContainer />
                           </PermissionGate>
                         </ProtectRoute>
 
