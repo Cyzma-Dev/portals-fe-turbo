@@ -7,4 +7,6 @@ export * from './pdfViewerInBoundOutBoundService';
 export * from './patientAllergiesService';
 export * from './patientComorbidConditionsService';
 export * from './patientHighRiskConditionsService';
+export * from './patientPrescriptionListService';
+export * from './patientRefillRequestsService';
 

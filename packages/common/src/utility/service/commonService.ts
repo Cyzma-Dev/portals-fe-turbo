@@ -51,6 +51,48 @@ export class CommonService {
 		return response;
 	};
 
+
+	static getAddressTypeOptions = async (): Promise<
+		IPagedResponse<IOptions[]>
+	> => {
+		const response =
+			(await BaseService.get<IPagedResponse<IOptions[]>>(
+				APIConstant.address_type_options,
+				true
+			)) || [];
+		return response;
+	};
+
+
+
+	static getStateList = async () => {
+		const response = await BaseService.get<IPagedResponse<IOptions[]>>(
+			APIConstant.state_list,
+			true
+		);
+		return response;
+	};
+
+
+
+	static getCityList = async (stateId: number) => {
+		const response = await BaseService.get<IPagedResponse<IOptions[]>>(
+			APIConstant.city_list.replace('<int:stateId>', `${stateId}`),
+			true
+		);
+		return response;
+	};
+
+
+
+	static getZipCodeList = async (cityId: number) => {
+		const response = await BaseService.get<IPagedResponse<IOptions[]>>(
+			APIConstant.zip_code_list.replace('<int:cityId>', `${cityId}`),
+			true
+		);
+		return response;
+	};
+
 }
 
 

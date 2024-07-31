@@ -38,6 +38,11 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     path: '/clinical-conditions',
     icon: <Icons.settings width="16" height="16" />,
   },
+  {
+    title: 'Prescription',
+    path: '/prescription',
+    icon: <Icons.settings width="16" height="16" />,
+  },
   // {
   //   title: 'Projects',
   //   path: '/projects',
