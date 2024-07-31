@@ -72,6 +72,7 @@ import {
   CircleArrowDown,
   Timer,
   SendHorizontal,
+  MessageSquareMore,
 } from 'lucide-react';
 
 export const Icons = {
@@ -146,6 +147,7 @@ export const Icons = {
   circleArrowDown: CircleArrowDown,
   timer: Timer,
   sendHorizontal: SendHorizontal,
+  messageSquareMore: MessageSquareMore,
 
   checkSVG: ({ ...props }: LucideProps) => (
     <svg

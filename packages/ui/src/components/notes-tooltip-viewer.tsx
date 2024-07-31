@@ -54,6 +54,7 @@ export function NotesTooltipViewer(props: INotesTooltipViewerProps) {
                                             ""
                     }
                     {props.statusValue}
+                    <Icons.messageSquareMore className="h-4 w-4" />
                 </div>
             </CommonTooltip >
         </>
