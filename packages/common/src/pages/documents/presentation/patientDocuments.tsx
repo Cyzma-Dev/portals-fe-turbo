@@ -53,7 +53,7 @@ const PatientDocumentScreen = (props: IDocumentsNotesProps) => {
 						{props.isLoading && (row.original.id === recId)
 							?
 							<IconWrapper>
-								<Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+								<Icons.spinner className="h-4 w-4 animate-spin" />
 							</IconWrapper>
 							:
 							<IconWrapper

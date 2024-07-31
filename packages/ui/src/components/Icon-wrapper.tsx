@@ -1,5 +1,6 @@
 import clsx from "clsx"
 import { ReactNode } from "react"
+import { Button } from "../shadcn/ui"
 
 interface IIconWrapperProps {
     children: ReactNode
@@ -11,16 +12,17 @@ interface IIconWrapperProps {
 const IconWrapper = (props: IIconWrapperProps) => {
 
     return (
-        <div
-            className={clsx(`p-1 rounded-sm ${props.className}`,
+        <Button
+            className={clsx(`flex justify-center items-center p-0 h-7 w-7 m-0 rounded-sm bg-transparent text-foreground ${props.className}`,
                 {
-                    'text-slate-400 dark:text-zinc-200/40 cursor-not-allowed hover:bg-transparent hover:dark:bg-transparent hover:text-slate-400': props.disable
+                    'cursor-not-allowed hover:bg-transparent hover:dark:bg-transparent hover:text-slate-400': props.disable
                 }
             )}
+            disabled={props.disable}
             onClick={props.onClick}
         >
             {props.children}
-        </div>
+        </Button>
     )
 }
 
