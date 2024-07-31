@@ -16,34 +16,33 @@ export const PatientAllergiesContainer = () => {
 		setQueryString,
 		queryString,
 		isLoading: isLoadingAllergies,
-	} = PatientAllergiesHook(patient_id)
-	const [isEdit, setIsEdit] = useState<boolean>(false)
-	const [isLoading, setIsLoading] = useState<boolean>(false)
-	const [isBtnDisable, setIsBtnDisable] = useState<boolean>(false)
+	} = PatientAllergiesHook(patient_id);
+	const [isEdit, setIsEdit] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isBtnDisable, setIsBtnDisable] = useState<boolean>(false);
 	const [sheetOpen, setSheetOpen] = useState<boolean>(false);
-	const [currentAllergies, setCurrentAllergies] = useState<IPatientAllergies>()
+	const [currentAllergies, setCurrentAllergies] = useState<IPatientAllergies>();
 	const [filterOpen, setFilterOpen] = useState<boolean>(false);
 
-
 	const closeSheet = () => {
-		setSheetOpen(false)
-		setCurrentAllergies(undefined)
-	}
+		setSheetOpen(false);
+		setCurrentAllergies(undefined);
+	};
 
 	const openSheet = () => {
-		setSheetOpen(true)
-	}
+		setSheetOpen(true);
+	};
 
 	const handleEdit = (row: IPatientAllergies) => {
-		setCurrentAllergies(row)
-		setIsEdit(true)
-		openSheet()
-	}
+		setCurrentAllergies(row);
+		setIsEdit(true);
+		openSheet();
+	};
 
 	const handleSubmit = async (formData: ICreatePatientAllergies) => {
-		setIsBtnDisable(true)
+		setIsBtnDisable(true);
 		try {
-			setIsLoading(true)
+			setIsLoading(true);
 			if (isEdit) {
 				const response = await PatientAllergiesService.updatePatientAllergies(
 					currentAllergies!.id,
@@ -51,56 +50,56 @@ export const PatientAllergiesContainer = () => {
 						...formData,
 						id: currentAllergies!.id,
 					}
-				)
-				response?.message && toast.success(response?.message)
-				fetchPatientAllergies(patient_id, queryString)
-				closeSheet()
+				);
+				response?.message && toast.success(response?.message);
+				fetchPatientAllergies(patient_id, queryString);
+				closeSheet();
 			} else {
 				const response = await PatientAllergiesService.createPatientAllergies({
 					...formData,
 					patient_id: patient_id,
-				})
-				toast.success(response?.message)
-				fetchPatientAllergies(patient_id, queryString)
-				closeSheet()
+				});
+				toast.success(response?.message);
+				fetchPatientAllergies(patient_id, queryString);
+				closeSheet();
 			}
 		} catch (error: any) {
 			if (error?.data?.state === 'error' || error?.data?.state == 'exception') {
 				if (typeof error?.data?.error === 'object') {
 					Object.keys(error?.data?.error).forEach((key) => {
-						toast.error(error?.data?.error[key])
-					})
+						toast.error(error?.data?.error[key]);
+					});
 				} else {
-					error?.data?.error && toast.error(error?.data?.error)
-					error?.data?.message && toast.error(error?.data?.message)
+					error?.data?.error && toast.error(error?.data?.error);
+					error?.data?.message && toast.error(error?.data?.message);
 				}
 			} else {
-				error?.data?.error && toast.error(error?.data?.error)
-				error?.data?.message && toast.error(error?.data?.message)
+				error?.data?.error && toast.error(error?.data?.error);
+				error?.data?.message && toast.error(error?.data?.message);
 			}
 		} finally {
-			setIsLoading(false)
-			setIsBtnDisable(false)
+			setIsLoading(false);
+			setIsBtnDisable(false);
 		}
-	}
+	};
 
 	const handlePatientNoteDelete = async (rec_id: number) => {
 		try {
-			setIsLoading(true)
-			const response = await PatientAllergiesService.deletePatientAllergies(rec_id)
-			response?.message && toast.success(response?.message)
-			fetchPatientAllergies(patient_id, queryString)
+			setIsLoading(true);
+			const response = await PatientAllergiesService.deletePatientAllergies(rec_id);
+			response?.message && toast.success(response?.message);
+			fetchPatientAllergies(patient_id, queryString);
 		} catch (error: any) {
 			if (error?.status === 404) {
-				toast.error(MessageConstant.commonFailureMessage)
+				toast.error(MessageConstant.commonFailureMessage);
 			} else {
-				error?.data?.error && toast.error(error?.data?.error)
-				error?.data?.message && toast.error(error?.data?.message)
+				error?.data?.error && toast.error(error?.data?.error);
+				error?.data?.message && toast.error(error?.data?.message);
 			}
 		} finally {
-			setIsLoading(false)
+			setIsLoading(false);
 		}
-	}
+	};
 
 	const handleFilterChange = (field: string, operator: string, event: any) => {
 		const filteredData = CustomFilterStateManage(
@@ -108,15 +107,15 @@ export const PatientAllergiesContainer = () => {
 			field,
 			operator,
 			event
-		)
+		);
 		setQueryString((prevState: IQueryString) => ({
 			...prevState,
 			filter: {
 				...prevState.filter,
 				filters: filteredData,
 			},
-		}))
-	}
+		}));
+	};
 
 	const handleGridChange = useCallback(
 		(event: any) => {
@@ -127,7 +126,7 @@ export const PatientAllergiesContainer = () => {
 					event.pageSize &&
 					prevState.take === event.pageSize
 				) {
-					return prevState
+					return prevState;
 				}
 
 				return {
@@ -136,11 +135,11 @@ export const PatientAllergiesContainer = () => {
 						event.pageIndex *
 						event.pageSize,
 					take: event.pageSize,
-				}
-			})
+				};
+			});
 		},
 		[setQueryString]
-	)
+	);
 
 	return (
 		!filterOpen && isLoadingAllergies

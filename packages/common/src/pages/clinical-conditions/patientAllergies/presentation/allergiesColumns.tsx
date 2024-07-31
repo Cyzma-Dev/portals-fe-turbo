@@ -5,24 +5,24 @@ import { CustomColumnDef } from "../../../../utility";
 
 export const allergiesColumns: CustomColumnDef<any>[] = [
   {
-    accessorKey: "subject_name",
+    accessorKey: "allergy_name",
     toFilter: true,
     searchType: 'text',
     operator: 'contains',
-    headerName: 'Subject',
+    headerName: 'Allergy',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Subject" />
+      <DataTableColumnHeader column={column} title="Allergy" />
     ),
-    cell: ({ row }) => <div className="w-fit">{row.getValue("subject_name")}</div>,
+    cell: ({ row }) => <div className="w-fit">{row.getValue("allergy_name")}</div>,
     enableSorting: true,
     enableHiding: false,
   },
   {
-    accessorKey: "note_text",
+    accessorKey: "notes",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Note" />
     ),
-    cell: ({ row }) => <div className="w-fit">{row.getValue("note_text")}</div>,
+    cell: ({ row }) => <div className="w-fit">{row.getValue("notes")}</div>,
     enableSorting: true,
     enableHiding: false,
   },
