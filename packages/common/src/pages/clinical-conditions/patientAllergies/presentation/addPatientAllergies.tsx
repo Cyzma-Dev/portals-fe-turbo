@@ -1,5 +1,5 @@
 import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Icons, Input, ScrollArea, Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "@repo/ui/shadcn";
-import { addPatientAllergiesSchema } from "./schema";
+import { addPatientAllergiesSchema, editPatientAllergiesSchema } from "./schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -14,6 +14,7 @@ interface IAddPatientAllergies extends IAllergiesCommonProps {
 export const AddPatientAllergies = (props: IAddPatientAllergies) => {
 
     const { patientAllergiesOptionsData, fetchData } = PatientAllergiesOptionsHook();
+    const checkPatientAllergiesSchema = props.isEdit ? editPatientAllergiesSchema : addPatientAllergiesSchema;
 
 
     useEffect(() => {
@@ -21,14 +22,14 @@ export const AddPatientAllergies = (props: IAddPatientAllergies) => {
         fetchData();
     }, [props.sheetOpen]);
 
-    const onSubmit = async (formData: z.infer<typeof addPatientAllergiesSchema>) => {
-        formData.condition_value_ids = formData.condition_value_ids.map((value: any) => value.id);
+    const onSubmit = async (formData: z.infer<typeof checkPatientAllergiesSchema>) => {
+        formData.condition_value_ids = props.isEdit ? formData.condition_value_ids : formData.condition_value_ids.map((value: any) => value.id);
         console.log(formData, 'aleracare..localhost:5173');
         props.handleSubmit(formData);
     };
 
-    const form = useForm<z.infer<typeof addPatientAllergiesSchema>>({
-        resolver: zodResolver(addPatientAllergiesSchema),
+    const form = useForm<z.infer<typeof checkPatientAllergiesSchema>>({
+        resolver: zodResolver(checkPatientAllergiesSchema),
         defaultValues: {
             condition_value_ids: [],
             notes: '',
@@ -79,7 +80,9 @@ export const AddPatientAllergies = (props: IAddPatientAllergies) => {
                                                     </div>
                                                     <FormControl>
                                                         <MultipleSelectorAutocomplete
-                                                            value={value}
+                                                            value={value ?? []}
+                                                            isEdit={props.isEdit}
+                                                            disabled={props.isEdit}
                                                             ref={ref}
                                                             onChange={onChange}
                                                             defaultOptions={patientAllergiesOptionsData}
@@ -107,7 +110,7 @@ export const AddPatientAllergies = (props: IAddPatientAllergies) => {
                                                         <FormLabel className="text-base">Note</FormLabel>
                                                     </div>
                                                     <FormControl>
-                                                        <Input disabled={props.isBtnDisable} placeholder="Note" {...field} />
+                                                        <Input disabled={!props.isEdit} placeholder="Note" {...field} />
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>

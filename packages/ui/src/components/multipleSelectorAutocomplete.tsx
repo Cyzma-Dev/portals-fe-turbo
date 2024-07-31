@@ -74,6 +74,7 @@ interface MultipleSelectorAutocompleteProps {
     >;
     /** hide the clear all button. */
     hideClearAllButton?: boolean;
+    isEdit?: boolean;
 }
 
 export interface MultipleSelectorAutocompleteRef {
@@ -186,6 +187,7 @@ const MultipleSelectorAutocomplete = React.forwardRef<MultipleSelectorAutocomple
             commandProps,
             inputProps,
             hideClearAllButton = false,
+            isEdit,
         }: MultipleSelectorAutocompleteProps,
         ref: React.Ref<MultipleSelectorAutocompleteRef>,
     ) => {
@@ -243,7 +245,8 @@ const MultipleSelectorAutocomplete = React.forwardRef<MultipleSelectorAutocomple
 
         useEffect(() => {
             if (value) {
-                setSelected(value);
+                const extractedValue = isEdit ? arrayDefaultOptions.filter(val => val.id === value[0]) : value;
+                setSelected(extractedValue);
             }
         }, [value]);
 
@@ -389,10 +392,10 @@ const MultipleSelectorAutocomplete = React.forwardRef<MultipleSelectorAutocomple
                     }}
                 >
                     <div className="relative flex flex-wrap gap-1">
-                        {selected.map((option) => {
+                        {selected.map((option, index) => {
                             return (
                                 <Badge
-                                    key={option.id}
+                                    key={index}
                                     className={cn(
                                         'data-[disabled]:bg-muted-foreground data-[disabled]:text-muted data-[disabled]:hover:bg-muted-foreground',
                                         'data-[fixed]:bg-muted-foreground data-[fixed]:text-muted data-[fixed]:hover:bg-muted-foreground',

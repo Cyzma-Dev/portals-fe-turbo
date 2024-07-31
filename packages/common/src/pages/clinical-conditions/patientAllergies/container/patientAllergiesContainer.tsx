@@ -49,6 +49,7 @@ export const PatientAllergiesContainer = () => {
 					{
 						...formData,
 						id: currentAllergies!.id,
+						patient_id: patient_id
 					}
 				);
 				response?.message && toast.success(response?.message);
