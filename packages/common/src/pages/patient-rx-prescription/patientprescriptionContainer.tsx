@@ -1,7 +1,7 @@
 import React from "react";
 import { PatientExpiringPrescriptionContainer } from "./patient-expiring-prescription";
 
-export const PatientprescriptionContainer = () => {
+export const PatientPrescriptionContainer = () => {
 
 
     return (
