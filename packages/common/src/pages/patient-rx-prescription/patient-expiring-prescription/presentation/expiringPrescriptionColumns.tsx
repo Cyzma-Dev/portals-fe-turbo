@@ -6,6 +6,10 @@ import { CustomColumnDef } from "../../../../utility";
 export const expiringPrescriptionColumns: CustomColumnDef<any>[] = [
   {
     accessorKey: "rx_number",
+    toFilter: true,
+    searchType: 'text',
+    operator: 'contains',
+    headerName: 'Rx',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Rx" />
     ),
@@ -14,16 +18,11 @@ export const expiringPrescriptionColumns: CustomColumnDef<any>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "fill_date",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Fill Date" />
-    ),
-    cell: ({ row }) => <div className="w-fit">{row.getValue("fill_date")}</div>,
-    enableSorting: true,
-    enableHiding: false,
-  },
-  {
     accessorKey: "ndc",
+    toFilter: true,
+    searchType: 'text',
+    operator: 'contains',
+    headerName: 'NDC',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="NDC" />
     ),
@@ -32,7 +31,11 @@ export const expiringPrescriptionColumns: CustomColumnDef<any>[] = [
     enableHiding: false,
   },
   {
+    toFilter: true,
     accessorKey: "drug_name",
+    searchType: 'text',
+    operator: 'contains',
+    headerName: 'Drug Name',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Drug Name" />
     ),

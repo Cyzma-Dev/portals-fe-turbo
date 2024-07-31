@@ -78,7 +78,7 @@ const ExpiringPrescriptionScreen = (props: IPatientRxExpiringPrescriptionProps) 
 				<FilterFields
 					filterOpen={props.filterOpen}
 					handleFilterChange={props.handleFilterChange}
-					listColumns={props.expiringPrescriptionData}
+					listColumns={extendColumns}
 					options={[]}
 				/>
 			}
