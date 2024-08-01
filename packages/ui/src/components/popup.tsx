@@ -1,12 +1,15 @@
 import React from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@radix-ui/react-dialog';
 import { DialogHeader, } from '../shadcn/ui';
+import IconWrapper from './Icon-wrapper';
+import { Icons } from './icons';
 
 interface IPopupProps {
     fullScreenDialog: boolean;
     setFullScreenDialog: (data: boolean) => void;
-    title: string;
+    title?: string;
     children: React.ReactNode
+    multiTitle?: React.ReactNode
 }
 
 export function Popup(props: IPopupProps) {
@@ -20,12 +23,25 @@ export function Popup(props: IPopupProps) {
             {/* <DialogTrigger asChild={false}>
                 <Button variant="outline">Edit Profile</Button>
             </DialogTrigger> */}
-            <DialogContent className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-500 p-6 m-6 rounded-lg shadow-lg z-20 overflow-auto h-auto w-auto">
+            <DialogContent className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-secondary p-6 m-6 rounded-lg shadow-lg z-20 overflow-auto h-auto w-auto">
 
 
                 <DialogHeader>
-                    <DialogTitle className='font-bold '>
-                        {props.title}
+                    <DialogTitle className='font-bold flex justify-between'>
+                        {props.title
+                            ?
+                            props.title
+                            :
+                            props.multiTitle
+                        }
+                        <IconWrapper
+                            className="cursor-pointer hover:text-red hover:fill-redBackground hover:bg-redBackground"
+                            onClick={() => {
+                                props.setFullScreenDialog(false)
+                            }}
+                        >
+                            <Icons.x className="h-4 w-4" />
+                        </IconWrapper>
                     </DialogTitle>
                     {/* <DialogDescription>
                         Make changes to your profile here. Click save when you're done.

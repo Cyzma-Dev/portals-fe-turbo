@@ -114,14 +114,4 @@ export const PatientOutBoundColumns: CustomColumnDef<any>[] = [
     enableSorting: true,
     enableHiding: false,
   },
-  {
-    accessorKey: "status",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Status" />
-    ),
-    cell: ({ row }) => <div className="w-fit">{row.getValue("status")}</div>,
-    enableSorting: true,
-    enableHiding: false,
-  },
-
 ];
