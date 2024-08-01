@@ -12,6 +12,7 @@ import AuthLayout from './pages/auth/authLayout';
 import { RoleConstant } from './utility';
 import { Toaster } from 'sonner';
 import { AuthSteps } from './pages/auth/stepper/stepper-container';
+import SettingsContainer from './pages/settings/settings-container/settings-container';
 
 function App() {
 
@@ -63,7 +64,6 @@ function App() {
                             <PatientNotesContainer />
                           </PermissionGate>
                         </ProtectRoute>
-
                       }
                     />
                     <Route
@@ -109,6 +109,13 @@ function App() {
                         element={<LoginContainer />}
                       />
                     </Route>
+                    <Route path='/settings'
+                      element={
+                        <ProtectRoute>
+                          <SettingsContainer />
+                        </ProtectRoute>
+                      }
+                    />
                   </Route>
                   <Route
                       path='/account-created'

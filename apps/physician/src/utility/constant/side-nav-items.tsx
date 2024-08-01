@@ -26,11 +26,16 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
   {
     title: 'Outbound',
     path: '/outbound',
-    icon: <Icons.settings width="16" height="16" />,
+    icon: <Icons.alarmClock width="16" height="16" />,
   },
   {
     title: 'RX Archive',
     path: '/rx-archive',
+    icon: <Icons.alarmClock width="16" height="16" />,
+  },
+  {
+    title: 'Settings',
+    path: '/settings',
     icon: <Icons.settings width="16" height="16" />,
   },
   // {

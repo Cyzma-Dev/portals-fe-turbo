@@ -66,11 +66,11 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
   //   path: '/outbound',
   //   icon: <Icons.messageSquare width="16" height="16" />,
   // },
-  // {
-  //   title: 'Settings',
-  //   path: '/settings',
-  //   icon: <Icons.settings width="16" height="16" />,
-  // },
+  {
+    title: 'Settings',
+    path: '/settings',
+    icon: <Icons.settings width="16" height="16" />,
+  },
   // {
   //   title: 'Projects',
   //   path: '/projects',

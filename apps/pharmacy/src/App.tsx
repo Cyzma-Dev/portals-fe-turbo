@@ -12,6 +12,7 @@ import { LoginContainer, PermissionGate } from './pages';
 import AuthLayout from './pages/auth/authLayout';
 import { RoleConstant } from './utility';
 import { DashboardContainer } from './pages/dashboard/container';
+import SettingsContainer from './pages/settings/settings-container/settings-container';
 function App() {
 
   return (
@@ -82,6 +83,13 @@ function App() {
                   path='/messages'
                   element={<Messages/>}
                 /> */}
+                    <Route path='/settings'
+                      element={
+                        <ProtectRoute>
+                          <SettingsContainer />
+                        </ProtectRoute>
+                      }
+                    />
                   </Route>
                 </Routes>
               </Router>

@@ -19,7 +19,7 @@ const PasswordPolicyTicks = (props: IPasswordValidationProps) => {
         width="14"
         height="14"
         viewBox="0 0 24 24"
-        fill="#022100"
+        fill="transparent"
         stroke="currentColor"
         strokeWidth="3"
         strokeLinecap="round"

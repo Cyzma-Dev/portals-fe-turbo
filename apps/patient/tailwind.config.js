@@ -1,3 +1,4 @@
+import defaultTheme from 'tailwindcss/defaultTheme';
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
@@ -17,6 +18,9 @@ module.exports = {
       screens: {
         "2xl": "1400px",
       },
+    },
+    fontFamily: {
+      sans: ["__GeistSans_ac79ff", "__GeistSans_Fallback_ac79ff", ...defaultTheme.fontFamily.sans],
     },
     extend: {
       colors: {

@@ -31,6 +31,11 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
   {
     title: 'In-Bound',
     path: '/inBound',
+    icon: <Icons.billing width="16" height="16" />,
+  },
+  {
+    title: 'Settings',
+    path: '/settings',
     icon: <Icons.settings width="16" height="16" />,
   },
   // {

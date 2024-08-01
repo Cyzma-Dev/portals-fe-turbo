@@ -64,13 +64,6 @@ function HeaderBar(props: IHeaderBar) {
                     </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                    <DropdownMenuItem className='gap-2' onClick={()=>{alert()}} >
-                        <Icons.keyRound 
-                            className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all light:-rotate-90 light:scale-0"
-                            onClick={() => setTheme('dark')}
-                            />
-                        Change Password
-                    </DropdownMenuItem>
                     {
                         theme == 'light'
                         ?

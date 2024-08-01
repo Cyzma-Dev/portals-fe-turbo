@@ -4,3 +4,4 @@ export * from './userService';
 export * from './logoutService';
 export * from './patientDocumentService';
 export * from './pdfViewerInBoundOutBoundService';
+export * from './changePasswordService';
