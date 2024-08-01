@@ -34,6 +34,11 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icons.settings width="16" height="16" />,
   },
   {
+    title: 'Out-Bound',
+    path: '/outBound',
+    icon: <Icons.settings width="16" height="16" />,
+  },
+  {
     title: 'Clinical Conditions',
     path: '/clinical-conditions',
     icon: <Icons.settings width="16" height="16" />,

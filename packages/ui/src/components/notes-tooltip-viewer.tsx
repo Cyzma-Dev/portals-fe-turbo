@@ -23,10 +23,11 @@ export function NotesTooltipViewer(props: INotesTooltipViewerProps) {
                     clsx("flex items-center justify-center gap-2 w-fit border rounded-full px-2 py-1",
                         {
                             'text-blue bg-blueBackground': props.statusValue === "Approved",
-                            'text-orange bg-orangeBackground': props.statusValue === "Requested",
+                            'text-orange bg-orangeBackground': props.statusValue === "Requested" || props.statusValue === "Sent",
                             'text-red bg-redBackground': props.statusValue === "Rejected" || props.statusValue === "Cancelled",
                             'text-green bg-greenBackground': props.statusValue === "Done",
                             'text-purple bg-purpleBackground': props.statusValue === "Hold",
+
 
                         }
                     )}>
@@ -35,7 +36,7 @@ export function NotesTooltipViewer(props: INotesTooltipViewerProps) {
                             ?
                             <Icons.check className="h-4 w-4" />  /*Approved*/
                             :
-                            props.statusValue === "Requested"
+                            props.statusValue === "Requested" || props.statusValue === "Sent"
                                 ?
                                 <Icons.sendHorizontal className="h-4 w-4" />   /*Requested*/
                                 :

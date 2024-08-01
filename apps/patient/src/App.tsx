@@ -7,7 +7,7 @@ import {
 import SideNav from './components/side-nav';
 import { ThemeProvider } from './components/theme-provider';
 import { AuthProvider, PatientDocumentsContainer, NotificationProvider, PatientNotesContainer, PatientProvider, ProtectRoute, PatientClinicalConditionsContainer } from '@repo/common/common-library';
-import { LoginContainer, PatientInBoundContainer, PermissionGate } from './pages';
+import { LoginContainer, PatientInBoundContainer, PatientOutBoundContainer, PermissionGate } from './pages';
 import AuthLayout from './pages/auth/authLayout';
 import { RoleConstant } from './utility';
 import { PatientMessagesContainer } from './pages/patient-messages/container';
@@ -96,6 +96,19 @@ function App() {
                             requiredPermission={[RoleConstant.patient.view]}
                           >
                             <PatientInBoundContainer />
+                          </PermissionGate>
+                        </ProtectRoute>
+
+                      }
+                    />
+                    <Route
+                      path='/outBound'
+                      element={
+                        <ProtectRoute>
+                          <PermissionGate
+                            requiredPermission={[RoleConstant.patient.view]}
+                          >
+                            <PatientOutBoundContainer />
                           </PermissionGate>
                         </ProtectRoute>
 
