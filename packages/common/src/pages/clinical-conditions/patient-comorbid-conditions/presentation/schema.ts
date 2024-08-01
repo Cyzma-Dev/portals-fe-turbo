@@ -1,6 +1,15 @@
-import * as z from "zod"
+import * as z from "zod";
 
-export const addPatientComorbidSchema = z.object({
-    subject_id: z.number(),
-    note_text: z.string(),
+export const addPatientComorbidConditionsSchema = z.object({
+    condition_value_ids: z.array(
+        z.object({
+            id: z.number(),
+        })
+    ).min(1, "Allergy is required"),
+    notes: z.string(),
 });
+export const editPatientComorbidConditionsSchema = z.object({
+    condition_value_ids: z.array(z.number()),
+    notes: z.string().min(1, "Note is required"),
+});
+

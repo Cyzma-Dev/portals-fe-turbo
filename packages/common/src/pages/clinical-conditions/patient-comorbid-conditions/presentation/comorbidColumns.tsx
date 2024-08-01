@@ -6,6 +6,10 @@ import { CustomColumnDef } from "../../../../utility";
 export const comorbidColumns: CustomColumnDef<any>[] = [
   {
     accessorKey: "comorbid_condition_name",
+    toFilter: true,
+    searchType: 'text',
+    operator: 'contains',
+    headerName: 'Condition',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Condition" />
     ),

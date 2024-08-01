@@ -6,6 +6,10 @@ import { CustomColumnDef } from "../../../../utility";
 export const highRiskColumns: CustomColumnDef<any>[] = [
   {
     accessorKey: "high_risk_condition_name",
+    toFilter: true,
+    searchType: 'text',
+    operator: 'contains',
+    headerName: 'Condition',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Condition" />
     ),

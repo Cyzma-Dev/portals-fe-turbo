@@ -1,19 +1,17 @@
 export interface IPatientHighRisk {
   id: number;
-  note_text: string;
+  notes: string;
   created_by_name: string;
   updated_by_name: string;
-  subject_name: string;
-  subject_id: number;
   is_editable: boolean;
   message: string;
+  condition_value_ids: number[];
 }
 
 export interface ICreatePatientHighRisk {
+  condition_value_ids: { id?: number }[] | number[];
+  notes?: string;
   id?: number;
-  document_name: string;
-  subject?: number;
-  note?: string;
 }
 
 export interface IHighRiskCommonProps {

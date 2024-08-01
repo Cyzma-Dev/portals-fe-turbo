@@ -9,9 +9,11 @@ interface INotesTooltipViewerProps {
 }
 
 export function NotesTooltipViewer(props: INotesTooltipViewerProps) {
+
     return (
         <>
             <CommonTooltip
+                showContent={props.Content == null || props.Content == 'No Comment Available' ? false : true}
                 tooltipContent={
                     <div className="border bg-secondary rounded-md p-3 text-sm w-64 ">
                         <h1 className="font-bold text-sm mb-3 text-foreground border">{props.header}</h1>
@@ -23,38 +25,42 @@ export function NotesTooltipViewer(props: INotesTooltipViewerProps) {
                     clsx("flex items-center justify-center gap-2 w-fit border rounded-full px-2 py-1",
                         {
                             'text-blue bg-blueBackground': props.statusValue === "Approved",
-                            'text-orange bg-orangeBackground': props.statusValue === "Requested",
+                            'text-orange bg-orangeBackground': props.statusValue === "Requested" || props.statusValue === "Sent",
                             'text-red bg-redBackground': props.statusValue === "Rejected" || props.statusValue === "Cancelled",
                             'text-green bg-greenBackground': props.statusValue === "Done",
                             'text-purple bg-purpleBackground': props.statusValue === "Hold",
 
+
                         }
                     )}>
                     {
-                        props.statusValue === "Approved"
+                        props.Content == null || props.Content == 'No Comments Available'
                             ?
-                            <Icons.check className="h-4 w-4" />  /*Approved*/
-                            :
-                            props.statusValue === "Requested"
+                            props.statusValue === "Approved"
                                 ?
-                                <Icons.sendHorizontal className="h-4 w-4" />   /*Requested*/
+                                <Icons.check className="h-4 w-4" />  /*Approved*/
                                 :
-                                props.statusValue === "Rejected" || props.statusValue === "Cancelled"
+                                props.statusValue === "Requested" || props.statusValue === "Sent"
                                     ?
-                                    <Icons.circleX className="h-4 w-4" /> /*Rejected*/
+                                    <Icons.sendHorizontal className="h-4 w-4" />   /*Requested & Sent*/
                                     :
-                                    props.statusValue === "Done"
+                                    props.statusValue === "Rejected" || props.statusValue === "Cancelled"
                                         ?
-                                        <Icons.circleCheckBig className="h-4 w-4" /> /*Done*/
+                                        <Icons.circleX className="h-4 w-4" /> /*Rejected & Cancelled*/
                                         :
-                                        props.statusValue === "Hold"
+                                        props.statusValue === "Done"
                                             ?
-                                            <Icons.timer className="h-4 w-4" />   /* Hold*/
+                                            <Icons.circleCheckBig className="h-4 w-4" /> /*Done*/
                                             :
-                                            ""
+                                            props.statusValue === "Hold"
+                                                ?
+                                                <Icons.timer className="h-4 w-4" />   /* Hold*/
+                                                :
+                                                ""
+                            : <Icons.messageSquareMore className="h-4 w-4" />
                     }
                     {props.statusValue}
-                    <Icons.messageSquareMore className="h-4 w-4" />
+
                 </div>
             </CommonTooltip >
         </>

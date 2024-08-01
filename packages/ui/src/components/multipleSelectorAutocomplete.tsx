@@ -9,24 +9,27 @@ import { Command, CommandGroup, CommandItem, CommandList } from '../shadcn/ui/co
 import { cn } from "@repo/ui/utils";
 
 
-export interface OptionProps {
-    value: string;
-    label: string;
+export interface IOptions {
+    id: any;
+    value?: string;
+    // label: string;
+    display_text: string;
     disable?: boolean;
     /** fixed option that can't be removed. */
     fixed?: boolean;
     /** Group the options by providing key. */
     [key: string]: string | boolean | undefined;
 }
+
 interface GroupOption {
-    [key: string]: OptionProps[];
+    [key: string]: IOptions[];
 }
 
 interface MultipleSelectorAutocompleteProps {
-    value?: OptionProps[];
-    defaultOptions?: OptionProps[];
+    value?: any[];
+    defaultOptions?: any[];
     /** manually controlled options */
-    options?: OptionProps[];
+    options?: IOptions[];
     placeholder?: string;
     /** Loading component. */
     loadingIndicator?: React.ReactNode;
@@ -40,8 +43,8 @@ interface MultipleSelectorAutocompleteProps {
      **/
     triggerSearchOnFocus?: boolean;
     /** async search */
-    onSearch?: (value: string) => Promise<OptionProps[]>;
-    onChange?: (options: OptionProps[]) => void;
+    onSearch?: (value: string) => Promise<IOptions[]>;
+    onChange?: (options: IOptions[]) => void;
     /** Limit the maximum number of selected options. */
     maxSelected?: number;
     /** When the number of selected options exceeds the limit, the onMaxSelected will be called. */
@@ -71,10 +74,11 @@ interface MultipleSelectorAutocompleteProps {
     >;
     /** hide the clear all button. */
     hideClearAllButton?: boolean;
+    isEdit?: boolean;
 }
 
 export interface MultipleSelectorAutocompleteRef {
-    selectedValue: OptionProps[];
+    selectedValue: IOptions[];
     input: HTMLInputElement;
 }
 
@@ -92,7 +96,7 @@ export function useMultipleAutocompleteDebounce<T>(value: T, delay?: number): T 
     return debouncedValue;
 }
 
-function transToGroupOption(options: OptionProps[], groupBy?: string) {
+function transToGroupOption(options: IOptions[], groupBy?: string) {
     if (options.length === 0) {
         return {};
     }
@@ -113,18 +117,18 @@ function transToGroupOption(options: OptionProps[], groupBy?: string) {
     return groupOption;
 }
 
-function removePickedOption(groupOption: GroupOption, picked: OptionProps[]) {
+function removePickedOption(groupOption: GroupOption, picked: IOptions[]) {
     const cloneOption = JSON.parse(JSON.stringify(groupOption)) as GroupOption;
 
     for (const [key, value] of Object.entries(cloneOption)) {
-        cloneOption[key] = value.filter((val) => !picked.find((p) => p.value === val.value));
+        cloneOption[key] = value.filter((val) => !picked.find((p) => p.id === val.id));
     }
     return cloneOption;
 }
 
-function isOptionsExist(groupOption: GroupOption, targetOption: OptionProps[]) {
-    for (const [, value] of Object.entries(groupOption)) {
-        if (value.some((option) => targetOption.find((p) => p.value === option.value))) {
+function isOptionsExist(groupOption: GroupOption, targetOption: IOptions[]) {
+    for (const [, id] of Object.entries(groupOption)) {
+        if (id.some((option) => targetOption.find((p) => p.id === option.id))) {
             return true;
         }
     }
@@ -183,6 +187,7 @@ const MultipleSelectorAutocomplete = React.forwardRef<MultipleSelectorAutocomple
             commandProps,
             inputProps,
             hideClearAllButton = false,
+            isEdit,
         }: MultipleSelectorAutocompleteProps,
         ref: React.Ref<MultipleSelectorAutocompleteRef>,
     ) => {
@@ -190,8 +195,7 @@ const MultipleSelectorAutocomplete = React.forwardRef<MultipleSelectorAutocomple
         const [open, setOpen] = React.useState(false);
         const mouseOn = React.useRef<boolean>(false);
         const [isLoading, setIsLoading] = React.useState(false);
-
-        const [selected, setSelected] = React.useState<OptionProps[]>(value || []);
+        const [selected, setSelected] = React.useState<any[]>(value || []);
         const [options, setOptions] = React.useState<GroupOption>(
             transToGroupOption(arrayDefaultOptions, groupBy),
         );
@@ -209,8 +213,8 @@ const MultipleSelectorAutocomplete = React.forwardRef<MultipleSelectorAutocomple
         );
 
         const handleUnselect = React.useCallback(
-            (option: OptionProps) => {
-                const newOptions = selected.filter((s) => s.value !== option.value);
+            (option: IOptions) => {
+                const newOptions = selected.filter((s) => s.id !== option.id);
                 setSelected(newOptions);
                 onChange?.(newOptions);
             },
@@ -241,7 +245,8 @@ const MultipleSelectorAutocomplete = React.forwardRef<MultipleSelectorAutocomple
 
         useEffect(() => {
             if (value) {
-                setSelected(value);
+                const extractedValue = isEdit ? arrayDefaultOptions.filter(val => val.id === value[0]) : value;
+                setSelected(extractedValue);
             }
         }, [value]);
 
@@ -282,8 +287,8 @@ const MultipleSelectorAutocomplete = React.forwardRef<MultipleSelectorAutocomple
         const CreatableItem = () => {
             if (!creatable) return undefined;
             if (
-                isOptionsExist(options, [{ value: inputValue, label: inputValue }]) ||
-                selected.find((s) => s.value === inputValue)
+                isOptionsExist(options, [{ id: inputValue, display_text: inputValue }]) ||
+                selected.find((s) => s.id === inputValue)
             ) {
                 return undefined;
             }
@@ -302,7 +307,7 @@ const MultipleSelectorAutocomplete = React.forwardRef<MultipleSelectorAutocomple
                             return;
                         }
                         setInputValue('');
-                        const newOptions = [...selected, { value, label: value }];
+                        const newOptions = [...selected, { value, display_text: value }];
                         setSelected(newOptions);
                         onChange?.(newOptions);
                     }}
@@ -387,10 +392,10 @@ const MultipleSelectorAutocomplete = React.forwardRef<MultipleSelectorAutocomple
                     }}
                 >
                     <div className="relative flex flex-wrap gap-1">
-                        {selected.map((option) => {
+                        {selected.map((option, index) => {
                             return (
                                 <Badge
-                                    key={option.value}
+                                    key={index}
                                     className={cn(
                                         'data-[disabled]:bg-muted-foreground data-[disabled]:text-muted data-[disabled]:hover:bg-muted-foreground',
                                         'data-[fixed]:bg-muted-foreground data-[fixed]:text-muted data-[fixed]:hover:bg-muted-foreground',
@@ -399,7 +404,7 @@ const MultipleSelectorAutocomplete = React.forwardRef<MultipleSelectorAutocomple
                                     data-fixed={option.fixed}
                                     data-disabled={disabled || undefined}
                                 >
-                                    {option.label}
+                                    {option.display_text}
                                     <button
                                         className={cn(
                                             'ml-1 rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2',
@@ -456,8 +461,8 @@ const MultipleSelectorAutocomplete = React.forwardRef<MultipleSelectorAutocomple
                         <button
                             type="button"
                             onClick={() => {
-                                setSelected(selected.filter((s) => s.fixed))
-                                onChange?.(selected.filter((s) => s.fixed))
+                                setSelected(selected.filter((s) => s.fixed));
+                                onChange?.(selected.filter((s) => s.fixed));
                             }}
                             className={cn(
                                 "absolute right-0 h-6 w-6 p-0",
@@ -499,8 +504,8 @@ const MultipleSelectorAutocomplete = React.forwardRef<MultipleSelectorAutocomple
                                                 {dropdowns.map((option) => {
                                                     return (
                                                         <CommandItem
-                                                            key={option.value}
-                                                            value={option.value}
+                                                            key={option.id}
+                                                            value={option.id}
                                                             disabled={option.disable}
                                                             onMouseDown={(e) => {
                                                                 e.preventDefault();
@@ -521,7 +526,7 @@ const MultipleSelectorAutocomplete = React.forwardRef<MultipleSelectorAutocomple
                                                                 option.disable && 'cursor-default text-muted-foreground',
                                                             )}
                                                         >
-                                                            {option.label}
+                                                            {option.display_text}
                                                         </CommandItem>
                                                     );
                                                 })}

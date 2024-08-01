@@ -4,18 +4,23 @@ import { Tooltip, TooltipProvider, TooltipTrigger, TooltipContent } from '@radix
 interface TooltipTrigger {
     children: ReactNode
     tooltipContent: ReactNode
+    showContent?: boolean
 }
-function CommonTooltip({ children, tooltipContent }: TooltipTrigger) {
+function CommonTooltip({ children, tooltipContent, showContent = true }: TooltipTrigger) {
     return (
         <div className='z-50'>
-            <TooltipProvider >
-                <Tooltip >
-                    <TooltipTrigger asChild >
+            <TooltipProvider>
+                <Tooltip>
+                    <TooltipTrigger asChild>
                         {children}
                     </TooltipTrigger>
-                    <TooltipContent side={'bottom'} >
-                        {tooltipContent}
-                    </TooltipContent>
+                    {
+                        showContent &&
+                        <TooltipContent side={'bottom'}>
+                            {tooltipContent}
+                        </TooltipContent>
+                    }
+
                 </Tooltip>
             </TooltipProvider>
         </div>

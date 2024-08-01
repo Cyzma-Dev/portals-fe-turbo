@@ -1,25 +1,25 @@
 import React, { useState } from "react";
-import { CustomColumnDef } from "../../../../utility";
-import { Button, DataTable, DataTableColumnHeader, Icons, NotesTooltipViewer } from "@repo/ui/shadcn";
-import IconWrapper from "../../../../../../ui/src/components/Icon-wrapper";
-import FilterFields from "../../../../../../ui/src/components/filter-fields";
-import { IPatientExpiredPrescription } from "./types";
-import ExpiredRxFullHistory from "./expiredRxFullHistory";
-import { expiredPrescriptionColumns } from "./expiredPrescriptionColumns";
+import { Button, DataTable, DataTableColumnHeader, Icons } from "@repo/ui/shadcn";
+import { CustomColumnDef } from "@repo/common/common-library";
+import FilterFields from "../../../../../../packages/ui/src/components/filter-fields";
+import { IRxArchiveList } from "./types";
+import { PatientRxArchiveColumns } from "./PatientRxArchiveColumns";
+import RxFullHistory from "./rxFullHistory";
+import IconWrapper from "../../../../../../packages/ui/src/components/Icon-wrapper";
 
 
 
-interface IPatientRxExpiredPrescriptionProps {
-	expiredPrescriptionData: IPatientExpiredPrescription[];
+interface IPatientRxArchiveProps {
+	RxArchiveListData: IRxArchiveList[];
 	handleGridChange: (event: any) => void;
 	handleFilterChange: (field: string, operator: string, event: any) => void;
 	filterOpen: boolean
 	setFilterOpen: (data: boolean) => void
 }
 
-const ExpiredPrescriptionScreen = (props: IPatientRxExpiredPrescriptionProps) => {
+const PatientRxArchiveScreen = (props: IPatientRxArchiveProps) => {
 	const [refillHeaderDetails, setRefillHeaderDetails] = useState<any>(null);
-	const [fillData, setFillData] = useState<IPatientRxExpiredPrescriptionProps[]>([]);
+	const [fillData, setFillData] = useState<IPatientRxArchiveProps[]>([]);
 	const [fullScreenDialog, setFullScreenDialog] = useState<boolean>(false);
 
 	const handleAdditionalDetail = (row: any) => {
@@ -54,22 +54,7 @@ const ExpiredPrescriptionScreen = (props: IPatientRxExpiredPrescriptionProps) =>
 			enableSorting: true,
 			enableHiding: false,
 		},
-		{
-			accessorKey: "rx_request_status",
-			header: ({ column }) => (
-				<DataTableColumnHeader column={column} title="Status" />
-			),
-			cell: ({ row }) =>
-				<NotesTooltipViewer
-					header={`Reason for ${row.getValue("rx_request_status")}`}
-					Content={row.original.note}
-					statusValue={row.getValue("rx_request_status")}
-				/>,
-			enableSorting: true,
-			enableHiding: false,
-		},
-
-		...expiredPrescriptionColumns,
+		...PatientRxArchiveColumns,
 
 	]
 
@@ -78,7 +63,7 @@ const ExpiredPrescriptionScreen = (props: IPatientRxExpiredPrescriptionProps) =>
 			className='flex flex-col gap-4 w-full h-full'
 		>
 			<div className='flex gap-4 justify-content items-center text-xl font-bold'>
-				Expired Prescription
+				Rx Archive
 
 				<div className='flex gap-1'>
 
@@ -93,17 +78,17 @@ const ExpiredPrescriptionScreen = (props: IPatientRxExpiredPrescriptionProps) =>
 				<FilterFields
 					filterOpen={props.filterOpen}
 					handleFilterChange={props.handleFilterChange}
-					listColumns={extendColumns}
+					listColumns={PatientRxArchiveColumns}
 					options={[]}
 				/>
 			}
 			<DataTable
-				data={props.expiredPrescriptionData}
+				data={props.RxArchiveListData}
 				columns={extendColumns}
 				toolbar={false}
 				handleGridChange={props.handleGridChange}
 			/>
-			<ExpiredRxFullHistory
+			<RxFullHistory
 				fullScreenDialog={fullScreenDialog}
 				setFullScreenDialog={setFullScreenDialog}
 				refillHeaderDetails={refillHeaderDetails}
@@ -113,4 +98,4 @@ const ExpiredPrescriptionScreen = (props: IPatientRxExpiredPrescriptionProps) =>
 	);
 };
 
-export default ExpiredPrescriptionScreen
+export default PatientRxArchiveScreen
