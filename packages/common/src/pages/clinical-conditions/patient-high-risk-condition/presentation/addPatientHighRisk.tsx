@@ -1,12 +1,12 @@
-import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Icons, Input, ScrollArea, Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "@repo/ui/shadcn"
-import { addPatientHighRiskSchema } from "./schema"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
-import { useEffect } from "react"
-import { IHighRiskCommonProps } from "./types"
-import { PatientHighRiskOptionsHook } from "../../../../common-hooks"
-import MultipleSelectorAutocomplete from "../../../../../../ui/src/components/multipleSelectorAutocomplete"
+import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Icons, Input, ScrollArea, Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "@repo/ui/shadcn";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useEffect } from "react";
+import { IHighRiskCommonProps } from "./types";
+import { PatientHighRiskOptionsHook } from "../../../../common-hooks";
+import MultipleSelectorAutocomplete from "../../../../../../ui/src/components/multipleSelectorAutocomplete";
+import { addPatientHighRiskSchema, editPatientHighRiskSchema } from "./schema";
 
 
 interface IAddPatientHighRisk extends IHighRiskCommonProps {
@@ -14,53 +14,39 @@ interface IAddPatientHighRisk extends IHighRiskCommonProps {
 export const AddPatientHighRisk = (props: IAddPatientHighRisk) => {
 
     const { patientHighRiskOptionsData, fetchData } = PatientHighRiskOptionsHook();
+    const checkPatientAllergiesSchema = props.isEdit ? editPatientHighRiskSchema : addPatientHighRiskSchema;
 
 
     useEffect(() => {
-        // This effect will triggered to fetch High Risk Condition subject options
-        props.sheetOpen && fetchData();
+        // This effect will triggered to fetch Allergies subject options
+        fetchData();
     }, [props.sheetOpen]);
 
-    const onSubmit = async (formData: z.infer<typeof addPatientHighRiskSchema>) => {
-        console.log(formData, 'aleracare..localhost:5173')
-        props.handleSubmit(formData)
-    }
+    const onSubmit = async (formData: z.infer<typeof checkPatientAllergiesSchema>) => {
+        formData.condition_value_ids = props.isEdit ? formData.condition_value_ids : formData.condition_value_ids.map((value: any) => value.id);
+        props.handleSubmit(formData);
+    };
 
-    const form = useForm<z.infer<typeof addPatientHighRiskSchema>>({
-        resolver: zodResolver(addPatientHighRiskSchema),
+    const form = useForm<z.infer<typeof checkPatientAllergiesSchema>>({
+        resolver: zodResolver(checkPatientAllergiesSchema),
         defaultValues: {
-            subject_id: 0,
-            note_text: '',
+            condition_value_ids: [],
+            notes: '',
         },
-    })
-
+    });
     useEffect(() => {
         if (props.currentHighRiskCondition && props.isEdit && props.sheetOpen) {
-            form.reset(props.currentHighRiskCondition)
+            form.reset(props.currentHighRiskCondition);
         }
         if (!props.sheetOpen) {
-            props.setIsEdit(false)
-            props.setCurrentHighRiskCondition(undefined)
+            props.setIsEdit(false);
+            props.setCurrentHighRiskCondition(undefined);
             form.reset({
-                subject_id: 0,
-                note_text: '',
+                condition_value_ids: [],
+                notes: '',
             });
         }
-    }, [props.currentHighRiskCondition, props.sheetOpen])
-    const OPTIONS: any[] = [
-        { label: 'nextjs', value: 'nextjs', id: 45 },
-        { label: 'React', value: 'react', id: 78 },
-        { label: 'Remix', value: 'remix', id: 56 },
-        { label: 'Vite', value: 'vite', id: 36 },
-        { label: 'Nuxt', value: 'nuxt', id: 36 },
-        { label: 'Vue', value: 'vue', id: 25 },
-        { label: 'Svelte', value: 'svelte', id: 57 },
-        { label: 'Angular', value: 'angular', id: 21 },
-        { label: 'Ember', value: 'ember', disable: true, id: 35 },
-        { label: 'Gatsby', value: 'gatsby', disable: true, id: 10 },
-        { label: 'Astro', value: 'astro' },
-    ];
-
+    }, [props.currentHighRiskCondition, props.sheetOpen]);
 
     return (
         <Sheet open={props.sheetOpen} onOpenChange={props.setSheetOpen}>
@@ -73,7 +59,7 @@ export const AddPatientHighRisk = (props: IAddPatientHighRisk) => {
                         <form onSubmit={form.handleSubmit(onSubmit)}>
                             <ScrollArea>
                                 <SheetHeader>
-                                    <SheetTitle>{props.isEdit ? 'Edit High Risk Condition' : 'Add High Risk Condition'}</SheetTitle>
+                                    <SheetTitle>{props.isEdit ? 'Edit Allergies' : 'Add High Risk Condition'}</SheetTitle>
                                     <SheetDescription>
                                         {props.isEdit
                                             ? 'Edit the High Risk Condition details'
@@ -85,22 +71,28 @@ export const AddPatientHighRisk = (props: IAddPatientHighRisk) => {
                                     <div className="flex flex-col space-y-1.5">
                                         <FormField
                                             control={form.control}
-                                            name="subject_id"
-                                            render={() => (
+                                            name="condition_value_ids"
+                                            render={({ field: { onChange, value, ref } }) => (
                                                 <FormItem>
                                                     <div className="space-y-0.5">
                                                         <FormLabel className="text-base">High Risk Condition</FormLabel>
                                                     </div>
                                                     <FormControl>
                                                         <MultipleSelectorAutocomplete
-                                                            defaultOptions={OPTIONS}
-                                                            placeholder="Select frameworks you like..."
+                                                            value={value ?? []}
+                                                            isEdit={props.isEdit}
+                                                            disabled={props.isEdit}
+                                                            ref={ref}
+                                                            onChange={onChange}
+                                                            defaultOptions={patientHighRiskOptionsData}
+                                                            placeholder="Select options"
                                                             emptyIndicator={
                                                                 <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
                                                                     no results found.
                                                                 </p>
                                                             }
                                                         />
+
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
@@ -110,14 +102,14 @@ export const AddPatientHighRisk = (props: IAddPatientHighRisk) => {
                                     <div className="grid w-full items-center gap-4">
                                         <FormField
                                             control={form.control}
-                                            name="note_text"
+                                            name="notes"
                                             render={({ field }) => (
                                                 <FormItem>
                                                     <div className="space-y-0.5">
                                                         <FormLabel className="text-base">Note</FormLabel>
                                                     </div>
                                                     <FormControl>
-                                                        <Input disabled={props.isBtnDisable} placeholder="Note" {...field} />
+                                                        <Input disabled={!props.isEdit} placeholder="Note" {...field} />
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
@@ -144,5 +136,5 @@ export const AddPatientHighRisk = (props: IAddPatientHighRisk) => {
                 </div>
             </SheetContent>
         </Sheet>
-    )
-}
+    );
+};

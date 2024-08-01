@@ -3,18 +3,15 @@ export interface IPatientAllergies {
   notes: string;
   created_by_name: string;
   updated_by_name: string;
-  subject_name: string;
-  subject_id: number;
   is_editable: boolean;
   message: string;
+  condition_value_ids: number[];
 }
 
 export interface ICreatePatientAllergies {
-  id?: number;
-  condition_value_ids?: {
-    id?: number;
-  }[];
+  condition_value_ids: { id?: number }[] | number[];
   notes?: string;
+  id?: number;
 }
 
 export interface IAllergiesCommonProps {

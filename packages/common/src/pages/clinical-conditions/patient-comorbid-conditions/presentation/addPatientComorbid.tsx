@@ -1,5 +1,5 @@
 import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Icons, Input, ScrollArea, Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "@repo/ui/shadcn"
-import { addPatientComorbidSchema } from "./schema"
+import { addPatientComorbidConditionsSchema, editPatientComorbidConditionsSchema } from "./schema"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -9,57 +9,45 @@ import MultipleSelectorAutocomplete from "../../../../../../ui/src/components/mu
 import { PatientComorbidOptionsHook } from "../../../../common-hooks/patientComorbidOptionsHook"
 
 
+
 interface IAddPatientComorbidConditions extends IComorbidCommonProps {
 }
 export const AddPatientComorbidConditions = (props: IAddPatientComorbidConditions) => {
 
     const { patientComorbidOptionsData, fetchData } = PatientComorbidOptionsHook();
+    const checkPatientAllergiesSchema = props.isEdit ? editPatientComorbidConditionsSchema : addPatientComorbidConditionsSchema;
 
 
     useEffect(() => {
-        // This effect will triggered to fetch Comorbid Condition subject options
-        props.sheetOpen && fetchData();
+        // This effect will triggered to fetch Allergies subject options
+        fetchData();
     }, [props.sheetOpen]);
 
-    const onSubmit = async (formData: z.infer<typeof addPatientComorbidSchema>) => {
-        props.handleSubmit(formData)
-    }
+    const onSubmit = async (formData: z.infer<typeof checkPatientAllergiesSchema>) => {
+        formData.condition_value_ids = props.isEdit ? formData.condition_value_ids : formData.condition_value_ids.map((value: any) => value.id);
+        props.handleSubmit(formData);
+    };
 
-    const form = useForm<z.infer<typeof addPatientComorbidSchema>>({
-        resolver: zodResolver(addPatientComorbidSchema),
+    const form = useForm<z.infer<typeof checkPatientAllergiesSchema>>({
+        resolver: zodResolver(checkPatientAllergiesSchema),
         defaultValues: {
-            subject_id: 0,
-            note_text: '',
+            condition_value_ids: [],
+            notes: '',
         },
-    })
-
+    });
     useEffect(() => {
         if (props.currentComorbidConditions && props.isEdit && props.sheetOpen) {
-            form.reset(props.currentComorbidConditions)
+            form.reset(props.currentComorbidConditions);
         }
         if (!props.sheetOpen) {
-            props.setIsEdit(false)
-            props.setCurrentComorbidConditions(undefined)
+            props.setIsEdit(false);
+            props.setCurrentComorbidConditions(undefined);
             form.reset({
-                subject_id: 0,
-                note_text: '',
+                condition_value_ids: [],
+                notes: '',
             });
         }
-    }, [props.currentComorbidConditions, props.sheetOpen])
-    const OPTIONS: any[] = [
-        { label: 'nextjs', value: 'nextjs', id: 45 },
-        { label: 'React', value: 'react', id: 78 },
-        { label: 'Remix', value: 'remix', id: 56 },
-        { label: 'Vite', value: 'vite', id: 36 },
-        { label: 'Nuxt', value: 'nuxt', id: 36 },
-        { label: 'Vue', value: 'vue', id: 25 },
-        { label: 'Svelte', value: 'svelte', id: 57 },
-        { label: 'Angular', value: 'angular', id: 21 },
-        { label: 'Ember', value: 'ember', disable: true, id: 35 },
-        { label: 'Gatsby', value: 'gatsby', disable: true, id: 10 },
-        { label: 'Astro', value: 'astro' },
-    ];
-
+    }, [props.currentComorbidConditions, props.sheetOpen]);
 
     return (
         <Sheet open={props.sheetOpen} onOpenChange={props.setSheetOpen}>
@@ -72,11 +60,11 @@ export const AddPatientComorbidConditions = (props: IAddPatientComorbidCondition
                         <form onSubmit={form.handleSubmit(onSubmit)}>
                             <ScrollArea>
                                 <SheetHeader>
-                                    <SheetTitle>{props.isEdit ? 'Edit Comorbid Condition' : 'Add Comorbid Condition'}</SheetTitle>
+                                    <SheetTitle>{props.isEdit ? 'Edit Allergies' : 'Add Allergy'}</SheetTitle>
                                     <SheetDescription>
                                         {props.isEdit
-                                            ? 'Edit the Comorbid Condition details'
-                                            : 'Create new Comorbid Condition by filling the following details'
+                                            ? 'Edit the Allergies details'
+                                            : 'Create new Allergies by filling the following details'
                                         }
                                     </SheetDescription>
                                 </SheetHeader>
@@ -84,22 +72,28 @@ export const AddPatientComorbidConditions = (props: IAddPatientComorbidCondition
                                     <div className="flex flex-col space-y-1.5">
                                         <FormField
                                             control={form.control}
-                                            name="subject_id"
-                                            render={() => (
+                                            name="condition_value_ids"
+                                            render={({ field: { onChange, value, ref } }) => (
                                                 <FormItem>
                                                     <div className="space-y-0.5">
                                                         <FormLabel className="text-base">Comorbid Condition</FormLabel>
                                                     </div>
                                                     <FormControl>
                                                         <MultipleSelectorAutocomplete
-                                                            defaultOptions={OPTIONS}
-                                                            placeholder="Select frameworks you like..."
+                                                            value={value ?? []}
+                                                            isEdit={props.isEdit}
+                                                            disabled={props.isEdit}
+                                                            ref={ref}
+                                                            onChange={onChange}
+                                                            defaultOptions={patientComorbidOptionsData}
+                                                            placeholder="Select options"
                                                             emptyIndicator={
                                                                 <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
                                                                     no results found.
                                                                 </p>
                                                             }
                                                         />
+
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
@@ -109,14 +103,14 @@ export const AddPatientComorbidConditions = (props: IAddPatientComorbidCondition
                                     <div className="grid w-full items-center gap-4">
                                         <FormField
                                             control={form.control}
-                                            name="note_text"
+                                            name="notes"
                                             render={({ field }) => (
                                                 <FormItem>
                                                     <div className="space-y-0.5">
                                                         <FormLabel className="text-base">Note</FormLabel>
                                                     </div>
                                                     <FormControl>
-                                                        <Input disabled={props.isBtnDisable} placeholder="Note" {...field} />
+                                                        <Input disabled={!props.isEdit} placeholder="Note" {...field} />
                                                     </FormControl>
                                                     <FormMessage />
                                                 </FormItem>
@@ -143,5 +137,5 @@ export const AddPatientComorbidConditions = (props: IAddPatientComorbidCondition
                 </div>
             </SheetContent>
         </Sheet>
-    )
-}
+    );
+};

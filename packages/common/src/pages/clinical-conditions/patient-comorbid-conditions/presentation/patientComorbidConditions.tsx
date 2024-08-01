@@ -32,7 +32,6 @@ const PatientComorbidConditionsScreen = (props: IPatientComorbidProps) => {
 							onClick={() => {
 								props.handleEdit(row.original)
 							}}
-							disable={!row.original.is_editable}
 						>
 							<Icons.pencil className="h-4 w-4" />
 						</IconWrapper>
@@ -41,7 +40,6 @@ const PatientComorbidConditionsScreen = (props: IPatientComorbidProps) => {
 							onClick={() => {
 								props.handlePatientComorbidDelete(row.original.id)
 							}}
-							disable={!row.original.is_editable}
 						>
 							<Icons.trash className="h-4 w-4" />
 						</IconWrapper>

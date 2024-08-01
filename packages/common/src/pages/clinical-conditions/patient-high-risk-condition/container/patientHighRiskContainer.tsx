@@ -50,6 +50,7 @@ export const PatientHighRiskContainer = () => {
 					{
 						...formData,
 						id: currentHighRiskCondition!.id,
+						patient_id: patient_id
 					}
 				)
 				response?.message && toast.success(response?.message)

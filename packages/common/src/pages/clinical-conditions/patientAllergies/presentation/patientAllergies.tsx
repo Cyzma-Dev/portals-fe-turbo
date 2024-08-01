@@ -26,13 +26,12 @@ const PatientAllergiesScreen = (props: IPatientAllergiesProps) => {
 			),
 			cell: ({ row }) => {
 				return (
-					<div className="w-fit flex gap-4">
+					<div className="w-fit flex gap-2">
 						<IconWrapper
 							className="cursor-pointer hover:text-blue hover:fill-blueBackground hover:bg-blueBackground"
 							onClick={() => {
 								props.handleEdit(row.original)
 							}}
-							disable={!row.original.is_editable}
 						>
 							<Icons.pencil className="h-4 w-4" />
 						</IconWrapper>
@@ -41,7 +40,6 @@ const PatientAllergiesScreen = (props: IPatientAllergiesProps) => {
 							onClick={() => {
 								props.handlePatientNoteDelete(row.original.id)
 							}}
-							disable={!row.original.is_editable}
 						>
 							<Icons.trash className="h-4 w-4" />
 						</IconWrapper>
