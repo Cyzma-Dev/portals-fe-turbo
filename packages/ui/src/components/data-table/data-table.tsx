@@ -138,7 +138,6 @@ export function DataTable<TData, TValue>({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   })
-  console.log('load =', loading)
   return (
     <div className="space-y-4">
       {toolbar ? <DataTableToolbar table={table} /> : ''}

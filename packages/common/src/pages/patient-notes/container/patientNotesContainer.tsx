@@ -121,7 +121,6 @@ export const PatientNotesContainer = () => {
 
 	const handleGridChange = useCallback(
 		(event: any) => {
-			console.log("func called")
 			setQueryString((prevState: IQueryString) => {
 				if (
 					prevState.skip ===

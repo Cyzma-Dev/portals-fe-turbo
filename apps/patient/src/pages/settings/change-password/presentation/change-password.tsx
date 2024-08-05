@@ -40,12 +40,10 @@ export const ChangePasswordScreen = (props: IChangePasswordProps) => {
 	})
 
 	const onChangePasswordSubmit = async (data: any) => {
-		console.log("data =", data)
 		const resetRequest = {
 			...data
 		};
 		const result = await props.onSubmit(resetRequest);
-		console.log("hey =", result)
 		
 		if(result == "success"){
 			form.reset({

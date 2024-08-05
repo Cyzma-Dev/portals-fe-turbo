@@ -26,7 +26,6 @@ export const patientListingColumns: CustomColumnDef<any>[] = [
     ),
     cell: ({ row }) => {
       const commaSeparatedString: [] = row.getValue("physicians");
-      console.log('asdsa =', commaSeparatedString.join(', '))
       return(
         <div className="w-fit">{commaSeparatedString.join(', ')}</div>
       )
