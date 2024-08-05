@@ -13,6 +13,7 @@ import AuthLayout from './pages/auth/authLayout';
 import { RoleConstant } from './utility';
 import { DashboardContainer } from './pages/dashboard/container';
 import SettingsContainer from './pages/settings/settings-container/settings-container';
+import { PatientListingContainer } from './pages/patient-listing/container';
 function App() {
 
   return (
@@ -57,6 +58,19 @@ function App() {
                             requiredPermission={[RoleConstant.patient.view]}
                           >
                             <DashboardContainer />
+                          </PermissionGate>
+                        </ProtectRoute>
+
+                      }
+                    />
+                    <Route
+                      path='/patients'
+                      element={
+                        <ProtectRoute>
+                          <PermissionGate
+                            requiredPermission={[RoleConstant.patient.view]}
+                          >
+                            <PatientListingContainer />
                           </PermissionGate>
                         </ProtectRoute>
 

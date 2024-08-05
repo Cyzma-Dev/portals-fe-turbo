@@ -20,6 +20,8 @@ interface IDocumentsNotesProps extends IDocumentsCommonProps {
 	setPreviewSheetOpen: React.Dispatch<React.SetStateAction<boolean>>
 	filterOpen: boolean
 	setFilterOpen: (data: boolean) => void
+	isGridDataLoading: boolean
+	gridCount: number
 }
 
 const PatientDocumentScreen = (props: IDocumentsNotesProps) => {
@@ -123,6 +125,8 @@ const PatientDocumentScreen = (props: IDocumentsNotesProps) => {
 				columns={extendColumns}
 				toolbar={false}
 				handleGridChange={props.handleGridChange}
+				gridCount={props.gridCount}
+				loading={props.isGridDataLoading}
 			/>
 		</div>
 

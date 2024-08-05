@@ -17,6 +17,8 @@ interface IPatientInBoundProps {
 	handleFilterChange: (field: string, operator: string, event: any) => void;
 	filterOpen: boolean
 	setFilterOpen: (data: boolean) => void
+	isGridDataLoading: boolean
+	gridCount: number
 }
 
 const PatientInBoundScreen = (props: IPatientInBoundProps) => {
@@ -117,6 +119,8 @@ const PatientInBoundScreen = (props: IPatientInBoundProps) => {
 				columns={extendColumns}
 				toolbar={false}
 				handleGridChange={props.handleGridChange}
+				loading={props.isGridDataLoading}
+				gridCount={props.gridCount}
 			/>
 			<DownloadPdf
 				fullScreenDialog={fullScreenDialog}

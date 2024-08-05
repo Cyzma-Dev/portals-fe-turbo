@@ -13,6 +13,8 @@ interface IPatientNotesProps extends INotesCommonProps {
 	handlePatientNoteDelete: (rec_id: number) => void;
 	filterOpen: boolean;
 	setFilterOpen: (data: boolean) => void
+	gridCount: number
+	isGridDataLoading: boolean
 }
 
 const PatientNotesScreen = (props: IPatientNotesProps) => {
@@ -98,6 +100,8 @@ const PatientNotesScreen = (props: IPatientNotesProps) => {
 				columns={extendColumns}
 				toolbar={false}
 				handleGridChange={props.handleGridChange}
+				gridCount={props.gridCount}
+				loading={props.isGridDataLoading}
 			/>
 		</div>
 	);

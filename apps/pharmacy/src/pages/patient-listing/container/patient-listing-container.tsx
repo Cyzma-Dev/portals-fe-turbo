@@ -1,22 +1,19 @@
+import React, { useCallback, useState } from 'react';
+import { PatientListingHook } from '../../../hooks';
 import { IQueryString } from '@repo/common/common-library';
-import { GetPatientId } from '../../../../../../packages/common/src/helper-methods';
-import { useCallback, useState } from 'react';
-import { PatientInBoundHook } from '../../../hooks';
 import CustomFilterStateManage from '../../../../../../packages/common/src/helper-methods/custom-filter';
-import PatientInBoundScreen from '../presentation/patientInBound';
+import PatientListing from '../presentation/patient-listing';
 
-export const PatientInBoundContainer = () => {
-	const patient_id: number = GetPatientId();
+export const PatientListingContainer = () => {
+    const [filterOpen, setFilterOpen] = useState<boolean>(false);
+
 	const {
-		inBoundListData,
-		setQueryString,
+		patientListingData,
 		queryString,
-		loading: isGridDataLoading,
-		gridCount
-	} = PatientInBoundHook(patient_id)
-
-	const [filterOpen, setFilterOpen] = useState<boolean>(false);
-
+		setQueryString,
+		isLoading: isGridDataLoading,
+		gridCount,
+	} = PatientListingHook();
 
 	const handleFilterChange = (field: string, operator: string, event: any) => {
 		const filteredData = CustomFilterStateManage(
@@ -24,15 +21,15 @@ export const PatientInBoundContainer = () => {
 			field,
 			operator,
 			event
-		)
+		);
 		setQueryString((prevState: IQueryString) => ({
 			...prevState,
 			filter: {
 				...prevState.filter,
 				filters: filteredData,
 			},
-		}))
-	}
+		}));
+	};
 
 	const handleGridChange = useCallback(
 		(event: any) => {
@@ -59,14 +56,14 @@ export const PatientInBoundContainer = () => {
 	)
 
 	return (
-		<PatientInBoundScreen
-			inBoundListData={inBoundListData ? inBoundListData : []}
-			handleGridChange={handleGridChange}
-			handleFilterChange={handleFilterChange}
-			filterOpen={filterOpen}
-			setFilterOpen={setFilterOpen}
+		<PatientListing
+			patientListingData={patientListingData ? patientListingData : []}
 			isGridDataLoading={isGridDataLoading}
-			gridCount={gridCount}
+			gridCount={gridCount}			
+			handleFilterChange={handleFilterChange}
+			handleGridChange={handleGridChange}
+            filterOpen={filterOpen}
+            setFilterOpen={setFilterOpen}
 		/>
 	);
 };

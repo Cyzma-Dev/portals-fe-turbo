@@ -6,7 +6,6 @@ import { useCallback, useState } from 'react';
 import CustomFilterStateManage from '../../../helper-methods/custom-filter';
 import { ICreatePatientNotes, IPatientNotes } from '../presentation/types';
 import { toast } from 'sonner';
-import { DocumentSkeleton } from '@repo/ui/shadcn';
 
 export const PatientNotesContainer = () => {
 	const patient_id: number = GetPatientId();
@@ -15,8 +14,10 @@ export const PatientNotesContainer = () => {
 		fetchPatientNotes,
 		setQueryString,
 		queryString,
-		isLoading: isLoadingNotes,
+		gridCount,
+		isLoading: isGridDataLoading,
 	} = PatientNotesHook(patient_id)
+
 	const [isEdit, setIsEdit] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [isBtnDisable, setIsBtnDisable] = useState<boolean>(false)
@@ -24,7 +25,6 @@ export const PatientNotesContainer = () => {
 	const [currentNotes, setCurrentNotes] = useState<IPatientNotes>()
 
 	const [filterOpen, setFilterOpen] = useState<boolean>(false);
-
 
 	const closeSheet = () => {
 		setSheetOpen(false)
@@ -121,6 +121,7 @@ export const PatientNotesContainer = () => {
 
 	const handleGridChange = useCallback(
 		(event: any) => {
+			console.log("func called")
 			setQueryString((prevState: IQueryString) => {
 				if (
 					prevState.skip ===
@@ -144,30 +145,28 @@ export const PatientNotesContainer = () => {
 	)
 
 	return (
-		!filterOpen && isLoadingNotes
-			?
-			<DocumentSkeleton title='Notes' />
-			:
-			<PatientNotesScreen
-				patientNotesData={patientNotesData ? patientNotesData : []}
-				handleGridChange={handleGridChange}
-				handleFilterChange={handleFilterChange}
-				handlePatientNoteDelete={handlePatientNoteDelete}
-				isEdit={isEdit}
-				setIsEdit={setIsEdit}
-				isLoading={isLoading}
-				setIsLoading={setIsLoading}
-				isBtnDisable={isBtnDisable}
-				setIsBtnDisable={setIsBtnDisable}
-				sheetOpen={sheetOpen}
-				setSheetOpen={setSheetOpen}
-				openSheet={openSheet}
-				handleSubmit={handleSubmit}
-				handleEdit={handleEdit}
-				currentNotes={currentNotes}
-				setCurrentNotes={setCurrentNotes}
-				filterOpen={filterOpen}
-				setFilterOpen={setFilterOpen}
-			/>
+		<PatientNotesScreen
+			patientNotesData={patientNotesData ? patientNotesData : []}
+			handleGridChange={handleGridChange}
+			handleFilterChange={handleFilterChange}
+			handlePatientNoteDelete={handlePatientNoteDelete}
+			isEdit={isEdit}
+			setIsEdit={setIsEdit}
+			isLoading={isLoading}
+			setIsLoading={setIsLoading}
+			isBtnDisable={isBtnDisable}
+			setIsBtnDisable={setIsBtnDisable}
+			sheetOpen={sheetOpen}
+			setSheetOpen={setSheetOpen}
+			openSheet={openSheet}
+			handleSubmit={handleSubmit}
+			handleEdit={handleEdit}
+			currentNotes={currentNotes}
+			setCurrentNotes={setCurrentNotes}
+			filterOpen={filterOpen}
+			setFilterOpen={setFilterOpen}
+			gridCount={gridCount}
+			isGridDataLoading={isGridDataLoading}
+		/>
 	);
 };

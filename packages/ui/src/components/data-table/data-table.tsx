@@ -29,12 +29,15 @@ import {
 } from "../../shadcn/ui/table"
 import { DataTableToolbar } from "./data-table-toolbar"
 import { DataTablePagination } from "./data-table-pagination"
+import { Icons } from "../icons"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   toolbar: boolean
   handleGridChange: (updater: Updater<PaginationState>) => void
+  gridCount: number;
+  loading?: boolean;
 }
 
 export function DataTable<TData, TValue>({
@@ -42,6 +45,8 @@ export function DataTable<TData, TValue>({
   data,
   toolbar,
   handleGridChange,
+  gridCount,
+  loading,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({})
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -93,14 +98,13 @@ export function DataTable<TData, TValue>({
   //   handleGridChange(newState)
   // }
 
-  const [pagination, setPagination] = React.useState({
+  const [pagination, setPagination] = React.useState<PaginationState>({
     pageIndex: 0, //initial page index
     pageSize: 10, //default page size
   });
 
   React.useEffect(()=>{
     handleGridChange(pagination)
-
   }, [pagination])
 
   const table = useReactTable({
@@ -120,7 +124,7 @@ export function DataTable<TData, TValue>({
       },
     },
     manualPagination: true,
-    rowCount: 12,
+    rowCount: gridCount,
     enableRowSelection: true,
     onRowSelectionChange: handleRowSelectionChange,
     onSortingChange: handleSortingChange,
@@ -134,7 +138,7 @@ export function DataTable<TData, TValue>({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   })
-
+  console.log('load =', loading)
   return (
     <div className="space-y-4">
       {toolbar ? <DataTableToolbar table={table} /> : ''}
@@ -175,6 +179,14 @@ export function DataTable<TData, TValue>({
                   ))}
                 </TableRow>
               ))
+            ) : loading ? (
+              <TableRow>
+                <TableCell colSpan={columns.length} className="h-24 text-center">
+                  <div className="flex justify-center items-center h-full">
+                    <Icons.spinner className="h-6 w-6 animate-spin" />
+                  </div>
+                </TableCell>
+              </TableRow>
             ) : (
               <TableRow>
                 <TableCell

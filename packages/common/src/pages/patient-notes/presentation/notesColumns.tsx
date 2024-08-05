@@ -1,5 +1,5 @@
-import { DataTableColumnHeader } from "../../../../../ui/src/components/data-table";
-import { CustomColumnDef } from "../../../utility";
+import { CustomColumnDef } from "@repo/common/common-library";
+import { DataTableColumnHeader } from "@repo/ui/shadcn";
 
 export const notesColumns: CustomColumnDef<any>[] = [
   {

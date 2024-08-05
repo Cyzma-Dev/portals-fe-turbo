@@ -5,7 +5,6 @@ import { toast } from "sonner";
 import { IQueryString, MessageConstant, PatientDocumentsHook, PatientDocumentsService } from "@repo/common/common-library";
 import CustomFilterStateManage from "../../../../../../packages/common/src/helper-methods/custom-filter";
 import PatientDocumentScreen from "../presentation/patientDocuments";
-import { DocumentSkeleton } from "@repo/ui/shadcn";
 
 export const PatientDocumentsContainer = () => {
 
@@ -15,7 +14,8 @@ export const PatientDocumentsContainer = () => {
 		fetchPatientDocuments,
 		setQueryString,
 		queryString,
-		isLoading: isPatientDocumentsLoading,
+		isLoading: isGridDataLoading,
+		gridCount
 	} = PatientDocumentsHook(patient_id)
 
 	const [isEdit, setIsEdit] = useState<boolean>(false)
@@ -167,35 +167,30 @@ export const PatientDocumentsContainer = () => {
 
 
 	return (
-		!filterOpen && isPatientDocumentsLoading
-			?
-			<DocumentSkeleton
-				title='Documents'
-			/>
-			:
-			<PatientDocumentScreen
-				patientDocumentsData={patientDocumentsData ? patientDocumentsData : []}
-				handleGridChange={handleGridChange}
-				handleFilterChange={handleFilterChange}
-				handleDocumentNoteDelete={handleDocumentNoteDelete}
-				isEdit={isEdit}
-				setIsEdit={setIsEdit}
-				isLoading={isLoading}
-				isBtnDisable={isBtnDisable}
-				sheetOpen={sheetOpen}
-				setSheetOpen={setSheetOpen}
-				openSheet={openSheet}
-				handleSubmit={handleSubmit}
-				handleEdit={handleEdit}
-				currentNotes={currentNotes}
-				setCurrentNotes={setCurrentNotes}
-				filterOpen={filterOpen}
-				setFilterOpen={setFilterOpen}
-				handlePreviewDocuments={handlePreviewDocuments}
-				viewerFile={viewerFile}
-				previewSheetOpen={previewSheetOpen}
-				setPreviewSheetOpen={setPreviewSheetOpen}
-			/>
-
+		<PatientDocumentScreen
+			patientDocumentsData={patientDocumentsData ? patientDocumentsData : []}
+			handleGridChange={handleGridChange}
+			handleFilterChange={handleFilterChange}
+			handleDocumentNoteDelete={handleDocumentNoteDelete}
+			isEdit={isEdit}
+			setIsEdit={setIsEdit}
+			isLoading={isLoading}
+			isBtnDisable={isBtnDisable}
+			sheetOpen={sheetOpen}
+			setSheetOpen={setSheetOpen}
+			openSheet={openSheet}
+			handleSubmit={handleSubmit}
+			handleEdit={handleEdit}
+			currentNotes={currentNotes}
+			setCurrentNotes={setCurrentNotes}
+			filterOpen={filterOpen}
+			setFilterOpen={setFilterOpen}
+			handlePreviewDocuments={handlePreviewDocuments}
+			viewerFile={viewerFile}
+			previewSheetOpen={previewSheetOpen}
+			setPreviewSheetOpen={setPreviewSheetOpen}
+			isGridDataLoading={isGridDataLoading}
+			gridCount={gridCount}
+		/>
 	);
 };
