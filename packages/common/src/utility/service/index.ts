@@ -5,3 +5,9 @@ export * from './logoutService';
 export * from './patientDocumentService';
 export * from './pdfViewerInBoundOutBoundService';
 export * from './changePasswordService';
+export * from './patientAllergiesService';
+export * from './patientComorbidConditionsService';
+export * from './patientHighRiskConditionsService';
+export * from './patientPrescriptionListService';
+export * from './patientRefillRequestsService';
+

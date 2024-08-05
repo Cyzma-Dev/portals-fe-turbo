@@ -3,3 +3,5 @@ export * from "./patientInBoundService";
 export * from "./tocTemplateService";
 export * from "./patientSignupService";
 export * from "./patientVerifyService";
+export * from "./patientOutBoundService";
+export * from "./patientRxArchiveService";

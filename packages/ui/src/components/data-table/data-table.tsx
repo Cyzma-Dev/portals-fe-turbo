@@ -35,9 +35,10 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   toolbar: boolean
-  handleGridChange: (updater: Updater<PaginationState>) => void
   gridCount: number;
   loading?: boolean;
+  handleGridChange?: (updater: Updater<PaginationState>) => void
+  gridColor?: 'bg-background'
 }
 
 export function DataTable<TData, TValue>({
@@ -47,6 +48,7 @@ export function DataTable<TData, TValue>({
   handleGridChange,
   gridCount,
   loading,
+  gridColor,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState<RowSelectionState>({})
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
@@ -103,8 +105,9 @@ export function DataTable<TData, TValue>({
     pageSize: 10, //default page size
   });
 
-  React.useEffect(()=>{
-    handleGridChange(pagination)
+  React.useEffect(() => {
+    handleGridChange &&
+      handleGridChange(pagination);
   }, [pagination])
 
   const table = useReactTable({
@@ -141,7 +144,7 @@ export function DataTable<TData, TValue>({
   return (
     <div className="space-y-4">
       {toolbar ? <DataTableToolbar table={table} /> : ''}
-      <div className="rounded-md border">
+      <div className={`rounded-md border ${gridColor}`}>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -152,9 +155,9 @@ export function DataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   )
                 })}

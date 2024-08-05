@@ -7,7 +7,8 @@ import {
 import SideNav from './components/side-nav';
 import { ThemeProvider } from './components/theme-provider';
 import { AuthProvider, PatientDocumentsContainer, NotificationProvider, PatientNotesContainer, PatientProvider, ProtectRoute } from '@repo/common/common-library';
-import { AccountCreated, LoginContainer, PatientInBoundContainer, PermissionGate } from './pages';
+import { AccountCreated, LoginContainer, PatientInBoundContainer, PatientOutBoundContainer, PatientRxArchiveContainer, PermissionGate } from './pages';
+import { PatientClinicalConditionsContainer, PatientPrescriptionContainer } from '@repo/common/common-library';
 import AuthLayout from './pages/auth/authLayout';
 import { RoleConstant } from './utility';
 import { Toaster } from 'sonner';
@@ -55,6 +56,19 @@ function App() {
                     }
                   >
                     <Route
+                      path='/prescription'
+                      element={
+                        <ProtectRoute>
+                          <PermissionGate
+                            requiredPermission={[RoleConstant.patient.view]}
+                          >
+                            <PatientPrescriptionContainer />
+                          </PermissionGate>
+                        </ProtectRoute>
+
+                      }
+                    />
+                    <Route
                       path='/patient-notes'
                       element={
                         <ProtectRoute>
@@ -92,6 +106,46 @@ function App() {
                       }
                     />
                     <Route
+                      path='/outBound'
+                      element={
+                        <ProtectRoute>
+                          <PermissionGate
+                            requiredPermission={[RoleConstant.patient.view]}
+                          >
+                            <PatientOutBoundContainer />
+                          </PermissionGate>
+                        </ProtectRoute>
+
+                      }
+                    />
+                    <Route
+                      path='/rxArchive'
+                      element={
+                        <ProtectRoute>
+                          <PermissionGate
+                            requiredPermission={[RoleConstant.patient.view]}
+                          >
+                            <PatientRxArchiveContainer />
+                          </PermissionGate>
+                        </ProtectRoute>
+
+                      }
+                    />
+                    <Route
+                      path='/clinical-conditions'
+                      element={
+                        <ProtectRoute>
+                          <PermissionGate
+                            requiredPermission={[RoleConstant.patient.view]}
+                          >
+                            <PatientClinicalConditionsContainer />
+                          </PermissionGate>
+                        </ProtectRoute>
+
+                      }
+                    />
+
+                    <Route
                       path='/'
                       element={<AuthLayout />}
                     >
@@ -118,8 +172,8 @@ function App() {
                     />
                   </Route>
                   <Route
-                      path='/account-created'
-                      element={<AccountCreated />}
+                    path='/account-created'
+                    element={<AccountCreated />}
                   />
                 </Routes>
               </Router>

@@ -14,3 +14,5 @@ export * from "./notes-tooltip-viewer";
 export * from "./stepper";
 export * from "./data-time-picker";
 export * from "./passwordPolicyTicks";
+export * from "./Icon-wrapper";
+export * from "./multipleSelectorAutocomplete";
