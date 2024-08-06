@@ -3,16 +3,16 @@ import { GetPatientId } from '../../../../../../packages/common/src/helper-metho
 import { useCallback, useState } from 'react';
 import { PatientRxArchiveHook } from '../../../hooks';
 import CustomFilterStateManage from '../../../../../../packages/common/src/helper-methods/custom-filter';
-import { DocumentSkeleton } from '@repo/ui/shadcn';
 import PatientRxArchiveScreen from '../presentation/patientRxArchive';
 
 export const PatientRxArchiveContainer = () => {
 	const patient_id: number = GetPatientId();
 	const {
-		loading,
+		loading: isGridDataLoading,
 		RxArchiveListData,
 		queryString,
 		setQueryString,
+		gridCount,
 	} = PatientRxArchiveHook(patient_id)
 
 	const [filterOpen, setFilterOpen] = useState<boolean>(false);
@@ -59,18 +59,14 @@ export const PatientRxArchiveContainer = () => {
 	)
 
 	return (
-		!filterOpen && loading
-			?
-			<DocumentSkeleton
-				title='Rx Archive'
-			/>
-			:
-			<PatientRxArchiveScreen
-				RxArchiveListData={RxArchiveListData ? RxArchiveListData : []}
-				handleGridChange={handleGridChange}
-				handleFilterChange={handleFilterChange}
-				filterOpen={filterOpen}
-				setFilterOpen={setFilterOpen}
-			/>
+		<PatientRxArchiveScreen
+			RxArchiveListData={RxArchiveListData ? RxArchiveListData : []}
+			handleGridChange={handleGridChange}
+			handleFilterChange={handleFilterChange}
+			filterOpen={filterOpen}
+			setFilterOpen={setFilterOpen}
+			isGridDataLoading={isGridDataLoading}
+			gridCount={gridCount}
+		/>
 	);
 };

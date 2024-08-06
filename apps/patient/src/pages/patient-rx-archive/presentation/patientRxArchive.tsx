@@ -15,6 +15,8 @@ interface IPatientRxArchiveProps {
 	handleFilterChange: (field: string, operator: string, event: any) => void;
 	filterOpen: boolean
 	setFilterOpen: (data: boolean) => void
+	isGridDataLoading: boolean
+	gridCount: number
 }
 
 const PatientRxArchiveScreen = (props: IPatientRxArchiveProps) => {
@@ -59,14 +61,10 @@ const PatientRxArchiveScreen = (props: IPatientRxArchiveProps) => {
 	]
 
 	return (
-		<div
-			className='flex flex-col gap-4 w-full h-full'
-		>
+		<div className='flex flex-col gap-4 w-full h-full'>
 			<div className='flex gap-4 justify-content items-center text-xl font-bold'>
 				Rx Archive
-
 				<div className='flex gap-1'>
-
 					<Button variant="ghost" size="sm" className="flex gap-1" onClick={() => props.setFilterOpen(!props.filterOpen)}>
 						<Icons.listFilter className="h-4 w-4" />
 					</Button>
@@ -87,6 +85,8 @@ const PatientRxArchiveScreen = (props: IPatientRxArchiveProps) => {
 				columns={extendColumns}
 				toolbar={false}
 				handleGridChange={props.handleGridChange}
+				gridCount={props.gridCount}
+				loading={props.isGridDataLoading}
 			/>
 			<RxFullHistory
 				fullScreenDialog={fullScreenDialog}

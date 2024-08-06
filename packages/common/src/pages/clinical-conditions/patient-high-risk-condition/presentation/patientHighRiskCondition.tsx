@@ -14,6 +14,8 @@ interface IPatientHighRiskProps extends IHighRiskCommonProps {
 	handlePatientNoteDelete: (rec_id: number) => void;
 	filterOpen: boolean;
 	setFilterOpen: (data: boolean) => void
+	isGridDataLoading: boolean
+	gridCount: number
 }
 
 const PatientHighRiskConditionScreen = (props: IPatientHighRiskProps) => {
@@ -97,6 +99,8 @@ const PatientHighRiskConditionScreen = (props: IPatientHighRiskProps) => {
 				columns={extendColumns}
 				toolbar={false}
 				handleGridChange={props.handleGridChange}
+				gridCount={props.gridCount}
+				loading={props.isGridDataLoading}
 			/>
 		</div>
 	);

@@ -9,19 +9,19 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icons.home width="16" height="16" />,
   },
   {
-    title: 'Account Info',
-    path: '/account-info',
+    title: 'Basic Details',
+    path: '/basic-details',
     icon: <Icons.userRound width="16" height="16" />,
   },
   {
     title: 'Prescription',
     path: '/prescription',
-    icon: <Icons.settings width="16" height="16" />,
+    icon: <Icons.pill width="16" height="16" />,
   },
   {
     title: 'Clinical Conditions',
     path: '/clinical-conditions',
-    icon: <Icons.settings width="16" height="16" />,
+    icon: <Icons.hospital width="16" height="16" />,
   },
   {
     title: 'Notes',
@@ -41,25 +41,23 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
   {
     title: 'In-Bound',
     path: '/inBound',
-    icon: <Icons.billing width="16" height="16" />,
+    icon: <Icons.circleArrowDownIcon width="16" height="16" />,
+  },
+  {
+    title: 'Out-Bound',
+    path: '/outBound',
+    icon: <Icons.circleArrowUpIcon width="16" height="16" />,
+  },
+  {
+    title: 'Rx-Archive',
+    path: '/rxArchive',
+    icon: <Icons.archive width="16" height="16" />,
   },
   {
     title: 'Settings',
     path: '/settings',
     icon: <Icons.settings width="16" height="16" />,
   },
-  {
-    title: 'Out-Bound',
-    path: '/outBound',
-    icon: <Icons.settings width="16" height="16" />,
-  },
-  {
-    title: 'Rx-Archive',
-    path: '/rxArchive',
-    icon: <Icons.settings width="16" height="16" />,
-  },
-
-
   // {
   //   title: 'Projects',
   //   path: '/projects',

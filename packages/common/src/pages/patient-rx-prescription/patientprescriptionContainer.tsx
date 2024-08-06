@@ -6,9 +6,9 @@ export const PatientPrescriptionContainer = () => {
 
 
     return (
-        <>
+        <div>
             <PatientExpiringPrescriptionContainer />
             <PatientExpiredPrescriptionContainer />
-        </>
+        </div>
     );
 };

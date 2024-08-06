@@ -15,6 +15,8 @@ interface IPatientRxExpiredPrescriptionProps {
 	handleFilterChange: (field: string, operator: string, event: any) => void;
 	filterOpen: boolean
 	setFilterOpen: (data: boolean) => void
+	isGridDataLoading: boolean
+	gridCount: number
 }
 
 const ExpiredPrescriptionScreen = (props: IPatientRxExpiredPrescriptionProps) => {
@@ -102,6 +104,8 @@ const ExpiredPrescriptionScreen = (props: IPatientRxExpiredPrescriptionProps) =>
 				columns={extendColumns}
 				toolbar={false}
 				handleGridChange={props.handleGridChange}
+				gridCount={props.gridCount}
+				loading={props.isGridDataLoading}
 			/>
 			<ExpiredRxFullHistory
 				fullScreenDialog={fullScreenDialog}

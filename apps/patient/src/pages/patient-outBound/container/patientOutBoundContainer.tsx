@@ -2,7 +2,6 @@ import { IQueryString } from '@repo/common/common-library';
 import { GetPatientId } from '../../../../../../packages/common/src/helper-methods';
 import { useCallback } from 'react';
 import CustomFilterStateManage from '../../../../../../packages/common/src/helper-methods/custom-filter';
-import { DocumentSkeleton } from '@repo/ui/shadcn';
 import PatientOutBoundScreen from '../presentation/patientOutBound';
 import { PatientOutboundHook } from '../../../hooks';
 
@@ -12,7 +11,8 @@ export const PatientOutBoundContainer = () => {
 		outBoundListData,
 		setQueryString,
 		queryString,
-		loading
+		loading: isGridDataLoading,
+		gridCount,
 	} = PatientOutboundHook(patient_id)
 
 	const handleFilterChange = (field: string, operator: string, event: any) => {
@@ -56,16 +56,12 @@ export const PatientOutBoundContainer = () => {
 	)
 
 	return (
-		loading
-			?
-			<DocumentSkeleton
-				title='In Bound'
-			/>
-			:
-			<PatientOutBoundScreen
-				outBoundListData={outBoundListData ? outBoundListData : []}
-				handleGridChange={handleGridChange}
-				handleFilterChange={handleFilterChange}
-			/>
+		<PatientOutBoundScreen
+			outBoundListData={outBoundListData ? outBoundListData : []}
+			handleGridChange={handleGridChange}
+			handleFilterChange={handleFilterChange}
+			isGridDataLoading={isGridDataLoading}
+			gridCount={gridCount}
+		/>
 	);
 };

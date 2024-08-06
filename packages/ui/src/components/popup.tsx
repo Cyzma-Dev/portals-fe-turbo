@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dialog, DialogContent, DialogTitle } from '@radix-ui/react-dialog';
+import { Dialog, DialogContent, DialogTitle, DialogOverlay } from '@radix-ui/react-dialog';
 import { DialogHeader, } from '../shadcn/ui';
 import IconWrapper from './Icon-wrapper';
 import { Icons } from './icons';
@@ -9,11 +9,10 @@ interface IPopupProps {
     setFullScreenDialog: (data: boolean) => void;
     title?: string;
     children: React.ReactNode
-    multiTitle?: React.ReactNode
+    header?: React.ReactNode
 }
 
 export function Popup(props: IPopupProps) {
-
 
     return (
         <Dialog
@@ -23,16 +22,15 @@ export function Popup(props: IPopupProps) {
             {/* <DialogTrigger asChild={false}>
                 <Button variant="outline">Edit Profile</Button>
             </DialogTrigger> */}
-            <DialogContent className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-secondary p-6 m-6 rounded-lg shadow-lg z-20 overflow-auto h-auto w-auto">
-
-
+            <DialogOverlay className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50" />
+            <DialogContent className="w-full lg:w-fit z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-secondary p-6 pb-2 rounded-md">
                 <DialogHeader>
                     <DialogTitle className='font-bold flex justify-between'>
                         {props.title
                             ?
                             props.title
                             :
-                            props.multiTitle
+                            props.header
                         }
                         <IconWrapper
                             className="cursor-pointer hover:text-red hover:fill-redBackground hover:bg-redBackground"
@@ -47,7 +45,7 @@ export function Popup(props: IPopupProps) {
                         Make changes to your profile here. Click save when you're done.
                     </DialogDescription> */}
                 </DialogHeader>
-                <div>
+                <div className='my-4'>
                     {props.children}
                 </div>
                 {/* <DialogFooter>
