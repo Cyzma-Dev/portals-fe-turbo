@@ -54,7 +54,7 @@ const PatientOutBoundScreen = (props: IPatientOutBoundProps) => {
 								</IconWrapper>
 								:
 								<IconWrapper
-									className="cursor-pointer hover:text-blue hover:underline"
+									className="cursor-pointer hover:underline hover:text-blue"
 									onClick={async () => {
 										setPdfOpenLoading(true)
 										setClickedActionRowData(row.original)
