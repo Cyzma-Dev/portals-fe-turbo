@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { CommonService } from '../utility/service/commonService';
-import { IOptions } from '../utility';
+import { ICityOptions, IOptions } from '../utility';
 
 
 export const AddressCityOptionsHook = () => {
-    const [cityList, setCityList] = useState<IOptions[]>([]);
+    const [cityList, setCityList] = useState<ICityOptions[]>([]);
     const [stateBasedCityList, setStateBasedCityList] = useState<IOptions[]>([]);
     const [stateId, setStateId] = useState<number>(0);
     const [isCityLoading, setIsCityLoading] = useState<boolean>(false);

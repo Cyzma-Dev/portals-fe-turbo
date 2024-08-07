@@ -8,12 +8,12 @@ import { cn } from "@repo/ui/utils"
 import { SubjectTypeOptionsHook } from "../../../common-hooks/subjectTypeOptionsHook"
 import { INotesCommonProps } from "./types"
 
-interface IAddPatientNotes extends INotesCommonProps{
+interface IAddPatientNotes extends INotesCommonProps {
 }
 export const AddPatientNotes = (props: IAddPatientNotes) => {
     const { subjectOptionsData, fetchData } = SubjectTypeOptionsHook();
 
-    const [open, setOpen] = useState(false);
+    const [comboBoxOpen, setComboBoxOpen] = useState(false);
 
     useEffect(() => {
         // This effect will triggered to fetch notes subject options
@@ -32,8 +32,8 @@ export const AddPatientNotes = (props: IAddPatientNotes) => {
         },
     })
 
-    useEffect(()=>{
-        if(props.currentNotes && props.isEdit && props.sheetOpen){
+    useEffect(() => {
+        if (props.currentNotes && props.isEdit && props.sheetOpen) {
             form.reset(props.currentNotes)
         }
         if (!props.sheetOpen) {
@@ -44,7 +44,7 @@ export const AddPatientNotes = (props: IAddPatientNotes) => {
                 note_text: '',
             });
         }
-    },[props.currentNotes, props.sheetOpen])
+    }, [props.currentNotes, props.sheetOpen])
 
     return (
         <Sheet open={props.sheetOpen} onOpenChange={props.setSheetOpen}>
@@ -73,56 +73,56 @@ export const AddPatientNotes = (props: IAddPatientNotes) => {
                                             render={({ field }) => (
                                                 <FormItem className="flex flex-col">
                                                     <FormLabel className="text-base">Subject</FormLabel>
-                                                    <Popover open={open} onOpenChange={setOpen}>
+                                                    <Popover open={comboBoxOpen} onOpenChange={setComboBoxOpen}>
                                                         <PopoverTrigger asChild>
-                                                        <FormControl>
-                                                            <Button
-                                                                disabled={props.isBtnDisable}
-                                                                variant="outline"
-                                                                role="combobox"
-                                                                className={cn(
-                                                                    "w-full justify-between",
-                                                                    !field.value && "text-muted-foreground"
-                                                                )}
-                                                            >
-                                                            {field.value
-                                                                ? subjectOptionsData.find(
-                                                                    (language) => language.id === field.value
-                                                                )?.display_text
-                                                                : "Select Subject"}
-                                                            <Icons.chevronUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                                                            </Button>
-                                                        </FormControl>
+                                                            <FormControl>
+                                                                <Button
+                                                                    disabled={props.isBtnDisable}
+                                                                    variant="outline"
+                                                                    role="combobox"
+                                                                    className={cn(
+                                                                        "w-full justify-between",
+                                                                        !field.value && "text-muted-foreground"
+                                                                    )}
+                                                                >
+                                                                    {field.value
+                                                                        ? subjectOptionsData.find(
+                                                                            (language) => language.id === field.value
+                                                                        )?.display_text
+                                                                        : "Select Subject"}
+                                                                    <Icons.chevronUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                                                </Button>
+                                                            </FormControl>
                                                         </PopoverTrigger>
                                                         <PopoverContent className="w-[200px] p-0">
-                                                        <Command>
-                                                            <CommandInput placeholder="Search subject..." />
-                                                            <CommandEmpty>No language found.</CommandEmpty>
-                                                            <CommandGroup>
-                                                            {subjectOptionsData.map((subject) => (
-                                                                <CommandList key={subject.id}>
-                                                                    <CommandItem
-                                                                        key={subject.display_text}
-                                                                        value={subject.display_text}
-                                                                        onSelect={() => {
-                                                                            form.setValue("subject_id", subject.id)
-                                                                            setOpen(false)
-                                                                        }}
-                                                                    >
-                                                                    <Icons.check
-                                                                        className={cn(
-                                                                        "mr-2 h-4 w-4",
-                                                                        subject.id === field.value
-                                                                            ? "opacity-100"
-                                                                            : "opacity-0"
-                                                                        )}
-                                                                    />
-                                                                    {subject.display_text}
-                                                                    </CommandItem>
-                                                                </CommandList>
-                                                            ))}
-                                                            </CommandGroup>
-                                                        </Command>
+                                                            <Command>
+                                                                <CommandInput placeholder="Search subject..." />
+                                                                <CommandEmpty>No language found.</CommandEmpty>
+                                                                <CommandGroup>
+                                                                    {subjectOptionsData.map((subject) => (
+                                                                        <CommandList key={subject.id}>
+                                                                            <CommandItem
+                                                                                key={subject.display_text}
+                                                                                value={subject.display_text}
+                                                                                onSelect={() => {
+                                                                                    form.setValue("subject_id", subject.id)
+                                                                                    setComboBoxOpen(false)
+                                                                                }}
+                                                                            >
+                                                                                <Icons.check
+                                                                                    className={cn(
+                                                                                        "mr-2 h-4 w-4",
+                                                                                        subject.id === field.value
+                                                                                            ? "opacity-100"
+                                                                                            : "opacity-0"
+                                                                                    )}
+                                                                                />
+                                                                                {subject.display_text}
+                                                                            </CommandItem>
+                                                                        </CommandList>
+                                                                    ))}
+                                                                </CommandGroup>
+                                                            </Command>
                                                         </PopoverContent>
                                                     </Popover>
                                                     <FormMessage />
@@ -135,15 +135,15 @@ export const AddPatientNotes = (props: IAddPatientNotes) => {
                                                 control={form.control}
                                                 name="note_text"
                                                 render={({ field }) => (
-                                                <FormItem>
-                                                    <div className="space-y-0.5">
-                                                    <FormLabel className="text-base">Notes</FormLabel>
-                                                    </div>
-                                                    <FormControl>
-                                                    <Input disabled={props.isBtnDisable} placeholder="Notes" {...field} />
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
+                                                    <FormItem>
+                                                        <div className="space-y-0.5">
+                                                            <FormLabel className="text-base">Notes</FormLabel>
+                                                        </div>
+                                                        <FormControl>
+                                                            <Input disabled={props.isBtnDisable} placeholder="Notes" {...field} />
+                                                        </FormControl>
+                                                        <FormMessage />
+                                                    </FormItem>
                                                 )}
                                             />
                                         </div>
@@ -165,6 +165,6 @@ export const AddPatientNotes = (props: IAddPatientNotes) => {
                     </Form>
                 </div>
             </SheetContent>
-            </Sheet>
+        </Sheet>
     )
 }

@@ -6,7 +6,7 @@ export const AddressTypeOptionsHook = () => {
     const [loading, setLoading] = useState(true);
     const [addressOptionsData, setAddressOptionsData] = useState<IOptions[]>([]);
 
-    const fetchData = async () => {
+    const fetchAddressTypeData = async () => {
         try {
             setLoading(true);
             const result = await CommonService.getAddressTypeOptions();
@@ -18,5 +18,5 @@ export const AddressTypeOptionsHook = () => {
         }
     };
 
-    return { addressOptionsData, fetchData, loading };
+    return { addressOptionsData, fetchAddressTypeData, loading };
 };

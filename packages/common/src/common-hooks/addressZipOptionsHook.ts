@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { CommonService } from "../utility/service/commonService";
-import { IOptions } from "../utility";
+import { IZipOptions } from "../utility";
 
 
 export const AddressZipOptionsHook = () => {
-    const [zipCodeList, setZipCodeList] = useState<IOptions[]>([]);
-    const [cityBasedZipCodeList, setCityBasedZipCodeList] = useState<IOptions[]>([]);
+    const [zipCodeList, setZipCodeList] = useState<IZipOptions[]>([]);
+    const [cityBasedZipCodeList, setCityBasedZipCodeList] = useState<IZipOptions[]>([]);
     const [cityId, setCityId] = useState<number>(0);
     const [isZipLoading, setIsZipLoading] = useState<boolean>(false);
     useEffect(() => {

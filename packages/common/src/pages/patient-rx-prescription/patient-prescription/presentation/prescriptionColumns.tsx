@@ -3,7 +3,7 @@ import { DataTableColumnHeader } from "@repo/ui/shadcn";
 import { CustomColumnDef } from "../../../../utility";
 
 
-export const expiringPrescriptionColumns: CustomColumnDef<any>[] = [
+export const prescriptionColumns: CustomColumnDef<any>[] = [
   {
     accessorKey: "rx_number",
     toFilter: true,

@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { IQueryString, MessageConstant, PatientPrescriptionListService } from "../utility";
 import { toast } from "sonner";
 import { apiCallTime } from "../helper-methods";
+import { IPatientPrescription } from "../pages/patient-rx-prescription/patient-prescription";
 
 export const PrescriptionListHook = (patient_id: number) => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    const [prescriptionData, setPrescriptionData] = useState<IPrescriptions[] | []>([]);
+    const [prescriptionData, setPrescriptionData] = useState<IPatientPrescription[] | []>([]);
     const [gridCount, setGridCount] = useState(0);
     const [queryString, setQueryString] = useState<IQueryString>({
         filter: {

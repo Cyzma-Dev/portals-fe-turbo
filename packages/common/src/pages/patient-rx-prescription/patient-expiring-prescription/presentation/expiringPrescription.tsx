@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CustomColumnDef } from "../../../../utility";
-import { Button, DataTable, DataTableColumnHeader, Icons } from "@repo/ui/shadcn";
+import { Button, DataTable, DataTableColumnHeader, Icons, NotesTooltipViewer } from "@repo/ui/shadcn";
 import IconWrapper from "../../../../../../ui/src/components/Icon-wrapper";
 import FilterFields from "../../../../../../ui/src/components/filter-fields";
 import { IPatientExpiringPrescription } from "./types";
@@ -51,6 +51,25 @@ const ExpiringPrescriptionScreen = (props: IPatientRxExpiringPrescriptionProps) 
 					<Icons.add className="h-4 w-4" />
 				</IconWrapper>,
 
+			enableSorting: true,
+			enableHiding: false,
+		},
+		{
+			accessorKey: "refill_request_status",
+			header: ({ column }) => (
+				<DataTableColumnHeader column={column} title="Status" />
+			),
+			cell: ({ row }) =>
+				<>
+					{
+						row.getValue("refill_request_status") != null &&
+						<NotesTooltipViewer
+							header={`Reason for ${row.getValue("refill_request_status")}`}
+							Content={row.original.pharmacy_note}
+							statusValue={row.getValue("refill_request_status")}
+						/>
+					}
+				</>,
 			enableSorting: true,
 			enableHiding: false,
 		},

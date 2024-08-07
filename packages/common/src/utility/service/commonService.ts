@@ -93,6 +93,16 @@ export class CommonService {
 		return response;
 	};
 
+
+
+	static getActiveAddressOptions = async (patientId: number): Promise<IPagedResponse<IOptions[]>> => {
+		const response = (await BaseService.get<IPagedResponse<IOptions[]>>(
+			APIConstant.active_address_list.replace("<int:patient_id>", patientId + ""),
+			true
+		)) || [];
+		return response;
+	};
+
 }
 
 

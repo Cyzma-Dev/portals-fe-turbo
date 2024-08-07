@@ -75,6 +75,8 @@ import {
   Eye,
   EyeOff,
   MessageSquareMore,
+  Square,
+  SquareCheck,
 } from 'lucide-react';
 
 export const Icons = {
@@ -152,7 +154,8 @@ export const Icons = {
   eye: Eye,
   eyeOff: EyeOff,
   messageSquareMore: MessageSquareMore,
-
+  square: Square,
+  squareCheck: SquareCheck,
   checkSVG: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

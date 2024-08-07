@@ -225,14 +225,16 @@ function Calendar({
   classNames,
   showOutsideDays = true,
   yearRange = 50,
+  minDate,
   ...props
-}: CalendarProps & { yearRange?: number }) {
+}: CalendarProps & { yearRange?: number, minDate?: Date }) {
   const MONTHS = React.useMemo(() => genMonths(props.locale || enUS), []);
   const YEARS = React.useMemo(() => genYears(props.locale || enUS, yearRange), []);
 
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
+      fromDate={minDate}
       className={cn('p-3', className)}
       classNames={{
         months: 'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0 justify-center',
@@ -597,6 +599,7 @@ type DateTimePickerProps = {
   /** showing `AM/PM` or not. */
   hourCycle?: 12 | 24;
   placeholder?: string;
+  minDate?: Date;
   /**
    * The year range will be: `This year + yearRange` and `this year - yearRange`.
    * Default is 50.
