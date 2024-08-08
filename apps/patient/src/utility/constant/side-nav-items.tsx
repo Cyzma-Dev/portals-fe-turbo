@@ -16,12 +16,12 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
   {
     title: 'Prescription',
     path: '/prescription',
-    icon: <Icons.settings width="16" height="16" />,
+    icon: <Icons.pill width="16" height="16" />,
   },
   {
     title: 'Clinical Conditions',
     path: '/clinical-conditions',
-    icon: <Icons.settings width="16" height="16" />,
+    icon: <Icons.hospital width="16" height="16" />,
   },
   {
     title: 'Notes',
@@ -41,7 +41,7 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
   {
     title: 'In-Bound',
     path: '/inBound',
-    icon: <Icons.billing width="16" height="16" />,
+    icon: <Icons.fileInput width="16" height="16" />,
   },
   {
     title: 'Settings',
@@ -51,12 +51,12 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
   {
     title: 'Out-Bound',
     path: '/outBound',
-    icon: <Icons.settings width="16" height="16" />,
+    icon: <Icons.fileOutput width="16" height="16" />,
   },
   {
     title: 'Rx-Archive',
     path: '/rxArchive',
-    icon: <Icons.settings width="16" height="16" />,
+    icon: <Icons.archive width="16" height="16" />,
   },
 
 

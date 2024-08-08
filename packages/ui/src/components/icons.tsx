@@ -77,6 +77,11 @@ import {
   MessageSquareMore,
   Square,
   SquareCheck,
+  FileOutput,
+  FileInput,
+  Archive,
+  Hospital,
+  Pill,
 } from 'lucide-react';
 
 export const Icons = {
@@ -156,6 +161,12 @@ export const Icons = {
   messageSquareMore: MessageSquareMore,
   square: Square,
   squareCheck: SquareCheck,
+  fileOutput: FileOutput,
+  fileInput: FileInput,
+  archive: Archive,
+  hospital: Hospital,
+  pill: Pill,
+
   checkSVG: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
