@@ -22,14 +22,14 @@ export const PatientDocumentsContainer = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 	const [isBtnDisable, setIsBtnDisable] = useState<boolean>(false)
 	const [sheetOpen, setSheetOpen] = useState<boolean>(false);
-	const [currentNotes, setCurrentNotes] = useState<IPatientDocument>()
+	const [currentDocument, setCurrentDocument] = useState<IPatientDocument>()
 	const [viewerFile, setViewerFile] = useState<IUploadDocument | null>(null);
 	const [previewSheetOpen, setPreviewSheetOpen] = useState<boolean>(false);
 	const [filterOpen, setFilterOpen] = useState<boolean>(false);
 
 	const closeSheet = () => {
 		setSheetOpen(false)
-		setCurrentNotes(undefined)
+		setCurrentDocument(undefined)
 	}
 
 	const openSheet = () => {
@@ -37,7 +37,7 @@ export const PatientDocumentsContainer = () => {
 	}
 
 	const handleEdit = (row: IPatientDocument) => {
-		setCurrentNotes(row)
+		setCurrentDocument(row)
 		setIsEdit(true)
 		openSheet()
 	}
@@ -48,10 +48,10 @@ export const PatientDocumentsContainer = () => {
 			setIsLoading(true)
 			if (isEdit) {
 				const response = await PatientDocumentsService.updatePatientDocument(
-					currentNotes!.id,
+					currentDocument!.id,
 					{
 						...formData,
-						id: currentNotes!.id,
+						id: currentDocument!.id,
 					}
 				)
 				response?.message && toast.success(response?.message)
@@ -181,8 +181,8 @@ export const PatientDocumentsContainer = () => {
 			openSheet={openSheet}
 			handleSubmit={handleSubmit}
 			handleEdit={handleEdit}
-			currentNotes={currentNotes}
-			setCurrentNotes={setCurrentNotes}
+			currentDocument={currentDocument}
+			setCurrentDocument={setCurrentDocument}
 			filterOpen={filterOpen}
 			setFilterOpen={setFilterOpen}
 			handlePreviewDocuments={handlePreviewDocuments}

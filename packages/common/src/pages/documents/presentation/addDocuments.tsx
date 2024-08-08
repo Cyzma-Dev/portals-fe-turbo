@@ -42,19 +42,19 @@ export const AddDocumentsNotes = (props: IDocumentsNotesProps) => {
     })
 
     useEffect(() => {
-        if (props.currentNotes && props.isEdit && props.sheetOpen) {
-            form.reset(props.currentNotes)
+        if (props.currentDocument && props.isEdit && props.sheetOpen) {
+            form.reset(props.currentDocument)
         }
         if (!props.sheetOpen) {
             props.setIsEdit(false)
-            props.setCurrentNotes(undefined)
+            props.setCurrentDocument(undefined)
             form.reset({
                 document_name: '',
                 subject: 0,
                 note: '',
             });
         }
-    }, [props.currentNotes, props.sheetOpen])
+    }, [props.currentDocument, props.sheetOpen])
 
     const handleFileChange = (file: File, binaryData: any) => {
         if (

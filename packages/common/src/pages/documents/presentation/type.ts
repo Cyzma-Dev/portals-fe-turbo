@@ -52,8 +52,8 @@ export interface IDocumentsCommonProps {
   sheetOpen: boolean
   setSheetOpen: React.Dispatch<React.SetStateAction<boolean>>
   openSheet: () => void
-  currentNotes: IPatientDocument | undefined
-  setCurrentNotes: React.Dispatch<React.SetStateAction<IPatientDocument | undefined>>
+  currentDocument: IPatientDocument | undefined
+  setCurrentDocument: React.Dispatch<React.SetStateAction<IPatientDocument | undefined>>
 }
 
 export interface ICreateDecomentst {

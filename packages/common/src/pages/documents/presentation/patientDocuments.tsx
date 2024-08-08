@@ -25,6 +25,7 @@ interface IDocumentsNotesProps extends IDocumentsCommonProps {
 }
 
 const PatientDocumentScreen = (props: IDocumentsNotesProps) => {
+	console.log(props.patientDocumentsData, "patientDocumentsDatapatientDocumentsData")
 	const [recId, setRecId] = useState<number | null>(null);
 
 	const extendColumns: CustomColumnDef<any>[] = [
@@ -108,8 +109,8 @@ const PatientDocumentScreen = (props: IDocumentsNotesProps) => {
 				isEdit={props.isEdit}
 				setIsEdit={props.setIsEdit}
 				openSheet={props.openSheet}
-				currentNotes={props.currentNotes}
-				setCurrentNotes={props.setCurrentNotes}
+				currentDocument={props.currentDocument}
+				setCurrentDocument={props.setCurrentDocument}
 				handleSubmit={props.handleSubmit}
 				isLoading={props.isLoading}
 				isBtnDisable={props.isBtnDisable}
