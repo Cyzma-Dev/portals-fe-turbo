@@ -3,10 +3,7 @@ import { useState } from 'react'
 import { Controller } from 'react-hook-form'
 import Dropzone from 'react-dropzone'
 import { Icons } from './icons'
-import { Alert, AlertDescription } from '../shadcn/ui/alert'
 import clsx from 'clsx'
-
-
 
 interface FileUploadProps {
     name: string
@@ -71,20 +68,7 @@ export const FileUpload = ({ name, control, onChange, disabled = false }: FileUp
                                     <input {...getInputProps()} />
                                     <div
                                         className={clsx('flex justify-center p-4 w-full h-28 border border-secondary rounded-sm cursor-pointer', {
-
                                         })}
-                                        // style={{
-                                        //     cursor: disabled ? 'not-allowed' : 'pointer',
-                                        //     width: '100%',
-                                        //     height: 'max-content',
-                                        //     borderRadius: '4px',
-                                        //     border: '1px dashed ',
-                                        //     justifyContent: 'center',
-                                        //     textAlign: 'center',
-                                        //     marginBottom: '1rem',
-                                        //     padding: '20px 0px 10px 0px',
-                                        //     // color: 'rgba(0,0,0,0.7)'
-                                        // }}
                                     >
 
                                         {fileSelect
@@ -113,15 +97,14 @@ export const FileUpload = ({ name, control, onChange, disabled = false }: FileUp
 
             {
                 file && handleValidFileType(file) && (
-                    <>
-                        <Alert>
-                            <p> <Icons.x style={{ fontSize: '3em' }} onClick={clearFile} /></p>
-                            <AlertDescription>
-                                <p>{file?.name}</p>
-                                <p>{`${file?.size} Kb`}</p>
-                            </AlertDescription>
-                        </Alert>
-                    </>
+                    <div className='border border-secondary p-4 flex items-center justify-between'>
+                        <div className='text-sm'>
+                            <span>{file?.name}</span>
+                            &nbsp;&nbsp;
+                            <span className='text-xs'>{`${file?.size} Kb`}</span>
+                        </div>
+                        <Icons.x className='cursor-pointer h-4 w-4' onClick={clearFile} />
+                    </div>
                 )
             }
         </>

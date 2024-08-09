@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import { ICreatePatientHighRisk, IPatientHighRisk } from '../presentation/types';
 import { toast } from 'sonner';
-import { DocumentSkeleton } from '@repo/ui/shadcn';
 import CustomFilterStateManage from '../../../../helper-methods/custom-filter';
 import { GetPatientId } from '../../../../helper-methods';
 import { PatientHighRiskConditionsHook } from '../../../../common-hooks';
@@ -15,7 +14,8 @@ export const PatientHighRiskContainer = () => {
 		fetchPatientHighRiskData,
 		setQueryString,
 		queryString,
-		isLoading: highRiskConditionData,
+		isLoading: isGridDataLoading,
+		gridCount,
 	} = PatientHighRiskConditionsHook(patient_id)
 	const [isEdit, setIsEdit] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -144,30 +144,28 @@ export const PatientHighRiskContainer = () => {
 	)
 
 	return (
-		!filterOpen && highRiskConditionData
-			?
-			<DocumentSkeleton title='High Risk Conditions' />
-			:
-			<PatientHighRiskConditionScreen
-				patientHighRiskData={patientHighRiskData ? patientHighRiskData : []}
-				handleGridChange={handleGridChange}
-				handleFilterChange={handleFilterChange}
-				handlePatientNoteDelete={handlePatientNoteDelete}
-				isEdit={isEdit}
-				setIsEdit={setIsEdit}
-				isLoading={isLoading}
-				setIsLoading={setIsLoading}
-				isBtnDisable={isBtnDisable}
-				setIsBtnDisable={setIsBtnDisable}
-				sheetOpen={sheetOpen}
-				setSheetOpen={setSheetOpen}
-				openSheet={openSheet}
-				handleSubmit={handleSubmit}
-				handleEdit={handleEdit}
-				currentHighRiskCondition={currentHighRiskCondition}
-				setCurrentHighRiskCondition={setCurrentHighRiskCondition}
-				filterOpen={filterOpen}
-				setFilterOpen={setFilterOpen}
-			/>
+		<PatientHighRiskConditionScreen
+			patientHighRiskData={patientHighRiskData ? patientHighRiskData : []}
+			handleGridChange={handleGridChange}
+			handleFilterChange={handleFilterChange}
+			handlePatientNoteDelete={handlePatientNoteDelete}
+			isEdit={isEdit}
+			setIsEdit={setIsEdit}
+			isLoading={isLoading}
+			setIsLoading={setIsLoading}
+			isBtnDisable={isBtnDisable}
+			setIsBtnDisable={setIsBtnDisable}
+			sheetOpen={sheetOpen}
+			setSheetOpen={setSheetOpen}
+			openSheet={openSheet}
+			handleSubmit={handleSubmit}
+			handleEdit={handleEdit}
+			currentHighRiskCondition={currentHighRiskCondition}
+			setCurrentHighRiskCondition={setCurrentHighRiskCondition}
+			filterOpen={filterOpen}
+			setFilterOpen={setFilterOpen}
+			isGridDataLoading={isGridDataLoading}
+			gridCount={gridCount}
+		/>
 	);
 };

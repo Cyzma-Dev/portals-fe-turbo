@@ -1,4 +1,3 @@
-import { DocumentSkeleton } from "@repo/ui/shadcn";
 import { ExpiredPrescriptionListHook } from "../../../../common-hooks";
 import { GetPatientId } from "../../../../helper-methods";
 import { IQueryString } from "../../../../utility";
@@ -10,10 +9,11 @@ import ExpiredPrescriptionScreen from "../presentation/expiredPrescription";
 export const PatientExpiredPrescriptionContainer = () => {
 	const patient_id: number = GetPatientId();
 	const {
-		isLoading,
+		isLoading: isGridDataLoading,
 		expiredPrescriptionData,
 		queryString,
 		setQueryString,
+		gridCount,
 	} = ExpiredPrescriptionListHook(patient_id)
 
 	const [filterOpen, setFilterOpen] = useState<boolean>(false);
@@ -60,18 +60,14 @@ export const PatientExpiredPrescriptionContainer = () => {
 	)
 
 	return (
-		!filterOpen && isLoading
-			?
-			<DocumentSkeleton
-				title='Expired Prescriptions'
-			/>
-			:
-			<ExpiredPrescriptionScreen
-				expiredPrescriptionData={expiredPrescriptionData ? expiredPrescriptionData : []}
-				handleGridChange={handleGridChange}
-				handleFilterChange={handleFilterChange}
-				filterOpen={filterOpen}
-				setFilterOpen={setFilterOpen}
-			/>
+		<ExpiredPrescriptionScreen
+			expiredPrescriptionData={expiredPrescriptionData ? expiredPrescriptionData : []}
+			handleGridChange={handleGridChange}
+			handleFilterChange={handleFilterChange}
+			filterOpen={filterOpen}
+			setFilterOpen={setFilterOpen}
+			isGridDataLoading={isGridDataLoading}
+			gridCount={gridCount}
+		/>
 	);
 };

@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import { ICreatePatientAllergies, IPatientAllergies } from '../presentation/types';
 import { toast } from 'sonner';
-import { DocumentSkeleton } from '@repo/ui/shadcn';
 import CustomFilterStateManage from '../../../../helper-methods/custom-filter';
 import { GetPatientId } from '../../../../helper-methods';
 import { PatientAllergiesHook } from '../../../../common-hooks';
@@ -15,7 +14,8 @@ export const PatientAllergiesContainer = () => {
 		fetchPatientAllergies,
 		setQueryString,
 		queryString,
-		isLoading: isLoadingAllergies,
+		isLoading: isGridDataLoading,
+		gridCount
 	} = PatientAllergiesHook(patient_id);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -143,30 +143,28 @@ export const PatientAllergiesContainer = () => {
 	);
 
 	return (
-		!filterOpen && isLoadingAllergies
-			?
-			<DocumentSkeleton title='Allergies' />
-			:
-			<PatientAllergiesScreen
-				patientAllergiesData={patientAllergiesData ? patientAllergiesData : []}
-				handleGridChange={handleGridChange}
-				handleFilterChange={handleFilterChange}
-				handlePatientNoteDelete={handlePatientNoteDelete}
-				isEdit={isEdit}
-				setIsEdit={setIsEdit}
-				isLoading={isLoading}
-				setIsLoading={setIsLoading}
-				isBtnDisable={isBtnDisable}
-				setIsBtnDisable={setIsBtnDisable}
-				sheetOpen={sheetOpen}
-				setSheetOpen={setSheetOpen}
-				openSheet={openSheet}
-				handleSubmit={handleSubmit}
-				handleEdit={handleEdit}
-				currentAllergies={currentAllergies}
-				setCurrentAllergies={setCurrentAllergies}
-				filterOpen={filterOpen}
-				setFilterOpen={setFilterOpen}
-			/>
+		<PatientAllergiesScreen
+			patientAllergiesData={patientAllergiesData ? patientAllergiesData : []}
+			handleGridChange={handleGridChange}
+			handleFilterChange={handleFilterChange}
+			handlePatientNoteDelete={handlePatientNoteDelete}
+			isEdit={isEdit}
+			setIsEdit={setIsEdit}
+			isLoading={isLoading}
+			setIsLoading={setIsLoading}
+			isBtnDisable={isBtnDisable}
+			setIsBtnDisable={setIsBtnDisable}
+			sheetOpen={sheetOpen}
+			setSheetOpen={setSheetOpen}
+			openSheet={openSheet}
+			handleSubmit={handleSubmit}
+			handleEdit={handleEdit}
+			currentAllergies={currentAllergies}
+			setCurrentAllergies={setCurrentAllergies}
+			filterOpen={filterOpen}
+			setFilterOpen={setFilterOpen}
+			isGridDataLoading={isGridDataLoading}
+			gridCount={gridCount}
+		/>
 	);
 };

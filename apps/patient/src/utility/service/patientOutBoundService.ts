@@ -31,7 +31,6 @@ export class PatientOutBoundService {
     static getTemplateData = async (
         templateRecordId: string
     ): Promise<IResponse<IOutBoundList>> => {
-        console.log(templateRecordId, "templateRecordId")
         const response = await BaseService.get<IResponse<IOutBoundList>>(
             `${APIConstant.patient_inbound_list.replace(
                 '<str:rec_id>',

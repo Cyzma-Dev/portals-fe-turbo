@@ -79,7 +79,7 @@ const PatientInBoundScreen = (props: IPatientInBoundProps) => {
 								setClickedActionRowData(row.original)
 							}}
 						>
-							<Icons.circleArrowDown className="h-5 w-5" />
+							<Icons.circleArrowDownIcon className="h-5 w-5" />
 						</IconWrapper>
 
 					</div>
@@ -87,7 +87,6 @@ const PatientInBoundScreen = (props: IPatientInBoundProps) => {
 			},
 		},
 		...PatientInBoundColumns,
-
 	]
 
 	return (
@@ -96,7 +95,6 @@ const PatientInBoundScreen = (props: IPatientInBoundProps) => {
 		>
 			<div className='flex gap-4 justify-content items-center text-xl font-bold'>
 				In Bound
-
 				<div className='flex gap-1'>
 
 					<Button variant="ghost" size="sm" className="flex gap-1" onClick={() => props.setFilterOpen(!props.filterOpen)}>

@@ -76,9 +76,8 @@ const PatientDocumentScreen = (props: IDocumentsProps) => {
 	]
 
 	return (
-
 		<div
-			className='flex flex-col gap-4 w-full h-full'
+			className='flex flex-col gap-4 w-full'
 		>
 			<div className='flex gap-4 justify-content items-center text-md font-bold'>
 				Documents

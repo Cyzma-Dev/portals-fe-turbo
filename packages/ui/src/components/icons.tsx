@@ -69,7 +69,6 @@ import {
   ArrowDownToLine,
   ScanEye,
   CircleCheckBig,
-  CircleArrowDown,
   Timer,
   SendHorizontal,
   Eye,
@@ -79,9 +78,12 @@ import {
   SquareCheck,
   FileOutput,
   FileInput,
-  Archive,
-  Hospital,
   Pill,
+  Hospital,
+  CircleArrowUpIcon,
+  CircleArrowDownIcon,
+  Archive,
+  Fullscreen,
 } from 'lucide-react';
 
 export const Icons = {
@@ -153,7 +155,6 @@ export const Icons = {
   downloadArrow: ArrowDownToLine,
   scanEye: ScanEye,
   circleCheckBig: CircleCheckBig,
-  circleArrowDown: CircleArrowDown,
   timer: Timer,
   sendHorizontal: SendHorizontal,
   eye: Eye,
@@ -166,7 +167,9 @@ export const Icons = {
   archive: Archive,
   hospital: Hospital,
   pill: Pill,
-
+  circleArrowUpIcon: CircleArrowUpIcon,
+  circleArrowDownIcon: CircleArrowDownIcon,
+  fullScreen: Fullscreen,
   checkSVG: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

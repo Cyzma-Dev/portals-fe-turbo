@@ -7,14 +7,14 @@ import { IPatientExpiringPrescription } from "./types";
 import ExpiringRxFullHistory from "./expiringRxFullHistory";
 import { expiringPrescriptionColumns } from "./expiringPrescriptionColumns";
 
-
-
 interface IPatientRxExpiringPrescriptionProps {
 	expiringPrescriptionData: IPatientExpiringPrescription[];
 	handleGridChange: (event: any) => void;
 	handleFilterChange: (field: string, operator: string, event: any) => void;
 	filterOpen: boolean
 	setFilterOpen: (data: boolean) => void
+	isGridDataLoading: boolean
+	gridCount: number
 }
 
 const ExpiringPrescriptionScreen = (props: IPatientRxExpiringPrescriptionProps) => {
@@ -106,6 +106,8 @@ const ExpiringPrescriptionScreen = (props: IPatientRxExpiringPrescriptionProps) 
 				columns={extendColumns}
 				toolbar={false}
 				handleGridChange={props.handleGridChange}
+				gridCount={props.gridCount}
+				loading={props.isGridDataLoading}
 			/>
 			<ExpiringRxFullHistory
 				fullScreenDialog={fullScreenDialog}

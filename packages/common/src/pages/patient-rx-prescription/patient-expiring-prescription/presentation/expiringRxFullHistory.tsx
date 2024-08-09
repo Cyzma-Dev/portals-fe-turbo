@@ -7,11 +7,10 @@ interface IRxFullHistoryProps {
     setFullScreenDialog: (data: boolean) => void
     refillHeaderDetails: any
     fillData: any[]
-
 }
 
 function ExpiringRxFullHistory(props: IRxFullHistoryProps) {
-
+    const gridCount = props.fillData.length
 
     const dataTableColumns: CustomColumnDef<any>[] = [
         {
@@ -97,30 +96,35 @@ function ExpiringRxFullHistory(props: IRxFullHistoryProps) {
         }
     ]
 
+    const Header = () => {
+        return(
+            <div className="flex gap-16 font-bold mb-6">
+                <h2 className='text-xl'>Full History</h2>
+                <div>
+                    <h1 className='text-text-base'>Rx Number</h1>
+                    <span className='text-blue text-sm'>{props.refillHeaderDetails?.rx_number}</span>
+                </div>
+                <div>
+                    <h1 className='text-text-base'>Drug Name</h1>
+                    <span className='text-blue text-sm'>{props.refillHeaderDetails?.drug_name}</span>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <Popup
             fullScreenDialog={props.fullScreenDialog}
             setFullScreenDialog={props.setFullScreenDialog}
             // title="Preview"
-            multiTitle={
-                <div className="flex gap-16 font-bold mb-6">
-                    <h2 className='text-xl'>Full History</h2>
-                    <div>
-                        <h1 className='text-text-base'>Rx Number</h1>
-                        <span className='text-blue text-sm'>{props.refillHeaderDetails?.rx_number}</span>
-                    </div>
-                    <div>
-                        <h1 className='text-text-base'>Drug Name</h1>
-                        <span className='text-blue text-sm'>{props.refillHeaderDetails?.drug_name}</span>
-                    </div>
-                </div>
-            }
+            header={<Header/>}
         >
             <DataTable
                 data={props.fillData}
                 columns={dataTableColumns}
                 toolbar={false}
                 gridColor='bg-background'
+                gridCount={gridCount}
             />
         </Popup>
     )

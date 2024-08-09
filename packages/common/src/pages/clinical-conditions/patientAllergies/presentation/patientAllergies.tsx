@@ -14,6 +14,8 @@ interface IPatientAllergiesProps extends IAllergiesCommonProps {
 	handlePatientNoteDelete: (rec_id: number) => void;
 	filterOpen: boolean;
 	setFilterOpen: (data: boolean) => void
+	isGridDataLoading: boolean
+	gridCount: number
 }
 
 const PatientAllergiesScreen = (props: IPatientAllergiesProps) => {
@@ -97,6 +99,8 @@ const PatientAllergiesScreen = (props: IPatientAllergiesProps) => {
 				columns={extendColumns}
 				toolbar={false}
 				handleGridChange={props.handleGridChange}
+				gridCount={props.gridCount}
+				loading={props.isGridDataLoading}
 			/>
 		</div>
 	);

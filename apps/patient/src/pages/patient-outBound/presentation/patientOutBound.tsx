@@ -12,6 +12,8 @@ interface IPatientOutBoundProps {
 	outBoundListData: IOutBoundList[];
 	handleGridChange: (event: any) => void;
 	handleFilterChange: (field: string, operator: string, event: any) => void;
+	isGridDataLoading: boolean
+	gridCount: number
 }
 
 const PatientOutBoundScreen = (props: IPatientOutBoundProps) => {
@@ -52,7 +54,7 @@ const PatientOutBoundScreen = (props: IPatientOutBoundProps) => {
 								</IconWrapper>
 								:
 								<IconWrapper
-									className="cursor-pointer hover:text-blue hover:underline"
+									className="cursor-pointer hover:underline hover:text-blue"
 									onClick={async () => {
 										setPdfOpenLoading(true)
 										setClickedActionRowData(row.original)
@@ -74,7 +76,7 @@ const PatientOutBoundScreen = (props: IPatientOutBoundProps) => {
 								setClickedActionRowData(row.original)
 							}}
 						>
-							<Icons.circleArrowDown className="h-5 w-5" />
+							<Icons.circleArrowDownIcon className="h-5 w-5" />
 						</IconWrapper>
 
 					</div>
@@ -112,6 +114,8 @@ const PatientOutBoundScreen = (props: IPatientOutBoundProps) => {
 				columns={extendColumns}
 				toolbar={false}
 				handleGridChange={props.handleGridChange}
+				gridCount={props.gridCount}
+				loading={props.isGridDataLoading}
 			/>
 			<DownloadPdf
 				fullScreenDialog={fullScreenDialog}

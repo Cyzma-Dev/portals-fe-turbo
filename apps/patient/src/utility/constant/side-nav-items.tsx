@@ -9,8 +9,8 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icons.home width="16" height="16" />,
   },
   {
-    title: 'Account Info',
-    path: '/account-info',
+    title: 'Basic Details',
+    path: '/basic-details',
     icon: <Icons.userRound width="16" height="16" />,
   },
   {
@@ -44,11 +44,6 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icons.fileInput width="16" height="16" />,
   },
   {
-    title: 'Settings',
-    path: '/settings',
-    icon: <Icons.settings width="16" height="16" />,
-  },
-  {
     title: 'Out-Bound',
     path: '/outBound',
     icon: <Icons.fileOutput width="16" height="16" />,
@@ -58,8 +53,11 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     path: '/rxArchive',
     icon: <Icons.archive width="16" height="16" />,
   },
-
-
+  {
+    title: 'Settings',
+    path: '/settings',
+    icon: <Icons.settings width="16" height="16" />,
+  },
   // {
   //   title: 'Projects',
   //   path: '/projects',

@@ -17,7 +17,6 @@ export const PatientInBoundContainer = () => {
 
 	const [filterOpen, setFilterOpen] = useState<boolean>(false);
 
-
 	const handleFilterChange = (field: string, operator: string, event: any) => {
 		const filteredData = CustomFilterStateManage(
 			queryString,

@@ -7,12 +7,10 @@ interface IRxFullHistoryProps {
     setFullScreenDialog: (data: boolean) => void
     refillHeaderDetails: any
     fillData: any[]
-
 }
 
 function RxFullHistory(props: IRxFullHistoryProps) {
-
-
+    const gridCount = props.fillData.length
     const dataTableColumns: CustomColumnDef<any>[] = [
         {
             accessorKey: "fill_number",
@@ -78,31 +76,36 @@ function RxFullHistory(props: IRxFullHistoryProps) {
             enableHiding: false,
         },
     ]
-
+    
+    const Header = () => {
+        return(
+            <div className="flex gap-12 font-bold mb-4 w-full">
+                <h2 className='text-lg'>Fill History</h2>
+                <div className='flex flex-col justify-start items-start'>
+                    <span>Rx Number</span>
+                    <span className='text-blue text-sm'>{props.refillHeaderDetails?.rx_number}</span>
+                </div>
+                <div className='flex flex-col justify-start items-start'>
+                    <h1 className='text-text-base'>Drug Name</h1>
+                    <span className='text-blue text-sm'>{props.refillHeaderDetails?.drug_name}</span>
+                </div>
+            </div>
+        )
+    }
+    
     return (
         <Popup
             fullScreenDialog={props.fullScreenDialog}
             setFullScreenDialog={props.setFullScreenDialog}
             // title="Preview"
-            multiTitle={
-                <div className="flex gap-16 font-bold mb-6">
-                    <h2 className='text-xl'>Full History</h2>
-                    <div>
-                        <h1 className='text-text-base'>Rx Number</h1>
-                        <span className='text-blue text-sm'>{props.refillHeaderDetails?.rx_number}</span>
-                    </div>
-                    <div>
-                        <h1 className='text-text-base'>Drug Name</h1>
-                        <span className='text-blue text-sm'>{props.refillHeaderDetails?.drug_name}</span>
-                    </div>
-                </div>
-            }
+            header={<Header/>}
         >
             <DataTable
                 data={props.fillData}
                 columns={dataTableColumns}
                 toolbar={false}
                 gridColor='bg-background'
+                gridCount={gridCount}
             />
         </Popup>
     )

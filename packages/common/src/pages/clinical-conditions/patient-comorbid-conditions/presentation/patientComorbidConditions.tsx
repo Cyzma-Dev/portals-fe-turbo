@@ -14,6 +14,8 @@ interface IPatientComorbidProps extends IComorbidCommonProps {
 	handlePatientComorbidDelete: (rec_id: number) => void;
 	filterOpen: boolean;
 	setFilterOpen: (data: boolean) => void
+	isGridDataLoading: boolean
+	gridCount: number
 }
 
 const PatientComorbidConditionsScreen = (props: IPatientComorbidProps) => {
@@ -97,6 +99,8 @@ const PatientComorbidConditionsScreen = (props: IPatientComorbidProps) => {
 				columns={extendColumns}
 				toolbar={false}
 				handleGridChange={props.handleGridChange}
+				gridCount={props.gridCount}
+				loading={props.isLoading}
 			/>
 		</div>
 	);

@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import { IPatientComorbid } from '../presentation/types';
 import { toast } from 'sonner';
-import { DocumentSkeleton } from '@repo/ui/shadcn';
 import CustomFilterStateManage from '../../../../helper-methods/custom-filter';
 import { GetPatientId } from '../../../../helper-methods';
 import { PatientComorbidConditionsHook } from '../../../../common-hooks';
@@ -15,7 +14,8 @@ export const PatientComorbidContainer = () => {
 		fetchPatientComorbidConditions,
 		setQueryString,
 		queryString,
-		isLoading: isLoadingComorbidConditionsData,
+		isLoading: isGridDataLoading,
+		gridCount,
 	} = PatientComorbidConditionsHook(patient_id)
 	const [isEdit, setIsEdit] = useState<boolean>(false)
 	const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -144,30 +144,28 @@ export const PatientComorbidContainer = () => {
 	)
 
 	return (
-		!filterOpen && isLoadingComorbidConditionsData
-			?
-			<DocumentSkeleton title='Comorbid Conditions' />
-			:
-			<PatientComorbidConditionsScreen
-				patientComorbidConditionsData={patientComorbidConditionsData ? patientComorbidConditionsData : []}
-				handleGridChange={handleGridChange}
-				handleFilterChange={handleFilterChange}
-				handlePatientComorbidDelete={handlePatientComorbidDelete}
-				isEdit={isEdit}
-				setIsEdit={setIsEdit}
-				isLoading={isLoading}
-				setIsLoading={setIsLoading}
-				isBtnDisable={isBtnDisable}
-				setIsBtnDisable={setIsBtnDisable}
-				sheetOpen={sheetOpen}
-				setSheetOpen={setSheetOpen}
-				openSheet={openSheet}
-				handleSubmit={handleSubmit}
-				handleEdit={handleEdit}
-				currentComorbidConditions={currentComorbidConditions}
-				setCurrentComorbidConditions={setCurrentComorbidConditions}
-				filterOpen={filterOpen}
-				setFilterOpen={setFilterOpen}
-			/>
+		<PatientComorbidConditionsScreen
+			patientComorbidConditionsData={patientComorbidConditionsData ? patientComorbidConditionsData : []}
+			handleGridChange={handleGridChange}
+			handleFilterChange={handleFilterChange}
+			handlePatientComorbidDelete={handlePatientComorbidDelete}
+			isEdit={isEdit}
+			setIsEdit={setIsEdit}
+			isLoading={isLoading}
+			setIsLoading={setIsLoading}
+			isBtnDisable={isBtnDisable}
+			setIsBtnDisable={setIsBtnDisable}
+			sheetOpen={sheetOpen}
+			setSheetOpen={setSheetOpen}
+			openSheet={openSheet}
+			handleSubmit={handleSubmit}
+			handleEdit={handleEdit}
+			currentComorbidConditions={currentComorbidConditions}
+			setCurrentComorbidConditions={setCurrentComorbidConditions}
+			filterOpen={filterOpen}
+			setFilterOpen={setFilterOpen}
+			isGridDataLoading={isGridDataLoading}
+			gridCount={gridCount}
+		/>
 	);
 };

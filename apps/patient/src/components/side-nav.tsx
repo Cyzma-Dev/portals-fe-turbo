@@ -59,7 +59,7 @@ const SideNav = () => {
         <div
           ref={sideNavRef}
           style={{ overflowY: 'auto', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}
-          className={clsx('md:w-60 min-w-fit max-w-fit bg-white flex-1 border-r border-muted-background absolute sm:static h-screen overflow-y-auto', {
+          className={clsx('md:w-60 min-w-fit max-w-fit bg-white z-50 flex-1 border-r border-muted-background absolute sm:static h-screen overflow-y-auto', {
             'md:flex' : !collapsed,
             'hidden' : collapsed
           })}
