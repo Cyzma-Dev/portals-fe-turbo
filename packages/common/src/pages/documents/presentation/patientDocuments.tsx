@@ -5,15 +5,15 @@ import { useState } from 'react';
 import { CustomColumnDef } from "../../../utility";
 import { documentColumns } from "./documentscolumns";
 import { IDocumentsCommonProps, IPatientDocument } from "./type";
-import { AddDocumentsNotes } from "./addDocuments";
+import { AddDocuments } from "./addDocuments";
 import { PreviewDocuments } from "./previewDocuments";
 import IconWrapper from "../../../../../ui/src/components/Icon-wrapper";
-interface IDocumentsNotesProps extends IDocumentsCommonProps {
+interface IDocumentsProps extends IDocumentsCommonProps {
 	patientDocumentsData: IPatientDocument[];
 	handleGridChange: (event: any) => void;
 	handleFilterChange: (field: string, operator: string, event: any) => void;
 	handleEdit: (row: IPatientDocument) => void;
-	handleDocumentNoteDelete: (rec_id: number) => void;
+	handleDocumentDelete: (rec_id: number) => void;
 	handlePreviewDocuments: (item: any) => void;
 	viewerFile: any
 	previewSheetOpen: boolean
@@ -24,8 +24,7 @@ interface IDocumentsNotesProps extends IDocumentsCommonProps {
 	gridCount: number
 }
 
-const PatientDocumentScreen = (props: IDocumentsNotesProps) => {
-	console.log(props.patientDocumentsData, "patientDocumentsDatapatientDocumentsData")
+const PatientDocumentScreen = (props: IDocumentsProps) => {
 	const [recId, setRecId] = useState<number | null>(null);
 
 	const extendColumns: CustomColumnDef<any>[] = [
@@ -48,7 +47,7 @@ const PatientDocumentScreen = (props: IDocumentsNotesProps) => {
 						<IconWrapper
 							className="cursor-pointer hover:text-red hover:fill-redBackground hover:bg-redBackground"
 							onClick={() => {
-								props.handleDocumentNoteDelete(row.original.id)
+								props.handleDocumentDelete(row.original.id)
 							}}
 						>
 							<Icons.trash className="h-4 w-4" />
@@ -103,7 +102,7 @@ const PatientDocumentScreen = (props: IDocumentsNotesProps) => {
 					options={[]}
 				/>
 			}
-			<AddDocumentsNotes
+			<AddDocuments
 				sheetOpen={props.sheetOpen}
 				setSheetOpen={props.setSheetOpen}
 				isEdit={props.isEdit}

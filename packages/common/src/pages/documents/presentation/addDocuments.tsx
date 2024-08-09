@@ -9,17 +9,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-interface IDocumentsNotesProps extends IDocumentsCommonProps {
+interface IDocumentsProps extends IDocumentsCommonProps {
 
 }
-export const AddDocumentsNotes = (props: IDocumentsNotesProps) => {
+export const AddDocuments = (props: IDocumentsProps) => {
     const { documentOptionsData, fetchData } = DocumentTypeOptionsHook();
 
     const [open, setOpen] = useState(false);
     const [binaryData, setBinaryData] = useState<any | null>(null);
 
     useEffect(() => {
-        // This effect will triggered to fetch notes subject options
+        // This effect will triggered to fetch Documents subject options
         props.sheetOpen && fetchData();
     }, [props.sheetOpen]);
 
@@ -85,8 +85,8 @@ export const AddDocumentsNotes = (props: IDocumentsNotesProps) => {
                                     <SheetTitle>{props.isEdit ? 'Edit Document' : 'Add Document'}</SheetTitle>
                                     <SheetDescription>
                                         {props.isEdit
-                                            ? 'Edit the note details'
-                                            : 'Create new note by filling the following details'
+                                            ? 'Edit the Document details'
+                                            : 'Create new Document by filling the following details'
                                         }
                                     </SheetDescription>
                                 </SheetHeader>

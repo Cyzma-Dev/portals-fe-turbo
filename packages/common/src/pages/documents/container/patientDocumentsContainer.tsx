@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { GetPatientId } from "../../../../../../packages/common/src/helper-methods";
-import { ICreateDecomentst, IPatientDocument, IPreviewDocuments, IUploadDocument } from "../presentation";
+import { ICreateDocuments, IPatientDocument, IPreviewDocuments, IUploadDocument } from "../presentation";
 import { toast } from "sonner";
 import { IQueryString, MessageConstant, PatientDocumentsHook, PatientDocumentsService } from "@repo/common/common-library";
 import CustomFilterStateManage from "../../../../../../packages/common/src/helper-methods/custom-filter";
@@ -42,7 +42,7 @@ export const PatientDocumentsContainer = () => {
 		openSheet()
 	}
 
-	const handleSubmit = async (formData: ICreateDecomentst) => {
+	const handleSubmit = async (formData: ICreateDocuments) => {
 		setIsBtnDisable(true)
 		try {
 			setIsLoading(true)
@@ -61,7 +61,7 @@ export const PatientDocumentsContainer = () => {
 				const fileData = new FormData();
 				const contentType = 'multipart/form-data';
 				for (const key in formData) {
-					fileData.append(key, formData[key as keyof ICreateDecomentst] as string | Blob);
+					fileData.append(key, formData[key as keyof ICreateDocuments] as string | Blob);
 				}
 				const response = await PatientDocumentsService.uploadPatientDocument(
 					fileData,
@@ -92,7 +92,7 @@ export const PatientDocumentsContainer = () => {
 		}
 	}
 
-	const handleDocumentNoteDelete = async (rec_id: number) => {
+	const handleDocumentDelete = async (rec_id: number) => {
 		try {
 			setIsLoading(true)
 			const response = await PatientDocumentsService.deletePatientDocument(rec_id)
@@ -171,7 +171,7 @@ export const PatientDocumentsContainer = () => {
 			patientDocumentsData={patientDocumentsData ? patientDocumentsData : []}
 			handleGridChange={handleGridChange}
 			handleFilterChange={handleFilterChange}
-			handleDocumentNoteDelete={handleDocumentNoteDelete}
+			handleDocumentDelete={handleDocumentDelete}
 			isEdit={isEdit}
 			setIsEdit={setIsEdit}
 			isLoading={isLoading}

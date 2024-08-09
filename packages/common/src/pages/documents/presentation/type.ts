@@ -46,7 +46,7 @@ export interface IPatientDocuments {
 export interface IDocumentsCommonProps {
   isEdit: boolean
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>
-  handleSubmit: (formData: ICreateDecomentst) => void
+  handleSubmit: (formData: ICreateDocuments) => void
   isLoading: boolean
   isBtnDisable: boolean
   sheetOpen: boolean
@@ -56,7 +56,7 @@ export interface IDocumentsCommonProps {
   setCurrentDocument: React.Dispatch<React.SetStateAction<IPatientDocument | undefined>>
 }
 
-export interface ICreateDecomentst {
+export interface ICreateDocuments {
   document: Document
   document_name: string
   note?: string

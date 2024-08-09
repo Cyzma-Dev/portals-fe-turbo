@@ -5,10 +5,10 @@ import { Button, Popup, Icons, Input, Sheet, SheetContent } from "@repo/ui/shadc
 
 
 
-interface IDocumentsNotesProps extends IPreviewDocumentsProps {
+interface IDocumentsProps extends IPreviewDocumentsProps {
 
 }
-export const PreviewDocuments = (props: IDocumentsNotesProps) => {
+export const PreviewDocuments = (props: IDocumentsProps) => {
 
     const [fullScreenDialog, setFullScreenDialog] = useState(false);
 
