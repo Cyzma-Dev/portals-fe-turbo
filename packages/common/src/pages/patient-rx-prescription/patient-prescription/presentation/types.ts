@@ -1,4 +1,3 @@
-import { IOptions } from "@repo/ui/shadcn";
 
 export interface IPatientPrescription {
     days_supply: number;
@@ -51,10 +50,6 @@ export interface IRequestRefillCommonProps {
     openSheet: () => void
     currentPrescription: IPatientPrescription[]
     setCurrentPrescription: React.Dispatch<React.SetStateAction<IPatientPrescription>>
-}
-
-export interface IActiveAddressOptions extends IOptions {
-    address_type_name?: string;
 }
 
 export interface IAddNewAddressProps {

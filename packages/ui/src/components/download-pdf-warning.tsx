@@ -1,15 +1,17 @@
 import { Button, Popup, Icons } from '@repo/ui/shadcn'
 import React, { useState } from 'react'
-import IconWrapper from '../../../../../../packages/ui/src/components/Icon-wrapper'
-import { DownloadPdfDocument } from '@repo/common/common-library'
-import { IOutBoundList } from './types'
+import { toast } from 'sonner'
+import IconWrapper from './Icon-wrapper'
 interface IDownloadPdfProps {
     fullScreenDialog: boolean
     setFullScreenDialog: (data: boolean) => void
-    clickedActionRowData: IOutBoundList
+    rec_id: string
+    fileName: string
+    downloadPdfDocument: (rec_id: string, fileName: string) => Promise<string | boolean>
+
 }
 
-function DownloadPdf(props: IDownloadPdfProps) {
+export function CommonDownloadPdf(props: IDownloadPdfProps) {
     const [pdfDownloadLoading, setPdfDownloadLoading] = useState<boolean>(false);
 
     return (
@@ -28,7 +30,10 @@ function DownloadPdf(props: IDownloadPdfProps) {
                 <Button disabled={pdfDownloadLoading}
                     onClick={async () => {
                         setPdfDownloadLoading(true)
-                        await DownloadPdfDocument(props.clickedActionRowData.rec_id, `${props.clickedActionRowData.patient_name}_${props.clickedActionRowData.rx_number}`)
+                        const response = await props.downloadPdfDocument(props.rec_id, props.fileName)
+                        if (response) {
+                            toast.error(response)
+                        }
                         setPdfDownloadLoading(false)
                         props.setFullScreenDialog(false)
                     }}>
@@ -46,4 +51,3 @@ function DownloadPdf(props: IDownloadPdfProps) {
     )
 }
 
-export default DownloadPdf

@@ -12,9 +12,9 @@ import { toast } from 'sonner'
 
 interface IPatientAddNewAddressProps extends IAddNewAddressProps {
     isEditMode?: boolean
-    currentAddress: any
+    currentAddress?: any
     // enableLoader: (data: boolean) => void
-    loading: boolean
+    loading?: boolean
 }
 
 

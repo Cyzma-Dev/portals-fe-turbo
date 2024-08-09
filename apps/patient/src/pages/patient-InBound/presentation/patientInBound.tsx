@@ -1,12 +1,11 @@
 import React from "react";
-import { Button, DataTable, DataTableColumnHeader, Icons, NotesTooltipViewer } from "@repo/ui/shadcn";
+import { Button, CommonDownloadPdf, DataTable, DataTableColumnHeader, Icons, NotesTooltipViewer } from "@repo/ui/shadcn";
 import { useState } from 'react';
-import { CustomColumnDef, NewTabPdfViewer } from "@repo/common/common-library";
+import { CustomColumnDef, DownloadPdfDocument, NewTabPdfViewer } from "@repo/common/common-library";
 import { PatientInBoundColumns } from "./PatientInBoundColumns";
 import FilterFields from "../../../../../../packages/ui/src/components/filter-fields";
 import IconWrapper from "../../../../../../packages/ui/src/components/Icon-wrapper";
 import { toast } from "sonner";
-import DownloadPdf from "./downloadPdf";
 import { IInBoundList } from "./types";
 
 
@@ -25,7 +24,8 @@ const PatientInBoundScreen = (props: IPatientInBoundProps) => {
 	const [clickedActionRowData, setClickedActionRowData] = useState<any>(null);
 	const [fullScreenDialog, setFullScreenDialog] = useState<boolean>(false);
 	const [pdfOpenLoading, setPdfOpenLoading] = useState<boolean>(false);
-
+	const rec_id = clickedActionRowData?.rec_id
+	const fileName = `${clickedActionRowData?.patient_name}_${clickedActionRowData?.rx_number}`
 	const extendColumns: CustomColumnDef<any>[] = [
 		{
 			accessorKey: "action",
@@ -120,10 +120,12 @@ const PatientInBoundScreen = (props: IPatientInBoundProps) => {
 				loading={props.isGridDataLoading}
 				gridCount={props.gridCount}
 			/>
-			<DownloadPdf
+			<CommonDownloadPdf
 				fullScreenDialog={fullScreenDialog}
 				setFullScreenDialog={setFullScreenDialog}
-				clickedActionRowData={clickedActionRowData}
+				rec_id={rec_id}
+				fileName={fileName}
+				downloadPdfDocument={DownloadPdfDocument}
 			/>
 
 

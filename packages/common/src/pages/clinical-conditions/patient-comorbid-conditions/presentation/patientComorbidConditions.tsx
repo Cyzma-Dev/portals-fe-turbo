@@ -100,7 +100,7 @@ const PatientComorbidConditionsScreen = (props: IPatientComorbidProps) => {
 				toolbar={false}
 				handleGridChange={props.handleGridChange}
 				gridCount={props.gridCount}
-				loading={props.isLoading}
+				loading={props.isGridDataLoading}
 			/>
 		</div>
 	);

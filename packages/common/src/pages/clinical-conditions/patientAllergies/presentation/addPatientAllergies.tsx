@@ -24,7 +24,6 @@ export const AddPatientAllergies = (props: IAddPatientAllergies) => {
 
     const onSubmit = async (formData: z.infer<typeof checkPatientAllergiesSchema>) => {
         formData.condition_value_ids = props.isEdit ? formData.condition_value_ids : formData.condition_value_ids.map((value: any) => value.id);
-        console.log(formData, 'aleracare..localhost:5173');
         props.handleSubmit(formData);
     };
 

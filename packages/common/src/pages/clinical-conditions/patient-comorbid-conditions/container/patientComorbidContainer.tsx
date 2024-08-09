@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { IPatientComorbid } from '../presentation/types';
+import { ICreatePatientComorbid, IPatientComorbid } from '../presentation/types';
 import { toast } from 'sonner';
 import CustomFilterStateManage from '../../../../helper-methods/custom-filter';
 import { GetPatientId } from '../../../../helper-methods';
@@ -40,7 +40,7 @@ export const PatientComorbidContainer = () => {
 		openSheet()
 	}
 
-	const handleSubmit = async (formData: IPatientComorbid) => {
+	const handleSubmit = async (formData: ICreatePatientComorbid) => {
 		setIsBtnDisable(true)
 		try {
 			setIsLoading(true)

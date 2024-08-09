@@ -84,7 +84,7 @@ export const PatientAllergiesContainer = () => {
 		}
 	};
 
-	const handlePatientNoteDelete = async (rec_id: number) => {
+	const handlePatientAllergiesDelete = async (rec_id: number) => {
 		try {
 			setIsLoading(true);
 			const response = await PatientAllergiesService.deletePatientAllergies(rec_id);
@@ -147,7 +147,7 @@ export const PatientAllergiesContainer = () => {
 			patientAllergiesData={patientAllergiesData ? patientAllergiesData : []}
 			handleGridChange={handleGridChange}
 			handleFilterChange={handleFilterChange}
-			handlePatientNoteDelete={handlePatientNoteDelete}
+			handlePatientAllergiesDelete={handlePatientAllergiesDelete}
 			isEdit={isEdit}
 			setIsEdit={setIsEdit}
 			isLoading={isLoading}

@@ -16,3 +16,4 @@ export * from "./data-time-picker";
 export * from "./passwordPolicyTicks";
 export * from "./Icon-wrapper";
 export * from "./multipleSelectorAutocomplete";
+export * from "./download-pdf-warning";

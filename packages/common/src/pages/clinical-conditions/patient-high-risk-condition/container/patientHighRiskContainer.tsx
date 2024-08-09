@@ -85,7 +85,7 @@ export const PatientHighRiskContainer = () => {
 		}
 	}
 
-	const handlePatientNoteDelete = async (rec_id: number) => {
+	const handlePatientHighRiskConditionsDelete = async (rec_id: number) => {
 		try {
 			setIsLoading(true)
 			const response = await PatientHighRiskConditionsService.deletePatientHighRiskConditions(rec_id)
@@ -148,7 +148,7 @@ export const PatientHighRiskContainer = () => {
 			patientHighRiskData={patientHighRiskData ? patientHighRiskData : []}
 			handleGridChange={handleGridChange}
 			handleFilterChange={handleFilterChange}
-			handlePatientNoteDelete={handlePatientNoteDelete}
+			handlePatientHighRiskConditionsDelete={handlePatientHighRiskConditionsDelete}
 			isEdit={isEdit}
 			setIsEdit={setIsEdit}
 			isLoading={isLoading}

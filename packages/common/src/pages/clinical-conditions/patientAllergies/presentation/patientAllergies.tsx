@@ -11,7 +11,7 @@ interface IPatientAllergiesProps extends IAllergiesCommonProps {
 	handleGridChange: (event: any) => void;
 	handleFilterChange: (field: string, operator: string, event: any) => void;
 	handleEdit: (row: IPatientAllergies) => void;
-	handlePatientNoteDelete: (rec_id: number) => void;
+	handlePatientAllergiesDelete: (rec_id: number) => void;
 	filterOpen: boolean;
 	setFilterOpen: (data: boolean) => void
 	isGridDataLoading: boolean
@@ -40,7 +40,7 @@ const PatientAllergiesScreen = (props: IPatientAllergiesProps) => {
 						<IconWrapper
 							className="cursor-pointer hover:text-red hover:fill-redBackground hover:bg-redBackground"
 							onClick={() => {
-								props.handlePatientNoteDelete(row.original.id)
+								props.handlePatientAllergiesDelete(row.original.id)
 							}}
 						>
 							<Icons.trash className="h-4 w-4" />

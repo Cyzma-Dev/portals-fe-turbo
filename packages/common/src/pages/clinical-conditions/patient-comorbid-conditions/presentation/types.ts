@@ -12,12 +12,13 @@ export interface ICreatePatientComorbid {
   condition_value_ids: { id?: number }[] | number[];
   notes?: string;
   id?: number;
+  patient_id?: number;
 }
 
 export interface IComorbidCommonProps {
   isEdit: boolean
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>
-  handleSubmit: (formData: ICreatePatientComorbid) => void
+  handleSubmit: (formData: ICreatePatientComorbid) => Promise<void>
   isLoading: boolean
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
   isBtnDisable: boolean
