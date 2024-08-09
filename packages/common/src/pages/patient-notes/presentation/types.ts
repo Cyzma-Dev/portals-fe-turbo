@@ -11,9 +11,9 @@ export interface IPatientNotes {
 
 export interface ICreatePatientNotes {
   id?: number;
-  document_name: string;
-  subject?: number;
+  subject_id?: number;
   note?: string;
+  patient_id?: number;
 }
 
 export interface INotesCommonProps {
